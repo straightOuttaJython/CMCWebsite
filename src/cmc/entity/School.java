@@ -41,8 +41,34 @@ public class School
 		this.tuition = tuition;
 		this.percentFinAid = percentFinAid;
 		this.admitRate = admitRate;
-		this.decideRate = decideRate;
-				
+		this.decideRate = decideRate;	
+	}
+	
+	/*
+	 * Sets the variables as a default state
+	 * @param String name,state,location,control,enphases[]
+	 * @param int numStudentsEnrolled, numApplications,academics,socialLife, qualityLife
+	 * @param Double percentFemEnrolled, satVerbal, satMath, tuition, percentFinAid, admitRate, decideRate
+	 */
+	public School()
+	{
+		this.name = "";
+		this.state = "";
+		this.location = "";
+		this.control = "";
+		this.numStudentsEnrolled = 0;
+		this.numApplications = 0;
+		this.academics = 0;
+		this.socialLife = 0;
+		this.qualityLife = 0;
+		this.percentFemEnrolled = 0.0;
+		this.satVerbal = 0.0;
+		this.satMath = 0.0;
+		this.tuition = 0.0;
+		this.percentFinAid = 0.0;
+		this.admitRate = 0.0;
+		this.decideRate = 0.0;
+		this.emphases = new String[3];
 	}
 	/*
 	 * Gets name of school
