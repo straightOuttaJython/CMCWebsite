@@ -1,4 +1,4 @@
-package cmc;
+package cmc.home;
 
 /**
  * The PersonHome controls the ebb and flow of Persons in the Choose my College system.

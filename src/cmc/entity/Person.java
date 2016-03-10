@@ -1,4 +1,4 @@
-package cmc;
+package cmc.entity;
 
 import java.lang.reflect.Array;
 

@@ -1,4 +1,4 @@
-package cmc;
+package cmc.controller;
 
 /**
  * The LoginController class controls how/when a Person would log in.

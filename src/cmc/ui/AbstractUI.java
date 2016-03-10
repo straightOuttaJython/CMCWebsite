@@ -1,4 +1,4 @@
-package ui;
+package cmc.ui;
 
 public interface AbstractUI {
 	

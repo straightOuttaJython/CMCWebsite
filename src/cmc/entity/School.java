@@ -1,4 +1,4 @@
-package cmc;
+package cmc.entity;
 
 /*
  * This saves the information for a given school

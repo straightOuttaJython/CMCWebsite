@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ui;
+package cmc.ui;
 
 /**
  * @author Alex Seefeldt
