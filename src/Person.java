@@ -1,3 +1,4 @@
+import School.School;
 
 /**
  * Person class represents an entity that will be typed as either a student or an admin in our Choose my College web-application. Each having basic details
