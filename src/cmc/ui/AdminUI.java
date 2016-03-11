@@ -3,6 +3,9 @@
  */
 package cmc.ui;
 
+import cmc.entity.Person;
+import cmc.entity.School;
+
 /**
  * @author Alex Seefeldt
  *

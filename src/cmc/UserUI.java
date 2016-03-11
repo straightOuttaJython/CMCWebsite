@@ -1,5 +1,8 @@
 package cmc;
 
+import cmc.entity.Person;
+import cmc.entity.School;
+
 /**
 * The UserUI class controls user's action.
 * 

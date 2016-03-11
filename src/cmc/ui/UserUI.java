@@ -1,5 +1,7 @@
 package cmc.ui;
 
+import cmc.entity.School;
+
 /**
  * @author atseefeldt
  *

@@ -26,10 +26,10 @@ public class Driver {
 		UniversityDBLibrary db = new UniversityDBLibrary(nameDB, nameDB, passDB);
 		int n = db.user_addUser("bob", "shirma", "bob", "obo", 'a');
 		System.out.println(n);
-		//LoginController login = new LoginController();
-		//String username = "bob";
-		//String password = "obo";
-		//Person person = login.login(username, password, db);
+		LoginController login = new LoginController();
+		String username = "bob";
+		String password = "obo";
+		Person person = login.login(username, password, db);
 	}
 
 }

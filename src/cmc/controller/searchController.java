@@ -1,5 +1,6 @@
 package cmc.controller;
 
+import cmc.entity.School;
 
 /**
  * The SearchController class controls how/when a Person would search for specific school.
@@ -18,7 +19,7 @@ public class searchController
 	 */
 	public School search(School idealSchool) 
 	{
-		return school;
+		return new School();
 	}
 
 	public void getRecSchool(School school)

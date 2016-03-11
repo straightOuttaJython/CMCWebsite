@@ -1,5 +1,7 @@
 package cmc.home;
 
+import cmc.entity.Person;
+
 /**
  * The PersonHome controls the ebb and flow of Persons in the Choose my College system.
  * 
@@ -15,7 +17,7 @@ public class PersonHome {
 	 * @return the person object associated with the entered username.
 	 */
 	public Person getPerson(String username) {
-		
+		return new Person();
 	}
 	
 	/**
@@ -33,7 +35,7 @@ public class PersonHome {
 	 * @return an array of Persons.
 	 */
 	public Person[] getAllUsers() {
-		
+		return null;
 	}
 	
 	/**
