@@ -23,7 +23,7 @@ public class LoginController {
 		String user = username;
 		String pass = password;
 		String[][] array = dataBase.user_getUsers();
-		System.out.println(array.toString());
+		System.out.println();
 		return new Person();
 	}
 }
