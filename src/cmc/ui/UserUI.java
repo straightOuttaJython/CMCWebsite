@@ -1,4 +1,4 @@
-package cmc;
+package cmc.ui;
 
 import cmc.entity.Person;
 import cmc.entity.School;
@@ -6,8 +6,8 @@ import cmc.entity.School;
 /**
 * The UserUI class controls user's action.
 * 
-* @author Duong
-* @version March 9, 2016
+* @author Duong, Matthew Kounniyom
+* @version March 11, 2016
 */
 public class UserUI{
 	
@@ -23,11 +23,13 @@ public class UserUI{
 		this.user = user;
 	}
 	
-	/** view menu
-	 * 
+	/**
+	 *  Displays a menu full of all the options available to a "user".
 	 */
 	public void viewMenu(){
-		
+		System.out.println("*** USER MENU ***");
+		System.out.println("   - Manage Saved Schools");
+		System.out.println("   - Manage Saved Schools");
 	}
 	
 	/** manage school
