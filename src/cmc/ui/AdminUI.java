@@ -94,7 +94,7 @@ public class AdminUI implements AbstractUI {
 		System.out.println("Type \" l \" if you want to see the list of School(CASE SENSATIVE)");
 		System.out.println("Type \" a \" if you want to Add School (CASE SENSATIVE)");
 		System.out.println("Type \" e \" if you want to Edit School(CASE SENSATIVE)");
-		System.out.println("Type \" q \" if you want to Edit School(CASE SENSATIVE)");
+		System.out.println("Type \" q \" if you want to quit (CASE SENSATIVE)");
 		String choice = addOrEdit.nextLine();
 		if(choice.equals("a"))
 		{
@@ -121,7 +121,7 @@ public class AdminUI implements AbstractUI {
 		}
 		else if(choice.equals("q"))
 		{
-			System.exit(0);
+			this.viewMenu();
 		}
 	}
 	
@@ -163,9 +163,20 @@ public class AdminUI implements AbstractUI {
 	 */
 	public void addSchool() 
 	{
+		SchoolHome aSH = new SchoolHome();
+		School[] listOfSchools = aSH.listOfSchools();
+	
 		Scanner in = new Scanner(System.in);
 		System.out.println("Please enter the school name: ");
 		String name = in.nextLine();
+		
+		for(int i =0; i < listOfSchools.length; i++)
+		{
+			if(listOfSchools[i].getName().equals(name))
+			{
+				this.denyAddSchool();
+			}
+		}
 		
 		System.out.println("Please enter the state that the school is located in. (***FULL NAME***):");
 		String state = in.nextLine();
@@ -215,6 +226,8 @@ public class AdminUI implements AbstractUI {
 		db.university_addUniversity(name,state,location,control,
 				numStudentsEnrolled,percentFemEnrolled, satVerbal, satMath, tuition, percentFinAid,
 				numApplicatns, admitRate,decideRate,academics,socialLife,qualityLife);
+		
+		
 	}
 	
 	/**
@@ -286,8 +299,7 @@ public class AdminUI implements AbstractUI {
 				System.out.println("************ EDITTING SCHOOL HAS BEEN COMPLETED *********");
 			}
 		}
-		
-			
+		this.failureToEditSchool();	
 	}
 	
 	/**
@@ -295,7 +307,8 @@ public class AdminUI implements AbstractUI {
 	 */
 	private void denyAddSchool() 
 	{
-		System.out.println("*** YOUR ATTEMPT OF ADDING A SCHOOL HAS BEEN DENIED ***");
+		System.out.println("*** A SCHOOL WITH THAT NAME ALREADY EXISTS, REVERTING BACK TO MANAGE SCHOOLS ***");
+		this.manageSchools();
 	}
 	
 	/**
@@ -303,7 +316,8 @@ public class AdminUI implements AbstractUI {
 	 */
 	public void cancelEditSchool() 
 	{
-		System.out.println("*** YOUR ATTEMPT TO EDIT A SCHOOL HAS BEEN CANCELED ***");
+		System.out.println("*** YOUR ATTEMPT TO EDIT A SCHOOL HAS BEEN CANCELED REVERTING BACK TO MANAGE SCHOOL***");
+		this.manageSchools();
 	}
 
 	/**
@@ -311,7 +325,8 @@ public class AdminUI implements AbstractUI {
 	 */
 	private void failureToEditSchool() 
 	{
-		System.out.println("*** FAILURE TO EDIT SCHOOL... WAY TO GO ***");
+		System.out.println("*** NO SUCH SCHOOL WAS FOUND TO EDIT, REVERTING BACK TO MANAGE SCHOOLS ***");
+		this.manageSchools();
 	}
 
 	/**
