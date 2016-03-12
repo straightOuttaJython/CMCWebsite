@@ -6,16 +6,7 @@ import cmc.ui.UserUI;
 
 public class Driver {
 
-	/**
-	 * Used to name the database and is the login username.
-	 */
-	private static String nameDB = "straightou";
-	
-	/**
-	 * Database password.
-	 */
-	private static String passDB = "adem4";
-	
+
 	/**
 	 * Generic main method to drive the classes.
 	 * 
@@ -26,11 +17,14 @@ public class Driver {
 		// tests login
 		LoginUI login = new LoginUI();
 		login.login();
-		if(login.getLoggedPerson().getType() == 'a') {
+		if(login.getLoggedPerson().getType() == 'a') 
+		{
 			//admin stuff
 			AdminUI admin = new AdminUI();
 			admin.viewMenu();
-		} else {
+		}
+		else 
+		{
 			//user ui stuff
 			UserUI user = new UserUI(login.getLoggedPerson());
 			user.viewMenu();
