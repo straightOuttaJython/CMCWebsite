@@ -29,11 +29,17 @@ public class Driver {
 		LoginUI login = new LoginUI();
 		login.login();
 		
-		//AdminUI admin = new AdminUI();
-		//admin.manageSchools();
+		//admin stuff
+		AdminUI admin = new AdminUI();
+		admin.manageSchools();
+		admin.addSchool();
 		
-		UserUI user = new UserUI(login.getLoggedPerson());
-		user.viewMenu();
+		System.out.println("********** UPDATED **********");
+		admin.manageSchools();
+		
+		//user ui stuff
+		//UserUI user = new UserUI(login.getLoggedPerson());
+		//user.viewMenu();
 		
 	}
 

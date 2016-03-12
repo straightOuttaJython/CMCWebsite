@@ -3,6 +3,8 @@
  */
 package cmc.ui;
 
+import java.util.Scanner;
+
 import cmc.entity.Person;
 import cmc.entity.School;
 import cmc.home.SchoolHome;
@@ -74,14 +76,62 @@ public class AdminUI implements AbstractUI {
 	
 	/**
 	 * Add the given School object to the database.
-	 * @param school the new School to be added
+	 * 
 	 */
-	public void addSchool(School school) 
+	public void addSchool() 
 	{
-		db.university_addUniversity(school.getName(), school.getState(), school.getLocation(), school.getControl(),
-				school.getNumStudentsEnrolled(), school.getPercentFemEnrolled(), school.getSatVerb(), school.getSatMath(), 
-				school.getTuition(), school.getPercFinAid(), school.getNumApplications(), school.getAdmitRate(), 
-				school.getDecideRate(), school.getAcademics(),school.getSocialLife(), school.getQualityLife());
+		Scanner in = new Scanner(System.in);
+		System.out.println("Please enter the school name: ");
+		String name = in.nextLine();
+		
+		System.out.println("Please enter the state that the school is located in. (***FULL NAME***):");
+		String state = in.nextLine();
+		
+		System.out.println("Please enter the location of the school. ex. \"Suburban\" or \"Urban\" etc.: ");
+		String location = in.nextLine();
+		
+		System.out.println("Please enter the control of the school. ex. \"Private\" or \"Public\" etc.: ");
+		String control = in.nextLine();
+		
+		System.out.println("Please enter the number of students that enrolled in the school (MUST BE A NUMBER, NO DECIMALS): ");
+		int numStudentsEnrolled = in.nextInt();
+		
+		System.out.println("Please enter the percentage of femals that enrolled in the school: (MUST HAVE A DECIMAL IN THE VALUE)");
+		double percentFemEnrolled = in.nextDouble();
+		
+		System.out.println("Please enter the SAT Verbal score needed to attend the school: (MUST HAVE A DECIMAL IN THE VALUE)");
+		double satVerbal = in.nextDouble();
+		
+		System.out.println("Please enter the SAT Mathmaic score needed to attend the school: (MUST HAVE A DECIMAL IN THE VALUE)");
+		double satMath = in.nextDouble();
+		
+		System.out.println("Please enter the tuition of the school: (MUST HAVE A DECIMAL IN THE VALUE)");
+		double tuition = in.nextDouble();
+		
+		System.out.println("Please enter the percent of people who receive finacial aid in the school: (MUST HAVE A DECIMAL IN THE VALUE)");
+		double percentFinAid = in.nextDouble();
+		
+		System.out.println("Please enter number of people who applied to the school: (MUST BE A NUMBER, NO DECIMALS)");
+		int numApplicatns = in.nextInt();
+		
+		System.out.println("Please enter the admition rate for the school: (MUST HAVE A DECIMAL IN THE VALUE)");
+		double admitRate = in.nextDouble();
+		
+		System.out.println("Please enter the enrolled rate for the school: (MUST HAVE A DECIMAL IN THE VALUE)");
+		double decideRate = in.nextDouble();
+		
+		System.out.println("Please enter a rating from 0-100 for the school: (MUST BE A NUMBER, NO DECIMALS)");
+		int academics = in.nextInt();
+		
+		System.out.println("Please enter a rating from 0-100 for the school: (MUST BE A NUMBER, NO DECIMALS)");
+		int socialLife = in.nextInt();
+		
+		System.out.println("Please enter a rating from 0-100 for the school: (MUST BE A NUMBER, NO DECIMALS)");
+		int qualityLife = in.nextInt();
+		
+		db.university_addUniversity(name,state,location,control,
+				numStudentsEnrolled,percentFemEnrolled, satVerbal, satMath, tuition, percentFinAid,
+				numApplicatns, admitRate,decideRate,academics,socialLife,qualityLife);
 	}
 	
 	/**
