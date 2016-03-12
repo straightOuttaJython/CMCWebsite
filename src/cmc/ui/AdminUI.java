@@ -5,8 +5,11 @@ package cmc.ui;
 
 import java.util.Scanner;
 
+import javax.swing.text.html.StyleSheet.ListPainter;
+
 import cmc.entity.Person;
 import cmc.entity.School;
+import cmc.home.PersonHome;
 import cmc.home.SchoolHome;
 import dblibrary.project.csci230.UniversityDBLibrary;
 
@@ -32,14 +35,54 @@ public class AdminUI implements AbstractUI {
 	 * Show Admin menu
 	 */
 	public void viewMenu() {
+		Scanner adminOptions = new Scanner(System.in);
 		System.out.println("*** ADMIN MENU ***");
 		System.out.println("    OPTIONS:");
-		System.out.println("      - Manage Schools");
-		System.out.println("      - Logout");
-		System.out.println("      - Reset Form");
-		System.out.println("      - Add User");
-		System.out.println("      - Edit User");
-		System.out.println("      - Deactivate User");
+		System.out.println("Type \"m\" to    - Manage Schools");
+		System.out.println("Type \"l\" to    - Logout");
+		System.out.println("Type \"r\" to    - Reset Form");
+		System.out.println("Type \"a\" to    - Add User");
+		System.out.println("Type \"e\" to    - Edit User");
+		System.out.println("Type \"d\" to    - Deactivate User");
+		
+		String optionChose = adminOptions.nextLine();
+		
+		if(optionChose.equals("m"))
+		{
+			this.manageSchools();
+		}
+		else if(optionChose.equals("l"))
+		{
+			this.logout();
+		}
+		else if(optionChose.equals("r"))
+		{
+			this.resetForm();
+		}
+		else if(optionChose.equals("a"))
+		{
+			this.addUser();
+		}
+		else if(optionChose.equals("e"))
+		{
+			Scanner editUser =new Scanner(System.in);
+			System.out.println("Enter the username of the user you want to edit");
+			String user = editUser.nextLine();
+			this.editUser(user);
+		}
+		else if(optionChose.equals("d"))
+		{
+			Scanner deactUser =new Scanner(System.in);
+			System.out.println("Enter the username of the user you want to deactivate");
+			String deUser = deactUser.nextLine();
+			this.deactivate(deUser);
+		}
+		else
+		{
+			System.out.println("Please put a valid input.");
+			this.viewMenu();
+		}
+		
 	}
 	
 	/**
@@ -47,15 +90,39 @@ public class AdminUI implements AbstractUI {
 	 */
 	public void manageSchools() 
 	{
-		School[] s = sh.listOfSchools();
-		System.out.println("*** LIST OF SCHOOLS ***");
-		for(int i = 0; i < s.length; i++)
+		Scanner addOrEdit = new Scanner(System.in);
+		System.out.println("Type \" l \" if you want to see the list of School(CASE SENSATIVE)");
+		System.out.println("Type \" a \" if you want to Add School (CASE SENSATIVE)");
+		System.out.println("Type \" e \" if you want to Edit School(CASE SENSATIVE)");
+		System.out.println("Type \" q \" if you want to Edit School(CASE SENSATIVE)");
+		String choice = addOrEdit.nextLine();
+		if(choice.equals("a"))
 		{
-			String name = s[i].getName();
-			System.out.println(name);
+			this.addSchool();
+			this.manageSchools();
 		}
-		System.out.println("      - Add School");
-		System.out.println("      - Edit School");
+		else if(choice.equals("e"))
+		{
+			System.out.println("Please enter the name of the school you wish to edit: (CASE SENSATIVE)");
+			String schoolName = addOrEdit.nextLine();
+			this.editSchool(schoolName);
+			this.manageSchools();
+		}
+		else if(choice.equals("l"))
+		{
+			School[] s = sh.listOfSchools();
+			System.out.println("*** LIST OF SCHOOLS ***");
+			for(int i = 0; i < s.length; i++)
+			{
+				String name = s[i].getName();
+				System.out.println(name);
+			}
+			this.manageSchools();
+		}
+		else if(choice.equals("q"))
+		{
+			System.exit(0);
+		}
 	}
 	
 	/**
@@ -63,7 +130,23 @@ public class AdminUI implements AbstractUI {
 	 */
 	public void logout() 
 	{
-		System.out.println("*** YOU HAVE BEEN LOGGED OUT BY THE ALL MIGHTY IMAD RAHAL ***");
+		System.out.println("Are you sure you want to logout?");
+		Scanner again = new Scanner(System.in);
+		System.out.println("Type in \"y\" for yes or  \"n\" for no.");
+		String decision = again.nextLine();
+		if(decision.equals("y"))
+		{
+			System.out.println("*** YOU HAVE BEEN LOGGED OUT BY THE ALL MIGHTY IMAD RAHAL ***");
+			System.exit(0);
+		}
+		else if(decision.equals("n"))
+		{
+			this.viewMenu();
+		}
+		else
+		{
+			System.out.println("Please type in a correct input.");
+		}
 	}
 	
 	/**
@@ -138,11 +221,74 @@ public class AdminUI implements AbstractUI {
 	 * Update the given School with the data inside it.
 	 * @param school the updated School
 	 */
-	public void editSchool(School school) 
+	public void editSchool(String school) 
 	{
+		SchoolHome eSH = new SchoolHome();
+		School[] list = eSH.listOfSchools();
+		for(int i =0; i < list.length; i++)
+		{
+			if(list[i].getName().equals(school))
+			{
+				Scanner inTwo = new Scanner(System.in);
+				
+				System.out.println("Please enter the school name: ");
+				String name = inTwo.nextLine();
+				
+				System.out.println("Please enter the state that the school is located in. (***FULL NAME***):");
+				String state = inTwo.nextLine();
+				
+				System.out.println("Please enter the location of the school. ex. \"Suburban\" or \"Urban\" etc.: ");
+				String location = inTwo.nextLine();
+				
+				System.out.println("Please enter the control of the school. ex. \"Private\" or \"Public\" etc.: ");
+				String control = inTwo.nextLine();
+				
+				System.out.println("Please enter the number of students that enrolled in the school (MUST BE A NUMBER, NO DECIMALS): ");
+				int numStudentsEnrolled = inTwo.nextInt();
+				
+				System.out.println("Please enter the percentage of femals that enrolled in the school: (MUST HAVE A DECIMAL IN THE VALUE)");
+				double percentFemEnrolled = inTwo.nextDouble();
+				
+				System.out.println("Please enter the SAT Verbal score needed to attend the school: (MUST HAVE A DECIMAL IN THE VALUE)");
+				double satVerbal = inTwo.nextDouble();
+				
+				System.out.println("Please enter the SAT Mathmaic score needed to attend the school: (MUST HAVE A DECIMAL IN THE VALUE)");
+				double satMath = inTwo.nextDouble();
+				
+				System.out.println("Please enter the tuition of the school: (MUST HAVE A DECIMAL IN THE VALUE)");
+				double tuition = inTwo.nextDouble();
+				
+				System.out.println("Please enter the percent of people who receive finacial aid in the school: (MUST HAVE A DECIMAL IN THE VALUE)");
+				double percentFinAid = inTwo.nextDouble();
+				
+				System.out.println("Please enter number of people who applied to the school: (MUST BE A NUMBER, NO DECIMALS)");
+				int numApplicatns = inTwo.nextInt();
+				
+				System.out.println("Please enter the admition rate for the school: (MUST HAVE A DECIMAL IN THE VALUE)");
+				double admitRate = inTwo.nextDouble();
+				
+				System.out.println("Please enter the enrolled rate for the school: (MUST HAVE A DECIMAL IN THE VALUE)");
+				double decideRate = inTwo.nextDouble();
+				
+				System.out.println("Please enter a rating from 0-100 for the school: (MUST BE A NUMBER, NO DECIMALS)");
+				int academics = inTwo.nextInt();
+				
+				System.out.println("Please enter a rating from 0-100 for the school: (MUST BE A NUMBER, NO DECIMALS)");
+				int socialLife = inTwo.nextInt();
+				
+				System.out.println("Please enter a rating from 0-100 for the school: (MUST BE A NUMBER, NO DECIMALS)");
+				int qualityLife = inTwo.nextInt();
+				
+				
+				db.university_editUniversity(name,state,location,control,
+						numStudentsEnrolled,percentFemEnrolled, satVerbal, satMath, tuition, percentFinAid,
+						numApplicatns, admitRate,decideRate,academics,socialLife,qualityLife);
+				System.out.println("************ EDITTING SCHOOL HAS BEEN COMPLETED *********");
+			}
+		}
 		
+			
 	}
-	
 	
 	/**
 	 * Report to user that the School could not be added.
@@ -168,29 +314,61 @@ public class AdminUI implements AbstractUI {
 		System.out.println("*** FAILURE TO EDIT SCHOOL... WAY TO GO ***");
 	}
 
-	
 	/**
-	 * 
+	 * @param user
 	 */
-	public void addAUser() 
+	public void editUser(String username)
 	{
-		
+		PersonHome eSH = new PersonHome();
+		Person[] list = eSH.getAllUsers();
+		for(int i =0; i < list.length; i++)
+		{
+			if(list[i].getUsername().equals(username))
+			{
+				Scanner userNameIn = new Scanner(System.in);
+				System.out.println("Please enter the new or existing username: ");
+				String username1 = userNameIn.nextLine();
+				
+				System.out.println("Please enter the new or existing first name: ");
+				String firstName = userNameIn.nextLine();
+				
+				System.out.println("Please enter the new or existing last name: ");
+				String lastName = userNameIn.nextLine();
+				
+				System.out.println("Please enter the new or existing password: ");
+				String password = userNameIn.nextLine();
+				
+				System.out.println("Please enter the new or existing type(NOTE THIS MUST BE ONLY AN \"a\" or \"u\"): ");
+				char type = userNameIn.nextLine().charAt(0);
+				
+				db.user_editUser(username1, firstName, lastName, password, type, list[i].getStatus());
+			}
+		}
 	}
 
 	/**
 	 * @param user
 	 */
-	public void editUser(Person user)
+	public void deactivate(String username) 
 	{
-		
-	}
-	
-	/**
-	 * @param user
-	 */
-	public void deactivate(Person user) 
-	{
-		
+		PersonHome eSH = new PersonHome();
+		Person[] list = eSH.getAllUsers();
+		for(int i =0; i < list.length; i++)
+		{
+			if(list[i].getUsername().equals(username))
+			{
+				if(list[i].getStatus() == ('a'))
+				{
+					db.user_editUser(list[i].getUsername(), list[i].getFirstName(), list[i].getLastName(), 
+							list[i].getPassword(), list[i].getType(), 'd');
+				}
+				else
+				{
+					db.user_editUser(list[i].getUsername(), list[i].getFirstName(), list[i].getLastName(), 
+							list[i].getPassword(), list[i].getType(), 'a');
+				}
+			}
+		}
 	}
 	
 	/**
@@ -198,7 +376,24 @@ public class AdminUI implements AbstractUI {
 	 */
 	public void addUser() 
 	{
+		Scanner addUser = new Scanner(System.in);
 		
+		System.out.println("Please enter the first name of the person: ");
+		String firstName = addUser.nextLine();
+		
+		System.out.println("Please enter the last name of the person: ");
+		String lastName = addUser.nextLine();
+		
+		System.out.println("Please enter a username of the person: ");
+		String username = addUser.nextLine();
+		
+		System.out.println("Please enter a password for the person: ");
+		String password = addUser.nextLine();
+		
+		System.out.println("Please enter an \"a\" if the person is an Admin or a \"u\" if the person is a User: ");
+		char type = addUser.nextLine().charAt(0);
+		
+		db.user_addUser(firstName, lastName, username, password, type);
 	}
 	
 	/**

@@ -1,5 +1,7 @@
 package cmc.ui;
 
+import java.util.Scanner;
+
 import cmc.entity.Person;
 import cmc.entity.School;
 
@@ -16,6 +18,11 @@ public class UserUI{
 	 */
 	private Person user;
 	
+	/**
+	 * Scanner used in various methods.
+	 */
+	private Scanner s;
+	
 	/** Constructor
 	 * @param user
 	 */
@@ -28,105 +35,180 @@ public class UserUI{
 	 */
 	public void viewMenu(){
 		System.out.println("*** USER MENU ***");
-		System.out.println("   - Manage Saved Schools");
-		System.out.println("   - Manage Saved Schools");
+		System.out.println("   - Search For Schools: (\"search\")");
+		System.out.println("   - Manage Saved Schools: (\"saved\")");
+		System.out.println("   - Manage User Profile: (\"profile\")");
+		System.out.println("   - Logout: (\"logout\")");
 	}
 	
-	/** manage school
-	 * 
+	/**
+	 * Handles the User wanting to search for schools.
 	 */
-	public void manageSchool(){
+	public void searchForSchools() {
 		
 	}
 	
-	/** manage user 
-	 * 
+	/**
+	 * Manages the users saved school list.
 	 */
-	public void mangeUsers(){
+	public void manageSchools() {
 		
 	}
 	
-	/** log out 
-	 * 
+	/**
+	 * Manages the users profile.
 	 */
-	public void logout(){
+	public void manageUserProfile() {
+		System.out.println("*** MANAGING PROFILE ***");
+		System.out.println(" - Current Data: ");
+		System.out.println("     Username: " + user.getUsername());
+		System.out.println("     First name: " + user.getFirstName());
+		System.out.println("     Last name: " + user.getLastName());
+		System.out.println("     Password: " + user.getPassword());
+		System.out.println("     Type: " + user.getType());
+		System.out.println(" ** Enter ($) if you don't want to change them **");
+		System.out.println(" * ENTER \"reset\" IF RESET IS NEEDED *");
+		s = new Scanner(System.in);
+		System.out.print("   - Enter new first name: ");
+		String newFirst = s.next();
+		if(newFirst.equals("reset")) {
+			this.resetForm('u');
+		} else {
+			System.out.print("   - Enter new last name: ");
+			String newLast = s.next();
+			if(newLast.equals("reset")) {
+				this.resetForm('u');
+			} else {
+				System.out.print("   - Enter new password: ");
+				String newPass = s.next();
+				if(newPass.equals("reset")) {
+					this.resetForm('u');
+				} else {
+					this.editUser(newFirst, newLast, newPass);
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Logs out the user.
+	 */
+	public void logout(LoginUI login) {
+		login.clearLoggedPerson();
+		System.out.println("*** WOULD YOU LIKE TO QUIT Y or N ***");
+		s = new Scanner(System.in);
+		System.out.print(" - ");
+		char answer = s.next().charAt(0);
+		if(answer == 'Y') {
+			System.exit(0);
+		} else {
+			login.login();
+		}
+	}
+	
+	/**
+	 * Searchs for a specific school given by the user.
+	 * 
+	 * @param idealSchool, the school entered by the user.
+	 */
+	public void search(School idealSchool) {
 		
 	}
 	
-	/** resetForm
+	/**
+	 * Resets the search form.
 	 * 
+	 * @param method, indicates which method it was called from.
 	 */
-	public void resetForm(){
+	private void resetForm(char method) {
+		if(method == 'u') {
+			this.manageUserProfile();
+		}
+	}
+	
+	/**
+	 * Pulls up a simple view of the entered school, which contains some information of the school.
+	 * 
+	 * @param school, the school to be viewed.
+	 */
+	public void viewSimple(School school) {
 		
 	}
 	
-	/** add a school
+	/**
+	 * Removes the given school, from the users saved school list.
 	 * 
+	 * @param school, the school to be removed.
 	 */
-	public void addASchool(School school){
+	public void removeSchool(School school) {
 		
 	}
 	
-	/** edit a school
+	/**
+	 * Changes the users firstname, lastname, and password based on the given parameters.
 	 * 
+	 * @param firstName, the firstname to be changed to.
+	 * @param lastName, the lastname to be changed to.
+	 * @param password, the password to change to.
 	 */
-	public void editASchool(School school){
+	public void editUser(String firstName, String lastName, String password) {
+		if(!firstName.equals("$")) {
+			this.user.setFirstName(firstName);
+		} 
+		if(!lastName.equals("$")) {
+			this.user.setLastName(lastName);
+		} 
+		if(!password.equals("$")) {
+			this.user.setPassword(password);
+		} 
+		System.out.println("*** YOUR PROFILE HAS BEEN CHANGED SUCCESSFULLY ***");
+	}
+	
+	/**
+	 * Denies the an edit if given arguments are invalid.
+	 */
+	private void denyEdit() {
 		
 	}
 	
-	/** deny add school
-	 * 
+	/**
+	 * Shows search results.
 	 */
-	public void denyAddSchool(){
+	private void showResults() {
 		
 	}
 	
-	/** cancel edit school
+	/**
+	 * Used to view all of the details of a school.
 	 * 
+	 * @param school, the school to be viewed in full.
 	 */
-	public void cancelEditSchool(){
+	public void viewExpanded(School school) {
 		
 	}
 	
-	/** fail to edit school
+	/**
+	 * Saves the currently viewed school.
 	 * 
+	 * @param school, the school to be saved.
 	 */
-	public void failureToEditSchool(){
+	public void saveSchool(School school) {
 		
 	}
 	
-	/** fail to edit user
-	 * 
+	/**
+	 * Shows a failure message if the school is already in the saved schools list.
 	 */
-	public void failureToEditUSer(){
+	private void failureToSave() {
 		
 	}
 	
-	/** add user
+	/**
+	 * Gets the current user.
 	 * 
+	 * @return user, the current user.
 	 */
-	public void addUser(){
-		
-	}
-	
-	/** deny add user
-	 * 
-	 */
-	public void denyAddUser(){
-		
-	}
-	
-	/** edit user
-	 * 
-	 */
-	public void editUser(Person user){
-		
-	}
-	
-	/** deactivate user
-	 * 
-	 */
-	public void deactivateUser(Person user){
-		
+	public Person getUser() {
+		return this.user;
 	}
 }
