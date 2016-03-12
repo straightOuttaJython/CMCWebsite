@@ -1,6 +1,7 @@
 package cmc.controller;
 
 import cmc.entity.Person;
+import cmc.home.PersonHome;
 import dblibrary.project.csci230.UniversityDBLibrary;
 
 /**
@@ -10,6 +11,12 @@ import dblibrary.project.csci230.UniversityDBLibrary;
  * @version March 6, 2016
  */
 public class LoginController {
+	
+	/**
+	 * personHome is used to help access the person objects in the database.
+	 */
+	private PersonHome personHome;
+	
 	/**
 	 * The login method users an entered username and password to find a Person that matches those parameters and returns that Person.
 	 * 
@@ -18,16 +25,12 @@ public class LoginController {
 	 * @param database, the database to search through.
 	 * @return Person object that was found based on the username and password. 
 	 */
-	public Person login(String username, String password, UniversityDBLibrary dataBase) 
+	public Person login(String username, String password) 
 	{
-		String user = username;
-		String pass = password;
-		String[][] array = dataBase.user_getUsers();
-		for(int i = 0; i < array.length; i++) {
-			for(int j = 0; j<array[i].length; j++) {
-				System.out.print(array[i][j] + " ");
-			}
-			System.out.println();
+		personHome = new PersonHome();
+		Person foundPerson = personHome.getPerson(username);
+		if(foundPerson.getPassword().equals(password)) {
+			return foundPerson;
 		}
 		return new Person();
 	}

@@ -5,6 +5,7 @@ package cmc.ui;
 
 import cmc.entity.Person;
 import cmc.entity.School;
+import cmc.home.SchoolHome;
 
 /**
  * @author Alex Seefeldt
@@ -12,6 +13,7 @@ import cmc.entity.School;
  */
 public class AdminUI implements AbstractUI {
 	
+	private SchoolHome sh = new SchoolHome();
 	/**
 	 * Create a new AdminUI.
 	 */
@@ -23,14 +25,26 @@ public class AdminUI implements AbstractUI {
 	 * Show Admin menu
 	 */
 	public void viewMenu() {
-		
+		System.out.println("*** ADMIN MENU ***");
+		System.out.println("    OPTIONS:");
+		System.out.println("      - Manage Schools");
+		System.out.println("      - Logout");
+		System.out.println("      - Reset Form");
+		System.out.println("      - Add User");
+		System.out.println("      - Edit User");
+		System.out.println("      - Deactivate User");
 	}
 	
 	/**
 	 * Show Manage Schools menu
 	 */
-	public void manageSchools() {
+	public void manageSchools() 
+	{
+		System.out.println("*** LIST OF SCHOOLS ***");
+		sh.listOfSchools();
 		
+		System.out.println("      - Add School");
+		System.out.println("      - Edit School");
 	}
 	
 	/**

@@ -2,6 +2,7 @@ package cmc.driver;
 
 import cmc.controller.LoginController;
 import cmc.entity.Person;
+import cmc.ui.LoginUI;
 import dblibrary.project.csci230.UniversityDBLibrary;
 
 public class Driver {
@@ -22,14 +23,12 @@ public class Driver {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		UniversityDBLibrary db = new UniversityDBLibrary(nameDB, nameDB, passDB);
-		int n = db.user_addUser("bob", "shirma", "bob", "obo", 'a');
-		System.out.println(n);
-		LoginController login = new LoginController();
-		String username = "bob";
-		String password = "obo";
-		Person person = login.login(username, password, db);
+		// tests login
+		LoginUI login = new LoginUI();
+		login.login();
+		
+		
+		
 	}
 
 }

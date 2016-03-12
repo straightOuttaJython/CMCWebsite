@@ -1,6 +1,8 @@
 package cmc.home;
 
 import cmc.entity.Person;
+import cmc.entity.School;
+import dblibrary.project.csci230.UniversityDBLibrary;
 
 /**
  * The PersonHome controls the ebb and flow of Persons in the Choose my College system.
@@ -10,6 +12,8 @@ import cmc.entity.Person;
  */
 public class PersonHome {
 	
+	private UniversityDBLibrary db = new UniversityDBLibrary("straightou", "straightou", "adem4");
+	
 	/**
 	 * The getPerson method takes in a username as a parameter and returns the Person associated with that username.
 	 * 
@@ -17,7 +21,14 @@ public class PersonHome {
 	 * @return the person object associated with the entered username.
 	 */
 	public Person getPerson(String username) {
-		return new Person();
+		Person[] personArray = this.getAllUsers();
+		Person foundPerson = new Person();
+		for(int i = 0; i < personArray.length; i++) {
+			if(personArray[i].getUsername().equals(username)) {
+				foundPerson = personArray[i];
+			}
+		}
+		return foundPerson;
 	}
 	
 	/**
@@ -35,7 +46,19 @@ public class PersonHome {
 	 * @return an array of Persons.
 	 */
 	public Person[] getAllUsers() {
-		return null;
+		String[][] stringArray = db.user_getUsers();
+		Person[] personArray = new Person[stringArray.length];
+		for(int i = 0; i < stringArray.length; i++) {
+			String firstname = stringArray[i][0];
+			String lastname = stringArray[i][1];
+			String username = stringArray[i][2];
+			String password = stringArray[i][3];
+			char type = stringArray[i][4].charAt(0);
+			char status = stringArray[i][5].charAt(0);
+			School[] savedSchools = new School[1];
+			personArray[i] = new Person(firstname, lastname, username, password, type, status, savedSchools);
+		}
+		return personArray;
 	}
 	
 	/**
