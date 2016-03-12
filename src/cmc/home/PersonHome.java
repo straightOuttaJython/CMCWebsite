@@ -62,7 +62,8 @@ public class PersonHome {
 			char type = stringArray[i][4].charAt(0);
 			char status = stringArray[i][5].charAt(0);
 			String[][] savedArray = db.user_getUsernamesWithSavedSchools();
-			School[] savedSchools = new School[10];
+			School[] savedSchools = new School[1];
+			savedSchools[0] = new School();
 			if(savedArray != null) {
 				int numberOfSavedSchools = 0;
 				for(int p = 0; p < savedArray.length; p++) {

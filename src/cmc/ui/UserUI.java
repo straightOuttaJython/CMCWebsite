@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import cmc.entity.Person;
 import cmc.entity.School;
+import dblibrary.project.csci230.UniversityDBLibrary;
 
 /**
 * The UserUI class controls user's action.
@@ -53,26 +54,62 @@ public class UserUI{
 				this.manageUserProfile();
 				break;
 			case "logout":
+				this.logout();
 				break;
 			default:
 				System.out.println("*** INVALID ENTRY RESETTING ***");
 				this.resetForm('v');
 				break;
 		}
+		this.viewMenu();
 	}
 	
 	/**
 	 * Handles the User wanting to search for schools.
 	 */
 	public void searchForSchools() {
-		
+		System.out.println("*** PLEASE ENTER THE REQUIREMENTS FOR A SCHOOL YOU WANT TO SEARCH ***");
+		s = new Scanner(System.in);
+		System.out.println("  School Name: ");
+		String schoolName = s.next();
+		System.out.println("  State: ");
+		String state = s.next();
+		System.out.println("  Location: ");
+		String location = s.next();
+		System.out.println("  Control: ");
+		String control = s.next();
+		System.out.println("  Number of Students Enrolled: ");
+		int numStudentsEnrolled = Integer.parseInt(s.next());
+		System.out.println("  Percent of Females Enrolled: ");
+		double perFemEnrolled = Double.parseDouble(s.next());
+		System.out.println("  SAT Verbal: ");
+		double satVerbel = Double.parseDouble(s.next());
+		System.out.println("  SAT Math: ");
+		double satMath = Double.parseDouble(s.next());
+		System.out.println("  Tuition: ");
+		double tuition = Double.parseDouble(s.next());
+		System.out.println("  % Financial Aid: ");
+		double percentFinAid = Double.parseDouble(s.next());
+		System.out.println("  Academics Scale (1-5): ");
+		int academics = Integer.parseInt(s.next());
+		System.out.println("  Social Life Scale (1-5): ");
+		int socLife = Integer.parseInt(s.next());
+		System.out.println("  Quality Life Scale (1-5): ");
+		int qualLife = Integer.parseInt(s.next());
 	}
 	
 	/**
 	 * Manages the users saved school list.
 	 */
 	public void manageSchools() {
-		
+		School[] schoolArray = this.user.getSavedSchools();
+		//lists names
+		System.out.println("*** LIST OF ALL OF YOUR SAVED SCHOOLS ***");
+		for(School sc: schoolArray) {
+			System.out.println(sc.getName());
+		}
+		//remove
+		//view
 	}
 	
 	/**
@@ -113,16 +150,17 @@ public class UserUI{
 	/**
 	 * Logs out the user.
 	 */
-	public void logout(LoginUI login) {
-		login.clearLoggedPerson();
+	public void logout() {
+		UniversityDBLibrary db = new UniversityDBLibrary("straightou", "straightou", "adem4");
+		db.user_editUser(user.getUsername(), user.getFirstName(), user.getLastName(), 
+				user.getPassword(), user.getType(), user.getStatus());
+		user = new Person();
 		System.out.println("*** WOULD YOU LIKE TO QUIT Y or N ***");
 		s = new Scanner(System.in);
 		System.out.print(" - ");
 		char answer = s.next().charAt(0);
-		if(answer == 'Y') {
+		if(answer == 'Y' || answer == 'y') {
 			System.exit(0);
-		} else {
-			login.login();
 		}
 	}
 	
@@ -184,6 +222,9 @@ public class UserUI{
 			this.user.setPassword(password);
 		} 
 		System.out.println("*** YOUR PROFILE HAS BEEN CHANGED SUCCESSFULLY ***");
+		UniversityDBLibrary db = new UniversityDBLibrary("straightou", "straightou", "adem4");
+		db.user_editUser(user.getUsername(), user.getFirstName(), user.getLastName(), 
+		user.getPassword(), user.getType(), user.getStatus());
 	}
 	
 	/**
