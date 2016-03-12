@@ -4,6 +4,7 @@ import cmc.controller.LoginController;
 import cmc.entity.Person;
 import cmc.ui.AdminUI;
 import cmc.ui.LoginUI;
+import cmc.ui.UserUI;
 import dblibrary.project.csci230.UniversityDBLibrary;
 
 public class Driver {
@@ -25,13 +26,14 @@ public class Driver {
 	 */
 	public static void main(String[] args) {
 		// tests login
-		//LoginUI login = new LoginUI();
-		//login.login();
+		LoginUI login = new LoginUI();
+		login.login();
 		
-		AdminUI admin = new AdminUI();
-		admin.manageSchools();
+		//AdminUI admin = new AdminUI();
+		//admin.manageSchools();
 		
-		
+		UserUI user = new UserUI(login.getLoggedPerson());
+		user.viewMenu();
 		
 	}
 
