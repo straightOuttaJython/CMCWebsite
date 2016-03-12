@@ -1,11 +1,8 @@
 package cmc.driver;
 
-import cmc.controller.LoginController;
-import cmc.entity.Person;
 import cmc.ui.AdminUI;
 import cmc.ui.LoginUI;
 import cmc.ui.UserUI;
-import dblibrary.project.csci230.UniversityDBLibrary;
 
 public class Driver {
 
