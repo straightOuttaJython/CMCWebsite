@@ -34,7 +34,8 @@ public class Driver {
 		
 		UserUI user = new UserUI(login.getLoggedPerson());
 		user.viewMenu();
-		
+		user.manageUserProfile();
+		user.logout(login);
 	}
 
 }

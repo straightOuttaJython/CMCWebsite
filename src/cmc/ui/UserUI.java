@@ -1,5 +1,7 @@
 package cmc.ui;
 
+import java.util.Scanner;
+
 import cmc.entity.Person;
 import cmc.entity.School;
 
@@ -16,6 +18,11 @@ public class UserUI{
 	 */
 	private Person user;
 	
+	/**
+	 * Scanner used in various methods.
+	 */
+	private Scanner s;
+	
 	/** Constructor
 	 * @param user
 	 */
@@ -28,8 +35,10 @@ public class UserUI{
 	 */
 	public void viewMenu(){
 		System.out.println("*** USER MENU ***");
-		System.out.println("   - Manage Saved Schools");
-		System.out.println("   - Manage Saved Schools");
+		System.out.println("   - Search For Schools: (\"search\")");
+		System.out.println("   - Manage Saved Schools: (\"saved\")");
+		System.out.println("   - Manage User Profile: (\"profile\")");
+		System.out.println("   - Logout: (\"logout\")");
 	}
 	
 	/**
@@ -50,14 +59,51 @@ public class UserUI{
 	 * Manages the users profile.
 	 */
 	public void manageUserProfile() {
-		
+		System.out.println("*** MANAGING PROFILE ***");
+		System.out.println(" - Current Data: ");
+		System.out.println("     Username: " + user.getUsername());
+		System.out.println("     First name: " + user.getFirstName());
+		System.out.println("     Last name: " + user.getLastName());
+		System.out.println("     Password: " + user.getPassword());
+		System.out.println("     Type: " + user.getType());
+		System.out.println(" ** Enter ($) if you don't want to change them **");
+		System.out.println(" * ENTER \"reset\" IF RESET IS NEEDED *");
+		s = new Scanner(System.in);
+		System.out.print("   - Enter new first name: ");
+		String newFirst = s.next();
+		if(newFirst.equals("reset")) {
+			this.resetForm('u');
+		} else {
+			System.out.print("   - Enter new last name: ");
+			String newLast = s.next();
+			if(newLast.equals("reset")) {
+				this.resetForm('u');
+			} else {
+				System.out.print("   - Enter new password: ");
+				String newPass = s.next();
+				if(newPass.equals("reset")) {
+					this.resetForm('u');
+				} else {
+					this.editUser(newFirst, newLast, newPass);
+				}
+			}
+		}
 	}
 	
 	/**
 	 * Logs out the user.
 	 */
-	public void logout() {
-		
+	public void logout(LoginUI login) {
+		login.clearLoggedPerson();
+		System.out.println("*** WOULD YOU LIKE TO QUIT Y or N ***");
+		s = new Scanner(System.in);
+		System.out.print(" - ");
+		char answer = s.next().charAt(0);
+		if(answer == 'Y') {
+			System.exit(0);
+		} else {
+			login.login();
+		}
 	}
 	
 	/**
@@ -71,9 +117,13 @@ public class UserUI{
 	
 	/**
 	 * Resets the search form.
+	 * 
+	 * @param method, indicates which method it was called from.
 	 */
-	public void resetForm() {
-		
+	private void resetForm(char method) {
+		if(method == 'u') {
+			this.manageUserProfile();
+		}
 	}
 	
 	/**
@@ -102,7 +152,16 @@ public class UserUI{
 	 * @param password, the password to change to.
 	 */
 	public void editUser(String firstName, String lastName, String password) {
-		
+		if(!firstName.equals("$")) {
+			this.user.setFirstName(firstName);
+		} 
+		if(!lastName.equals("$")) {
+			this.user.setLastName(lastName);
+		} 
+		if(!password.equals("$")) {
+			this.user.setPassword(password);
+		} 
+		System.out.println("*** YOUR PROFILE HAS BEEN CHANGED SUCCESSFULLY ***");
 	}
 	
 	/**
@@ -142,5 +201,14 @@ public class UserUI{
 	 */
 	private void failureToSave() {
 		
+	}
+	
+	/**
+	 * Gets the current user.
+	 * 
+	 * @return user, the current user.
+	 */
+	public Person getUser() {
+		return this.user;
 	}
 }

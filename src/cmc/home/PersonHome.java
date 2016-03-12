@@ -61,7 +61,32 @@ public class PersonHome {
 			String password = stringArray[i][3];
 			char type = stringArray[i][4].charAt(0);
 			char status = stringArray[i][5].charAt(0);
-			School[] savedSchools = new School[1];
+			String[][] savedArray = db.user_getUsernamesWithSavedSchools();
+			School[] savedSchools = new School[10];
+			if(savedArray != null) {
+				int numberOfSavedSchools = 0;
+				for(int p = 0; p < savedArray.length; p++) {
+					if(savedArray[p].equals(username)) {
+						numberOfSavedSchools++;
+					}
+				}
+				savedSchools = new School[numberOfSavedSchools];
+				if(numberOfSavedSchools > 0) {
+					int length = 0;
+					for(int p = 0; p < savedArray.length; p++) {
+						if(savedArray[p].equals(username)) {
+							String schoolName =  savedArray[p][0];
+							SchoolHome sh = new SchoolHome();
+							School[] school = sh.listOfSchools();
+							for(int o = 0; 0 < school.length; o++) {
+								if(school[o].getName().equals(schoolName))
+									savedSchools[length] = school[o];
+							}
+							length++;
+						}
+					}
+				}
+			}
 			personArray[i] = new Person(firstname, lastname, username, password, type, status, savedSchools);
 		}
 		return personArray;
