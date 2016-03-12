@@ -1,128 +1,130 @@
-package cmc.ui;
+package cmc;
 
+import cmc.entity.Person;
 import cmc.entity.School;
 
 /**
- * @author atseefeldt
- *
- */
-public class UserUI implements AbstractUI {
-
+* The UserUI class controls user's action.
+* 
+* @author Duong
+* @version March 9, 2016
+*/
+public class UserUI{
+	
 	/**
+	 * Instance variable
+	 */
+	private Person user;
+	
+	/** Constructor
+	 * @param user
+	 */
+	public UserUI(Person user) {
+		this.user = user;
+	}
+	
+	/** view menu
 	 * 
 	 */
-	public UserUI() {
-		// TODO Auto-generated constructor stub
-	}
-
-	/* (non-Javadoc)
-	 * @see ui.AbstractUI#viewMenu()
-	 */
-	public void viewMenu() {
-		// TODO Auto-generated method stub
+	public void viewMenu(){
 		
 	}
 	
-	/**
+	/** manage school
 	 * 
 	 */
-	public void searchForSchools() {
+	public void manageSchool(){
 		
 	}
 	
-	/**
+	/** manage user 
 	 * 
 	 */
-	public void manageUserProfile() {
-		
-	}
-
-	/* (non-Javadoc)
-	 * @see ui.AbstractUI#logout()
-	 */
-	public void logout() {
-		// TODO Auto-generated method stub
+	public void mangeUsers(){
 		
 	}
 	
-	/**
-	 * @param idealSchool
-	 */
-	public void search(School idealSchool) {
-		
-	}
-
-	/* (non-Javadoc)
-	 * @see ui.AbstractUI#resetForm()
-	 */
-	public void resetForm() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	/**
-	 * @param school
-	 */
-	public void viewSimple(School school) {
-		
-	}
-	
-	/**
-	 * @param school
-	 */
-	public void removeSchool(School school) {
-		
-	}
-	
-	/**
+	/** log out 
 	 * 
 	 */
-	public void manageProfile() {
+	public void logout(){
 		
 	}
 	
-	/**
-	 * @param firstName
-	 * @param lastName
-	 * @param password
-	 */
-	public void editUser(String firstName, String lastName, String password) {
-		
-	}
-	
-	/**
+	/** resetForm
 	 * 
 	 */
-	private void denyEdit() {
+	public void resetForm(){
 		
 	}
 	
-	/**
-	 * @param school
-	 */
-	private void showResults(School[] school) { 
-		
-	}
-	
-	/**
-	 * @param school
-	 */
-	public void viewExpanded(School school) {
-		
-	}
-	
-	/**
-	 * @param school
-	 */
-	public void saveSchool(School school) {
-		
-	}
-	
-	/**
+	/** add a school
 	 * 
 	 */
-	private void failureToSave() {
+	public void addASchool(School school){
 		
 	}
-
+	
+	/** edit a school
+	 * 
+	 */
+	public void editASchool(School school){
+		
+	}
+	
+	/** deny add school
+	 * 
+	 */
+	public void denyAddSchool(){
+		
+	}
+	
+	/** cancel edit school
+	 * 
+	 */
+	public void cancelEditSchool(){
+		
+	}
+	
+	/** fail to edit school
+	 * 
+	 */
+	public void failureToEditSchool(){
+		
+	}
+	
+	/** fail to edit user
+	 * 
+	 */
+	public void failureToEditUSer(){
+		
+	}
+	
+	/** add user
+	 * 
+	 */
+	public void addUser(){
+		
+	}
+	
+	/** deny add user
+	 * 
+	 */
+	public void denyAddUser(){
+		
+	}
+	
+	/** edit user
+	 * 
+	 */
+	public void editUser(Person user){
+		
+	}
+	
+	/** deactivate user
+	 * 
+	 */
+	public void deactivateUser(Person user){
+		
+	}
 }
