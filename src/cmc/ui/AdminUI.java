@@ -227,6 +227,9 @@ public class AdminUI implements AbstractUI {
 				numStudentsEnrolled,percentFemEnrolled, satVerbal, satMath, tuition, percentFinAid,
 				numApplicatns, admitRate,decideRate,academics,socialLife,qualityLife);
 		
+		System.out.println("****************** SCHOOL HAS BEEN ADDED ******************");
+		this.manageSchools();
+		
 		
 	}
 	
@@ -404,6 +407,8 @@ public class AdminUI implements AbstractUI {
 	public void addUser() 
 	{
 		Scanner addUser = new Scanner(System.in);
+		PersonHome aASH = new PersonHome();
+		Person[] list = aASH.getAllUsers();
 		
 		System.out.println("Please enter the first name of the person: ");
 		String firstName = addUser.nextLine();
@@ -413,6 +418,14 @@ public class AdminUI implements AbstractUI {
 		
 		System.out.println("Please enter a username of the person: ");
 		String username = addUser.nextLine();
+		for(int i =0; i < list.length; i++)
+		{
+			if(list[i].getUsername().equals(username))
+			{
+				System.out.println("THIS USERNAME HAS BEEN TAKEN ALREADY *** REVERTING BACK TO ADD USER***");
+				this.addUser();
+			}
+		}
 		
 		System.out.println("Please enter a password for the person: ");
 		String password = addUser.nextLine();
@@ -421,6 +434,9 @@ public class AdminUI implements AbstractUI {
 		char type = addUser.nextLine().charAt(0);
 		
 		db.user_addUser(firstName, lastName, username, password, type);
+		
+		System.out.println("*** USER HAS BEEN ADDED SUCCESSFULLY ***");
+		this.viewMenu();
 	}
 	
 	/**
