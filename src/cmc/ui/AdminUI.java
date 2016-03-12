@@ -353,12 +353,24 @@ public class AdminUI implements AbstractUI {
 				System.out.println("Please enter the new or existing password: ");
 				String password = userNameIn.nextLine();
 				
-				System.out.println("Please enter the new or existing type(NOTE THIS MUST BE ONLY AN \"a\" or \"u\"): ");
+				System.out.println("Please enter the new or existing type(NOTE THIS MUST BE ONLY AN \"a\" or \"u\" *** CASE SENSATIVE ***): ");
 				char type = userNameIn.nextLine().charAt(0);
 				
+				if(type != 'a' || type != 'u')
+				{
+					System.out.println("********* NOT A VALID INPUT *********");
+					System.out.println("********* REVERTING BACK TO ADMIN MENU *********");
+					this.viewMenu();
+				}
+				
 				db.user_editUser(username1, firstName, lastName, password, type, list[i].getStatus());
+				
+				System.out.println("********* USER HAS BEEN EDITED SUCCESFULLY *********");
+				System.out.println("********* GOING BACK TO ADMIN MENU *********");
+				this.viewMenu();
 			}
 		}
+		this.failureToEditUser();
 	}
 
 	/**
@@ -424,7 +436,8 @@ public class AdminUI implements AbstractUI {
 	 */
 	private void failureToEditUser() 
 	{
-		System.out.println("*** FAILURE TO EDIT USER... WAY TO GO ***");
+		System.out.println("*** USER WAS NOT FOUND, REVERTING BACK TO ADMIN MENU ***");
+		this.viewMenu();
 	}
 
 }
