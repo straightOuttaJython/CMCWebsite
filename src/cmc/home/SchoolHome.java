@@ -55,19 +55,19 @@ public class SchoolHome
 			String admitRate1 = universities[i][11];
 			double admitRate = Double.parseDouble(admitRate1);
 			
-			String decideRate1 = universities[i][12];
+			String decideRate1 = universities[i][11];
 			double decideRate = Double.parseDouble(decideRate1);
 			
-			String academics1 = universities[i][13];
+			String academics1 = universities[i][12];
 			int academics = Integer.parseInt(academics1);
 			
-			String socialLife1 = universities[i][14];
+			String socialLife1 = universities[i][13];
 			int socialLife = Integer.parseInt(socialLife1);
 			
-			String qualityLife1 = universities[i][15];
+			String qualityLife1 = universities[i][14];
 			int qualityLife = Integer.parseInt(qualityLife1);
 			
-			String emphases1 = universities[i][16];
+			String emphases1 = universities[i][15];
 			String emphases[] = emphases1.split(" ");
 			
 			schoolList[i] = new School(name,state,location,control,

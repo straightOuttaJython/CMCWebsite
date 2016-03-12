@@ -46,7 +46,7 @@ public class AdminUI implements AbstractUI {
 		System.out.println("*** LIST OF SCHOOLS ***");
 		for(int i = 0; i < s.length; i++)
 		{
-			String name = s[1].getName();
+			String name = s[i].getName();
 			System.out.println(name);
 		}
 		
