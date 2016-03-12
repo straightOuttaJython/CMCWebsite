@@ -96,6 +96,12 @@ public class UserUI{
 		int socLife = Integer.parseInt(s.next());
 		System.out.println("  Quality Life Scale (1-5): ");
 		int qualLife = Integer.parseInt(s.next());
+		//make new school
+		//set every field that is not black to the above ^^
+		//this method will use this.search(above school)
+		//controller will get a list of all schools, compare their fields to above school
+		//display options
+		//you can add/view simple/ view expanded
 	}
 	
 	/**
