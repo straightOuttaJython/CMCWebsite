@@ -29,8 +29,12 @@ public class LoginController {
 	{
 		personHome = new PersonHome();
 		Person foundPerson = personHome.getPerson(username);
-		if(foundPerson.getPassword().equals(password)) {
-			return foundPerson;
+		if (foundPerson.getStatus() == 'N') {
+			System.out.println("*** ACCESS TO ACCOUNT IS DENIED ***");
+		} else {
+			if(foundPerson.getPassword().equals(password)) {
+				return foundPerson;
+			}
 		}
 		return new Person();
 	}

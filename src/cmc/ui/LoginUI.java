@@ -75,14 +75,4 @@ public class LoginUI
 	public Person getLoggedPerson() {
 		return this.user;
 	}
-	
-	/**
-	 * Clears the logged in person and saves their stuff.
-	 */
-	public void clearLoggedPerson() {
-		UniversityDBLibrary db = new UniversityDBLibrary("straightou", "straightou", "adem4");
-		db.user_editUser(user.getUsername(), user.getFirstName(), user.getLastName(), 
-				user.getPassword(), user.getType(), user.getStatus());
-		user = new Person();
-	}
 }
