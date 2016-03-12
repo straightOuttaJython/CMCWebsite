@@ -20,11 +20,14 @@ public class PersonHome {
 	 * @param username
 	 * @return the person object associated with the entered username.
 	 */
-	public Person getPerson(String username) {
+	public Person getPerson(String username) 
+	{
 		Person[] personArray = this.getAllUsers();
 		Person foundPerson = new Person();
-		for(int i = 0; i < personArray.length; i++) {
-			if(personArray[i].getUsername().equals(username)) {
+		for(int i = 0; i < personArray.length; i++) 
+		{
+			if(personArray[i].getUsername().equals(username)) 
+			{
 				foundPerson = personArray[i];
 			}
 		}
@@ -36,7 +39,8 @@ public class PersonHome {
 	 * 
 	 * @param person, the Person to be updated
 	 */
-	public void updatePerson(Person person) {
+	public void updatePerson(Person person) 
+	{
 		
 	}
 	
@@ -45,10 +49,12 @@ public class PersonHome {
 	 * 
 	 * @return an array of Persons.
 	 */
-	public Person[] getAllUsers() {
+	public Person[] getAllUsers() 
+	{
 		String[][] stringArray = db.user_getUsers();
 		Person[] personArray = new Person[stringArray.length];
-		for(int i = 0; i < stringArray.length; i++) {
+		for(int i = 0; i < stringArray.length; i++) 
+		{
 			String firstname = stringArray[i][0];
 			String lastname = stringArray[i][1];
 			String username = stringArray[i][2];
@@ -66,7 +72,8 @@ public class PersonHome {
 	 * 
 	 * @param user, the user to be deactivated.
 	 */
-	public void deactivate(Person user) {
+	public void deactivate(Person user) 
+	{
 		
 	}
 	

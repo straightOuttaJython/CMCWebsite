@@ -20,28 +20,33 @@ public class School
 	 * @param int numStudentsEnrolled, numApplications,academics,socialLife, qualityLife
 	 * @param Double percentFemEnrolled, satVerbal, satMath, tuition, percentFinAid, admitRate, decideRate
 	 */
-	public School(String name, String state, String location, String control, String emphases[], 
-			int numStudentsEnrolled, int numApplications,int academics, 
-			int socialLife, int qualityLife, Double percentFemEnrolled, Double satVerbal, 
-			Double satMath,  Double tuition, Double percentFinAid, Double admitRate, Double decideRate)
+	public School(String name, String state, String location, String control, 
+			int numStudentsEnrolled,Double percentFemEnrolled, Double satVerbal, Double satMath, Double tuition, Double percentFinAid,
+			int numApplications, Double admitRate, Double decideRate, 
+			int academics,int socialLife, int qualityLife, 
+			String emphases[])
 	{
 		this.name = name;
 		this.state = state;
 		this.location = location;
 		this.control = control;
-		this.emphases = emphases;
+		
 		this.numStudentsEnrolled = numStudentsEnrolled;
-		this.numApplications = numApplications;
-		this.academics = academics;
-		this.socialLife = socialLife;
-		this.qualityLife = qualityLife;
 		this.percentFemEnrolled = percentFemEnrolled;
 		this.satVerbal = satVerbal;
 		this.satMath = satMath;
 		this.tuition = tuition;
 		this.percentFinAid = percentFinAid;
+		
+		this.numApplications = numApplications;
 		this.admitRate = admitRate;
-		this.decideRate = decideRate;	
+		this.decideRate = decideRate;
+		
+		this.academics = academics;
+		this.socialLife = socialLife;
+		this.qualityLife = qualityLife;
+		
+		this.emphases = emphases;
 	}
 	
 	/*

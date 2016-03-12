@@ -17,8 +17,10 @@ public class AdminUI implements AbstractUI {
 	/**
 	 * Create a new AdminUI.
 	 */
-	public AdminUI() {
+	public AdminUI() 
+	{
 		// TODO Auto-generated constructor stub
+		
 	}
 	
 	/**
@@ -40,8 +42,13 @@ public class AdminUI implements AbstractUI {
 	 */
 	public void manageSchools() 
 	{
+		School[] s = sh.listOfSchools();
 		System.out.println("*** LIST OF SCHOOLS ***");
-		sh.listOfSchools();
+		for(int i = 0; i < s.length; i++)
+		{
+			String name = s[1].getName();
+			System.out.println(name);
+		}
 		
 		System.out.println("      - Add School");
 		System.out.println("      - Edit School");

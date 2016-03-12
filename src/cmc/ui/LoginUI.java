@@ -19,9 +19,12 @@ public class LoginUI
 		String password = s.next();
 		logControl = new LoginController();
 		user = logControl.login(username, password);
-		if(user.getFirstName().equals("")) {
+		if(user.getFirstName().equals("")) 
+		{
 			this.denyLogin();
-		} else {
+		} 
+		else
+		{
 			System.out.println("*** YOU HAVE SUCCESSFULLY LOGGED-IN ***");
 		}
 	}
