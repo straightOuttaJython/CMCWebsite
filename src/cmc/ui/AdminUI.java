@@ -227,6 +227,9 @@ public class AdminUI implements AbstractUI {
 				numStudentsEnrolled,percentFemEnrolled, satVerbal, satMath, tuition, percentFinAid,
 				numApplicatns, admitRate,decideRate,academics,socialLife,qualityLife);
 		
+		System.out.println("****************** SCHOOL HAS BEEN ADDED ******************");
+		this.manageSchools();
+		
 		
 	}
 	
