@@ -26,23 +26,14 @@ public class Driver {
 		// tests login
 		LoginUI login = new LoginUI();
 		login.login();
-		
-		//admin stuff
-		AdminUI admin = new AdminUI();
-		admin.viewMenu();
-		
-
-		//System.out.println("********** UPDATED **********");
-		admin.manageSchools();
-		
-		//user ui stuff
-		UserUI user = new UserUI(login.getLoggedPerson());
-		user.viewMenu();
-		
-
-		UserUI user1 = new UserUI(login.getLoggedPerson());
-		user1.viewMenu();
-		user1.manageUserProfile();
-		user1.logout(login);
+		if(login.getLoggedPerson().getType() == 'a') {
+			//admin stuff
+			AdminUI admin = new AdminUI();
+			admin.viewMenu();
+		} else {
+			//user ui stuff
+			UserUI user = new UserUI(login.getLoggedPerson());
+			user.viewMenu();
+		}
 	}
 }

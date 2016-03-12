@@ -39,6 +39,26 @@ public class UserUI{
 		System.out.println("   - Manage Saved Schools: (\"saved\")");
 		System.out.println("   - Manage User Profile: (\"profile\")");
 		System.out.println("   - Logout: (\"logout\")");
+		s = new Scanner(System.in);
+		System.out.print("  Please enter a valid command: ");
+		String cmd = s.next();
+		switch (cmd) {
+			case "search":
+				this.searchForSchools();
+				break;
+			case "saved":
+				this.manageSchools();
+				break;
+			case "profile":
+				this.manageUserProfile();
+				break;
+			case "logout":
+				break;
+			default:
+				System.out.println("*** INVALID ENTRY RESETTING ***");
+				this.resetForm('v');
+				break;
+		}
 	}
 	
 	/**
@@ -123,6 +143,8 @@ public class UserUI{
 	private void resetForm(char method) {
 		if(method == 'u') {
 			this.manageUserProfile();
+		} else if (method == 'v') {
+			this.viewMenu();
 		}
 	}
 	
