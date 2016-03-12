@@ -32,101 +32,115 @@ public class UserUI{
 		System.out.println("   - Manage Saved Schools");
 	}
 	
-	/** manage school
-	 * 
+	/**
+	 * Handles the User wanting to search for schools.
 	 */
-	public void manageSchool(){
+	public void searchForSchools() {
 		
 	}
 	
-	/** manage user 
-	 * 
+	/**
+	 * Manages the users saved school list.
 	 */
-	public void mangeUsers(){
+	public void manageSchools() {
 		
 	}
 	
-	/** log out 
-	 * 
+	/**
+	 * Manages the users profile.
 	 */
-	public void logout(){
+	public void manageUserProfile() {
 		
 	}
 	
-	/** resetForm
-	 * 
+	/**
+	 * Logs out the user.
 	 */
-	public void resetForm(){
+	public void logout() {
 		
 	}
 	
-	/** add a school
+	/**
+	 * Searchs for a specific school given by the user.
 	 * 
+	 * @param idealSchool, the school entered by the user.
 	 */
-	public void addASchool(School school){
+	public void search(School idealSchool) {
 		
 	}
 	
-	/** edit a school
-	 * 
+	/**
+	 * Resets the search form.
 	 */
-	public void editASchool(School school){
+	public void resetForm() {
 		
 	}
 	
-	/** deny add school
+	/**
+	 * Pulls up a simple view of the entered school, which contains some information of the school.
 	 * 
+	 * @param school, the school to be viewed.
 	 */
-	public void denyAddSchool(){
+	public void viewSimple(School school) {
 		
 	}
 	
-	/** cancel edit school
+	/**
+	 * Removes the given school, from the users saved school list.
 	 * 
+	 * @param school, the school to be removed.
 	 */
-	public void cancelEditSchool(){
+	public void removeSchool(School school) {
 		
 	}
 	
-	/** fail to edit school
+	/**
+	 * Changes the users firstname, lastname, and password based on the given parameters.
 	 * 
+	 * @param firstName, the firstname to be changed to.
+	 * @param lastName, the lastname to be changed to.
+	 * @param password, the password to change to.
 	 */
-	public void failureToEditSchool(){
+	public void editUser(String firstName, String lastName, String password) {
 		
 	}
 	
-	/** fail to edit user
-	 * 
+	/**
+	 * Denies the an edit if given arguments are invalid.
 	 */
-	public void failureToEditUSer(){
+	private void denyEdit() {
 		
 	}
 	
-	/** add user
-	 * 
+	/**
+	 * Shows search results.
 	 */
-	public void addUser(){
+	private void showResults() {
 		
 	}
 	
-	/** deny add user
+	/**
+	 * Used to view all of the details of a school.
 	 * 
+	 * @param school, the school to be viewed in full.
 	 */
-	public void denyAddUser(){
+	public void viewExpanded(School school) {
 		
 	}
 	
-	/** edit user
+	/**
+	 * Saves the currently viewed school.
 	 * 
+	 * @param school, the school to be saved.
 	 */
-	public void editUser(Person user){
+	public void saveSchool(School school) {
 		
 	}
 	
-	/** deactivate user
-	 * 
+	/**
+	 * Shows a failure message if the school is already in the saved schools list.
 	 */
-	public void deactivateUser(Person user){
+	private void failureToSave() {
 		
 	}
 }
