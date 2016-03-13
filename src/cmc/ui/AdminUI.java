@@ -414,15 +414,19 @@ public class AdminUI implements AbstractUI {
 		{
 			if(list[i].getUsername().equals(username))
 			{
-				if(list[i].getStatus() == ('a'))
+				if(list[i].getStatus() == ('Y'))
 				{
 					db.user_editUser(list[i].getUsername(), list[i].getFirstName(), list[i].getLastName(), 
-							list[i].getPassword(), list[i].getType(), 'd');
+							list[i].getPassword(), list[i].getType(), 'N');
+					System.out.println("*************** STATUS HAS BEEN CHANGED, REVERTING BACK TO ADMIN MENU **************");
+					this.viewMenu();
 				}
 				else
 				{
 					db.user_editUser(list[i].getUsername(), list[i].getFirstName(), list[i].getLastName(), 
-							list[i].getPassword(), list[i].getType(), 'a');
+							list[i].getPassword(), list[i].getType(), 'Y');
+					System.out.println("*************** STATUS HAS BEEN CHANGED, REVERTING BACK TO ADMIN MENU **************");
+					this.viewMenu();
 				}
 			}
 		}
@@ -449,7 +453,7 @@ public class AdminUI implements AbstractUI {
 		{
 			if(list[i].getUsername().equals(username))
 			{
-				System.out.println("THIS USERNAME HAS BEEN TAKEN ALREADY *** REVERTING BACK TO ADD USER***");
+				System.out.println("THIS USERNAME HAS BEEN TAKEN ALREADY *** REVERTING BACK TO ADD USER*** \n");
 				this.addUser();
 			}
 		}
