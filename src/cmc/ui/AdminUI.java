@@ -430,6 +430,9 @@ public class AdminUI implements AbstractUI {
 				}
 			}
 		}
+		System.out.println("*************** USER HAS NOT BEEN FOUND, REVERTING BACK TO ADMIN MENU **************");
+		this.viewMenu();
+		
 	}
 	
 	/**
