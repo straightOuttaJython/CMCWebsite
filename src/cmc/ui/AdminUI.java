@@ -208,7 +208,7 @@ public class AdminUI implements AbstractUI {
 		System.out.println("Please enter the number of students that enrolled in the school (MUST BE A NUMBER, NO DECIMALS): ");
 		int numStudentsEnrolled = in.nextInt();
 		
-		System.out.println("Please enter the percentage of femals that enrolled in the school: (MUST HAVE A DECIMAL IN THE VALUE)");
+		System.out.println("Please enter the percentage of females that enrolled in the school: (MUST HAVE A DECIMAL IN THE VALUE)");
 		double percentFemEnrolled = in.nextDouble();
 		
 		System.out.println("Please enter the SAT Verbal score needed to attend the school: (MUST HAVE A DECIMAL IN THE VALUE)");
@@ -232,13 +232,13 @@ public class AdminUI implements AbstractUI {
 		System.out.println("Please enter the enrolled rate for the school: (MUST HAVE A DECIMAL IN THE VALUE)");
 		double decideRate = in.nextDouble();
 		
-		System.out.println("Please enter a rating from 0-100 for the school: (MUST BE A NUMBER, NO DECIMALS)");
+		System.out.println("Please enter a rating from 0-5 for the academics of the school: (MUST BE A NUMBER, NO DECIMALS)");
 		int academics = in.nextInt();
 		
-		System.out.println("Please enter a rating from 0-100 for the school: (MUST BE A NUMBER, NO DECIMALS)");
+		System.out.println("Please enter a rating from 0-5 for the social life of the school: (MUST BE A NUMBER, NO DECIMALS)");
 		int socialLife = in.nextInt();
 		
-		System.out.println("Please enter a rating from 0-100 for the school: (MUST BE A NUMBER, NO DECIMALS)");
+		System.out.println("Please enter a rating from 0-5 for the quality of the school: (MUST BE A NUMBER, NO DECIMALS)");
 		int qualityLife = in.nextInt();
 		
 		db.university_addUniversity(name,state,location,control,
