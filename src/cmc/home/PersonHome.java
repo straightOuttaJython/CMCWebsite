@@ -118,9 +118,9 @@ public class PersonHome {
 	 * 
 	 * @param user, the new user to be added.
 	 */
-	public void addUser(Person user) 
+	public void addUser(String firstName, String lastName, String username, String password, char type)
 	{
-		
+		db.user_addUser(firstName, lastName, username, password, type);	
 	}
 
 }

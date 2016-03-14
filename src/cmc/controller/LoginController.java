@@ -2,7 +2,6 @@ package cmc.controller;
 
 import cmc.entity.Person;
 import cmc.home.PersonHome;
-import dblibrary.project.csci230.UniversityDBLibrary;
 
 /**
  * The LoginController class controls how/when a Person would log in.
