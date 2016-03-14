@@ -123,8 +123,8 @@ public class UserUI{
 		school.setQualLife(qualLife);
 		this.search(school);
 		this.viewSimple(school);
-		this.viewExpanded(school);
-		this.viewMenu();
+		//this.viewExpanded(school);
+		//this.viewMenu();
 		//make new school
 		//set every field that is not black to the above ^^
 		//this method will use this.search(above school)
