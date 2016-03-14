@@ -12,7 +12,7 @@ import dblibrary.project.csci230.UniversityDBLibrary;
 * The UserUI class controls user's action.
 * 
 * @author Duong, Matthew Kounniyom
-* @version March 11, 2016
+* @version March 14, 2016
 */
 public class UserUI{
 	
@@ -47,7 +47,11 @@ public class UserUI{
 		String cmd = s.next();
 		switch (cmd) {
 			case "search":
-				this.searchForSchools();
+				try{ 
+					this.searchForSchools();
+				} catch(ResetException re) {
+					this.resetForm('s');
+				}
 				break;
 			case "saved":
 				this.manageSchools();
@@ -68,108 +72,206 @@ public class UserUI{
 	
 	/**
 	 * Handles the User wanting to search for schools.
+	 * 
+	 * @throws ResetException if the user is trying to reset.
 	 */
-	public void searchForSchools() {
+	public void searchForSchools() throws ResetException {
 		System.out.println("*** PLEASE ENTER THE REQUIREMENTS FOR A SCHOOL YOU WANT TO SEARCH ***");
 		System.out.println(" ** IF YOU WANT TO LEAVE OUT A FIELD LEAVE BLANK FOR STRINGS ** \n ** PUT A 0 FOR INTEGERS OR DOUBLES **");
 		s = new Scanner(System.in);
+		String input;
 		
 		System.out.print("  School Name (String): ");
 		String schoolName = s.nextLine().toUpperCase();
+		if(schoolName.equals("RESET"))
+			throw new ResetException("User wants to reset.");
 		
 		System.out.print("  State (String): ");
 		String state = s.nextLine().toUpperCase();
+		if(state.equals("RESET"))
+			throw new ResetException("User wants to reset.");
 		
 		System.out.print("  Location (SUBURBAN, URBAN, SMALL-CITY, -1 if Unknown): ");
 		String location = s.nextLine().toUpperCase();
+		if(location.equals("RESET"))
+			throw new ResetException("User wants to reset.");
 		
 		System.out.print("  Control (PRIVATE, STATE, CITY, -1 if Unknown): ");
 		String control = s.nextLine().toUpperCase();
+		if(control.equals("RESET"))
+			throw new ResetException("User wants to reset.");
 		
 		System.out.println("  Number of Students Enrolled (Integer): ");
 		System.out.print("   Lower Value: ");
-		int numStudentsEnrolledLower = Integer.parseInt(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		int numStudentsEnrolledLower = Integer.parseInt(input);
 		System.out.print("   Upper Value: ");
-		int numStudentsEnrolledUpper = Integer.parseInt(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		int numStudentsEnrolledUpper = Integer.parseInt(input);
 		
 		System.out.println("  Percent of Females Enrolled (0.0-100.0): ");
 		System.out.print("   Lower Value: ");
-		double percFemEnrolledLower = Double.parseDouble(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		double percFemEnrolledLower = Double.parseDouble(input);
 		System.out.print("   Upper Value: ");
-		double percFemEnrolledUpper = Double.parseDouble(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		double percFemEnrolledUpper = Double.parseDouble(input);
 		
 		System.out.println("  SAT Verbal (0.0-800.0): ");
 		System.out.print("   Lower Value: ");
-		double satVerbalLower = Double.parseDouble(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		double satVerbalLower = Double.parseDouble(input);
 		System.out.print("   Upper Value: ");
-		double satVerbalUpper = Double.parseDouble(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		double satVerbalUpper = Double.parseDouble(input);
 		
 		System.out.println("  SAT Math (0.0-800.0): ");
 		System.out.print("   Lower Value: ");
-		double satMathLower = Double.parseDouble(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		double satMathLower = Double.parseDouble(input);
 		System.out.print("   Upper Value: ");
-		double satMathUpper = Double.parseDouble(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		double satMathUpper = Double.parseDouble(input);
 		
 		System.out.println("  Tuition (Double): ");
 		System.out.print("   Lower Value: ");
-		double tuitionLower = Double.parseDouble(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		double tuitionLower = Double.parseDouble(input);
 		System.out.print("   Upper Value: ");
-		double tuitionUpper = Double.parseDouble(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		double tuitionUpper = Double.parseDouble(input);
 		
 		System.out.println("  % Financial Aid (0.0-100.0): ");
 		System.out.print("   Lower Value: ");
-		double percentFinAidLower = Double.parseDouble(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		double percentFinAidLower = Double.parseDouble(input);
 		System.out.print("   Upper Value: ");
-		double percentFinAidUpper = Double.parseDouble(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		double percentFinAidUpper = Double.parseDouble(input);
 		
 		System.out.println("  Number of Applicants (Integer): ");
 		System.out.print("   Lower Value: ");
-		int numApplicantsLower = Integer.parseInt(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		int numApplicantsLower = Integer.parseInt(input);
 		System.out.print("   Upper Value: ");
-		int numApplicantsUpper = Integer.parseInt(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		int numApplicantsUpper = Integer.parseInt(input);
 		
 		System.out.println("  %  Admit Rate (0.0-100.0): ");
 		System.out.print("   Lower Value: ");
-		double admitRateLower = Double.parseDouble(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		double admitRateLower = Double.parseDouble(input);
 		System.out.print("   Upper Value: ");
-		double admitRateUpper = Double.parseDouble(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		double admitRateUpper = Double.parseDouble(input);
 		
 		System.out.println("  %  Decide Rate (0.0-100.0): ");
 		System.out.print("   Lower Value: ");
-		double decideRateLower = Double.parseDouble(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		double decideRateLower = Double.parseDouble(input);
 		System.out.print("   Upper Value: ");
-		double decideRateUpper = Double.parseDouble(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		double decideRateUpper = Double.parseDouble(input);
 		
 		System.out.println("  Academics Scale (1-5): ");
 		System.out.print("   Lower Value: ");
-		int academicsLower = Integer.parseInt(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		int academicsLower = Integer.parseInt(input);
 		System.out.print("   Upper Value: ");
-		int academicsUpper = Integer.parseInt(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		int academicsUpper = Integer.parseInt(input);
 		
 		System.out.println("  Social Life Scale (1-5): ");
 		System.out.print("   Lower Value: ");
-		int socLifeLower = Integer.parseInt(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		int socLifeLower = Integer.parseInt(input);
 		System.out.print("   Upper Value: ");
-		int socLifeUpper = Integer.parseInt(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		int socLifeUpper = Integer.parseInt(input);
 		
 		System.out.println("  Quality Life Scale (1-5): ");
 		System.out.print("   Lower Value: ");
-		int qualLifeLower = Integer.parseInt(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		int qualLifeLower = Integer.parseInt(input);
 		System.out.print("   Upper Value: ");
-		int qualLifeUpper = Integer.parseInt(s.nextLine());
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		int qualLifeUpper = Integer.parseInt(input);
 		
 		System.out.println("  Emphases: ");
 		String[] emphases = new String[5];
 		System.out.print("   1: ");
-		emphases[0] = s.nextLine().toUpperCase();
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		emphases[0] = input.toUpperCase();
 		System.out.print("   2: ");
-		emphases[1] = s.nextLine().toUpperCase();
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		emphases[1] = input.toUpperCase();
 		System.out.print("   3: ");
-		emphases[2] = s.nextLine().toUpperCase();
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		emphases[2] = input.toUpperCase();
 		System.out.print("   4: ");
-		emphases[3] = s.nextLine().toUpperCase();
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		emphases[3] = input.toUpperCase();
 		System.out.print("   5: ");
-		emphases[4] = s.nextLine().toUpperCase();
+		input = s.nextLine();
+		if(input.equals("RESET"))
+			throw new ResetException("User wants to reset.");
+		emphases[4] = input.toUpperCase();
 		
 		
 		//School school = new School();
@@ -279,6 +381,12 @@ public class UserUI{
 			this.manageUserProfile();
 		} else if (method == 'v') {
 			this.viewMenu();
+		} else if (method == 's') {
+			try{ 
+				this.searchForSchools();
+			} catch(ResetException re) {
+				this.resetForm('s');
+			}
 		}
 	}
 	
@@ -419,5 +527,49 @@ public class UserUI{
 	 */
 	public Person getUser() {
 		return this.user;
+	}
+	
+	/**
+	 * Custom exception for resetting the form.
+	 * 
+	 * @author Matthew Kounniyom
+	 * @version March 14, 2016
+	 */
+	public class ResetException extends Exception {
+		
+		/**
+		 * Default Constructor.
+		 */
+		public ResetException() {
+			super();
+		}
+		
+		/**
+		 * Second Constructor, inputs a message to be output to the user.
+		 * 
+		 * @param message, the string to be output.
+		 */
+		public ResetException(String message) {
+			super(message);
+		}
+		
+		/**
+		 * Third Constructor, inputs a message and a cause.
+		 * 
+		 * @param message, the string to be output.
+		 * @param cause, used to be retrieved for later.
+		 */
+		public ResetException(String message, Throwable cause) {
+			super(message, cause);
+		}
+		
+		/**
+		 * Fourth Constructor, takes in a cause to be used for later.
+		 * 
+		 * @param cause, used to be retrieved for later.
+		 */
+		public ResetException(Throwable cause) {
+			super(cause);
+		}
 	}
 }
