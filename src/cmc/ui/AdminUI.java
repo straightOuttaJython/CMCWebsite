@@ -241,7 +241,7 @@ public class AdminUI implements AbstractUI {
 		System.out.println("Please enter a rating from 0-5 for the quality of the school: (MUST BE A NUMBER, NO DECIMALS)");
 		int qualityLife = in.nextInt();
 		
-		db.university_addUniversity(name,state,location,control,
+		aSH.addSchool(name,state,location,control,
 				numStudentsEnrolled,percentFemEnrolled, satVerbal, satMath, tuition, percentFinAid,
 				numApplicatns, admitRate,decideRate,academics,socialLife,qualityLife);
 		
@@ -314,7 +314,7 @@ public class AdminUI implements AbstractUI {
 				int qualityLife = inTwo.nextInt();
 				
 				
-				db.university_editUniversity(name,state,location,control,
+				eSH.updateSchool(name,state,location,control,
 						numStudentsEnrolled,percentFemEnrolled, satVerbal, satMath, tuition, percentFinAid,
 						numApplicatns, admitRate,decideRate,academics,socialLife,qualityLife);
 				System.out.println("************ EDITTING SCHOOL HAS BEEN COMPLETED *********");
@@ -379,7 +379,7 @@ public class AdminUI implements AbstractUI {
 				if(type.equals("u"))
 				{
 					char type1 = type.charAt(0);
-					db.user_editUser(list[i].getUsername(), firstName, lastName, password, type1, list[i].getStatus());
+					eSH.updatePerson(list[i].getUsername(), firstName, lastName, password, type1, list[i].getStatus());
 					System.out.println("********* USER HAS BEEN EDITED SUCCESFULLY *********");
 					System.out.println("********* REVERTING BACK TO ADMIN MENU *********");
 					this.viewMenu();
@@ -387,7 +387,7 @@ public class AdminUI implements AbstractUI {
 				else if(type.equals("a"))
 				{
 					char type2 = type.charAt(0);
-					db.user_editUser(list[i].getUsername(), firstName, lastName, password, type2, list[i].getStatus());
+					eSH.updatePerson(list[i].getUsername(), firstName, lastName, password, type2, list[i].getStatus());
 					System.out.println("********* USER HAS BEEN EDITED SUCCESFULLY *********");
 					System.out.println("********* REVERTING BACK TO ADMIN MENU *********");
 					this.viewMenu();
@@ -414,20 +414,9 @@ public class AdminUI implements AbstractUI {
 		{
 			if(list[i].getUsername().equals(username))
 			{
-				if(list[i].getStatus() == ('Y'))
-				{
-					db.user_editUser(list[i].getUsername(), list[i].getFirstName(), list[i].getLastName(), 
-							list[i].getPassword(), list[i].getType(), 'N');
-					System.out.println("*************** STATUS HAS BEEN CHANGED, REVERTING BACK TO ADMIN MENU **************");
-					this.viewMenu();
-				}
-				else
-				{
-					db.user_editUser(list[i].getUsername(), list[i].getFirstName(), list[i].getLastName(), 
-							list[i].getPassword(), list[i].getType(), 'Y');
-					System.out.println("*************** STATUS HAS BEEN CHANGED, REVERTING BACK TO ADMIN MENU **************");
-					this.viewMenu();
-				}
+				eSH.deactivate(list[i]);
+				System.out.println("*************** STATUS HAS BEEN CHANGED, REVERTING BACK TO ADMIN MENU **************");
+				this.viewMenu();
 			}
 		}
 		System.out.println("*************** USER HAS NOT BEEN FOUND, REVERTING BACK TO ADMIN MENU **************");

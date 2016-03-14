@@ -39,9 +39,10 @@ public class PersonHome {
 	 * 
 	 * @param person, the Person to be updated
 	 */
-	public void updatePerson(Person person) 
+	public void updatePerson(String username, String firstName, String lastName, String password, char type1,
+			char status)
 	{
-		
+		db.user_editUser(username, firstName, lastName, password, type1, status);
 	}
 	
 	/**
@@ -100,7 +101,16 @@ public class PersonHome {
 	 */
 	public void deactivate(Person user) 
 	{
-		
+		if(user.getStatus() == ('Y'))
+		{
+			db.user_editUser(user.getUsername(), user.getFirstName(), user.getLastName(), 
+					user.getPassword(), user.getType(), 'N');
+		}
+		else
+		{
+			db.user_editUser(user.getUsername(), user.getFirstName(), user.getLastName(), 
+					user.getPassword(), user.getType(), 'Y');
+		}
 	}
 	
 	/**
@@ -108,7 +118,9 @@ public class PersonHome {
 	 * 
 	 * @param user, the new user to be added.
 	 */
-	public void addUser(Person user) {
+	public void addUser(Person user) 
+	{
 		
 	}
+
 }
