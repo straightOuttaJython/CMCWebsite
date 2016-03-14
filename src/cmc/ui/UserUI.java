@@ -71,58 +71,110 @@ public class UserUI{
 	 */
 	public void searchForSchools() {
 		System.out.println("*** PLEASE ENTER THE REQUIREMENTS FOR A SCHOOL YOU WANT TO SEARCH ***");
+		System.out.println(" ** IF YOU WANT TO LEAVE OUT A FIELD LEAVE BLANK FOR STRINGS ** \n ** PUT A 0 FOR INTEGERS OR DOUBLES **");
 		s = new Scanner(System.in);
-		System.out.println("  School Name: ");
-		String schoolName = s.nextLine();
-		System.out.println("  State: ");
-		String state = s.nextLine();
-		System.out.println("  Location: ");
-		String location = s.nextLine();
-		System.out.println("  Control: ");
-		String control = s.nextLine();
-		System.out.println("  Number of Students Enrolled: ");
-		int numStudentsEnrolled = Integer.parseInt(s.nextLine());
-		System.out.println("  Percent of Females Enrolled: ");
-		double percFemEnrolled = Double.parseDouble(s.nextLine());
-		System.out.println("  SAT Verbal: ");
-		double satVerbel = Double.parseDouble(s.nextLine());
-		System.out.println("  SAT Math: ");
-		double satMath = Double.parseDouble(s.nextLine());
-		System.out.println("  Tuition: ");
-		double tuition = Double.parseDouble(s.nextLine());
-		System.out.println("  % Financial Aid: ");
-		double percentFinAid = Double.parseDouble(s.nextLine());
-		System.out.println("  Number of Applicants : ");
-		int numApplicants = Integer.parseInt(s.nextLine());
-		System.out.println("  %  Admit Rate: ");
-		double admitRate = Double.parseDouble(s.nextLine());
-		System.out.println("  %  Decide Rate: ");
-		double decideRate = Double.parseDouble(s.nextLine());
+		
+		System.out.print("  School Name (String): ");
+		String schoolName = s.nextLine().toUpperCase();
+		
+		System.out.print("  State (String): ");
+		String state = s.nextLine().toUpperCase();
+		
+		System.out.print("  Location (SUBURBAN, URBAN, SMALL-CITY, -1 if Unknown): ");
+		String location = s.nextLine().toUpperCase();
+		
+		System.out.print("  Control (PRIVATE, STATE, CITY, -1 if Unknown): ");
+		String control = s.nextLine().toUpperCase();
+		
+		System.out.println("  Number of Students Enrolled (Integer): ");
+		System.out.print("   Lower Value: ");
+		int numStudentsEnrolledLower = Integer.parseInt(s.nextLine());
+		System.out.print("   Upper Value: ");
+		int numStudentsEnrolledUpper = Integer.parseInt(s.nextLine());
+		
+		System.out.println("  Percent of Females Enrolled (0.0-100.0): ");
+		System.out.print("   Lower Value: ");
+		double percFemEnrolledLower = Double.parseDouble(s.nextLine());
+		System.out.print("   Upper Value: ");
+		double percFemEnrolledUpper = Double.parseDouble(s.nextLine());
+		
+		System.out.println("  SAT Verbal (0.0-800.0): ");
+		System.out.print("   Lower Value: ");
+		double satVerbalLower = Double.parseDouble(s.nextLine());
+		System.out.print("   Upper Value: ");
+		double satVerbalUpper = Double.parseDouble(s.nextLine());
+		
+		System.out.println("  SAT Math (0.0-800.0): ");
+		System.out.print("   Lower Value: ");
+		double satMathLower = Double.parseDouble(s.nextLine());
+		System.out.print("   Upper Value: ");
+		double satMathUpper = Double.parseDouble(s.nextLine());
+		
+		System.out.println("  Tuition (Double): ");
+		System.out.print("   Lower Value: ");
+		double tuitionLower = Double.parseDouble(s.nextLine());
+		System.out.print("   Upper Value: ");
+		double tuitionUpper = Double.parseDouble(s.nextLine());
+		
+		System.out.println("  % Financial Aid (0.0-100.0): ");
+		System.out.print("   Lower Value: ");
+		double percentFinAidLower = Double.parseDouble(s.nextLine());
+		System.out.print("   Upper Value: ");
+		double percentFinAidUpper = Double.parseDouble(s.nextLine());
+		
+		System.out.println("  Number of Applicants (Integer): ");
+		System.out.print("   Lower Value: ");
+		int numApplicantsLower = Integer.parseInt(s.nextLine());
+		System.out.print("   Upper Value: ");
+		int numApplicantsUpper = Integer.parseInt(s.nextLine());
+		
+		System.out.println("  %  Admit Rate (0.0-100.0): ");
+		System.out.print("   Lower Value: ");
+		double admitRateLower = Double.parseDouble(s.nextLine());
+		System.out.print("   Upper Value: ");
+		double admitRateUpper = Double.parseDouble(s.nextLine());
+		
+		System.out.println("  %  Decide Rate (0.0-100.0): ");
+		System.out.print("   Lower Value: ");
+		double decideRateLower = Double.parseDouble(s.nextLine());
+		System.out.print("   Upper Value: ");
+		double decideRateUpper = Double.parseDouble(s.nextLine());
+		
 		System.out.println("  Academics Scale (1-5): ");
-		int academics = Integer.parseInt(s.nextLine());
+		System.out.print("   Lower Value: ");
+		int academicsLower = Integer.parseInt(s.nextLine());
+		System.out.print("   Upper Value: ");
+		int academicsUpper = Integer.parseInt(s.nextLine());
+		
 		System.out.println("  Social Life Scale (1-5): ");
-		int socLife = Integer.parseInt(s.nextLine());
+		System.out.print("   Lower Value: ");
+		int socLifeLower = Integer.parseInt(s.nextLine());
+		System.out.print("   Upper Value: ");
+		int socLifeUpper = Integer.parseInt(s.nextLine());
+		
 		System.out.println("  Quality Life Scale (1-5): ");
-		int qualLife = Integer.parseInt(s.nextLine());
-		School school = new School();
-		school.setName(schoolName);
-		school.setState(state);
-		school.setLocation(location);
-		school.setControl(control);
-		school.setNumStudentsEnrolled(numStudentsEnrolled);
-		school.setPercFemEnrolled(percFemEnrolled);
-		school.setSatVerbal(satVerbel);
-		school.setSatMath(satMath);
-		school.setTuition(tuition);
-		school.setPercFinAid(percentFinAid);
-		school.setNumApplications(numApplicants);
-		school.setAdmitRate(admitRate);
-		school.setDecideRate(decideRate);
-		school.setAcademics(academics);
-		school.setSocialLife(socLife);
-		school.setQualLife(qualLife);
-		this.search(school);
-		this.viewSimple(school);
+		System.out.print("   Lower Value: ");
+		int qualLifeLower = Integer.parseInt(s.nextLine());
+		System.out.print("   Upper Value: ");
+		int qualLifeUpper = Integer.parseInt(s.nextLine());
+		
+		System.out.println("  Emphases: ");
+		String[] emphases = new String[5];
+		System.out.print("   1: ");
+		emphases[0] = s.nextLine().toUpperCase();
+		System.out.print("   2: ");
+		emphases[1] = s.nextLine().toUpperCase();
+		System.out.print("   3: ");
+		emphases[2] = s.nextLine().toUpperCase();
+		System.out.print("   4: ");
+		emphases[3] = s.nextLine().toUpperCase();
+		System.out.print("   5: ");
+		emphases[4] = s.nextLine().toUpperCase();
+		
+		
+		//School school = new School();
+		//this.search(school);
+		//this.viewSimple(school);
 		//this.viewExpanded(school);
 		//this.viewMenu();
 		//make new school
@@ -207,11 +259,13 @@ public class UserUI{
 	public void search(School idealSchool) {
 		SchoolHome sch = new SchoolHome();
 		School[] scl = sch.listOfSchools();
+		System.out.println("*** SEARCH RESULTS ***"); 
 		for(int i = 0; i < scl.length; i++){
-			if (idealSchool.equals(scl[i])){
-				System.out.println(idealSchool.getName());
+			if (idealSchool.getName().equals(scl[i].getName())){
+				System.out.println("  - " + idealSchool.getName());
 			}
 		}
+		System.out.println("*** END SEARCH RESULTS ***"); 
 		
 	}
 	
@@ -234,12 +288,16 @@ public class UserUI{
 	 * @param school, the school to be viewed.
 	 */
 	public void viewSimple(School school) {
-		System.out.println("  Location: ");
-		System.out.println(school.getLocation());
-		System.out.println("  State: ");
-		System.out.println(school.getState());
-		System.out.println("  Tuition: ");
-		System.out.println(school.getTuition());
+		System.out.print("  School: ");
+		System.out.print(school.getName() + "\n");
+		System.out.print("  Location: ");
+		System.out.print(school.getLocation() + "\n");
+		System.out.print("  State: ");
+		System.out.print(school.getState() + "\n");
+		System.out.print("  Control: ");
+		System.out.print(school.getControl() + "\n");
+		System.out.print("  Number of Students: ");
+		System.out.print(school.getNumStudentsEnrolled() + "\n");
 	}
 	
 	/**
