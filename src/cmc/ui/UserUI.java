@@ -1,9 +1,11 @@
 package cmc.ui;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 import cmc.entity.Person;
 import cmc.entity.School;
+import cmc.home.SchoolHome;
 import dblibrary.project.csci230.UniversityDBLibrary;
 
 /**
@@ -71,31 +73,58 @@ public class UserUI{
 		System.out.println("*** PLEASE ENTER THE REQUIREMENTS FOR A SCHOOL YOU WANT TO SEARCH ***");
 		s = new Scanner(System.in);
 		System.out.println("  School Name: ");
-		String schoolName = s.next();
+		String schoolName = s.nextLine();
 		System.out.println("  State: ");
-		String state = s.next();
+		String state = s.nextLine();
 		System.out.println("  Location: ");
-		String location = s.next();
+		String location = s.nextLine();
 		System.out.println("  Control: ");
-		String control = s.next();
+		String control = s.nextLine();
 		System.out.println("  Number of Students Enrolled: ");
-		int numStudentsEnrolled = Integer.parseInt(s.next());
+		int numStudentsEnrolled = Integer.parseInt(s.nextLine());
 		System.out.println("  Percent of Females Enrolled: ");
-		double perFemEnrolled = Double.parseDouble(s.next());
+		double percFemEnrolled = Double.parseDouble(s.nextLine());
 		System.out.println("  SAT Verbal: ");
-		double satVerbel = Double.parseDouble(s.next());
+		double satVerbel = Double.parseDouble(s.nextLine());
 		System.out.println("  SAT Math: ");
-		double satMath = Double.parseDouble(s.next());
+		double satMath = Double.parseDouble(s.nextLine());
 		System.out.println("  Tuition: ");
-		double tuition = Double.parseDouble(s.next());
+		double tuition = Double.parseDouble(s.nextLine());
 		System.out.println("  % Financial Aid: ");
-		double percentFinAid = Double.parseDouble(s.next());
+		double percentFinAid = Double.parseDouble(s.nextLine());
+		System.out.println("  Number of Applicants : ");
+		int numApplicants = Integer.parseInt(s.nextLine());
+		System.out.println("  %  Admit Rate: ");
+		double admitRate = Double.parseDouble(s.nextLine());
+		System.out.println("  %  Decide Rate: ");
+		double decideRate = Double.parseDouble(s.nextLine());
 		System.out.println("  Academics Scale (1-5): ");
-		int academics = Integer.parseInt(s.next());
+		int academics = Integer.parseInt(s.nextLine());
 		System.out.println("  Social Life Scale (1-5): ");
-		int socLife = Integer.parseInt(s.next());
+		int socLife = Integer.parseInt(s.nextLine());
 		System.out.println("  Quality Life Scale (1-5): ");
-		int qualLife = Integer.parseInt(s.next());
+		int qualLife = Integer.parseInt(s.nextLine());
+		School school = new School();
+		school.setName(schoolName);
+		school.setState(state);
+		school.setLocation(location);
+		school.setControl(control);
+		school.setNumStudentsEnrolled(numStudentsEnrolled);
+		school.setPercFemEnrolled(percFemEnrolled);
+		school.setSatVerbal(satVerbel);
+		school.setSatMath(satMath);
+		school.setTuition(tuition);
+		school.setPercFinAid(percentFinAid);
+		school.setNumApplications(numApplicants);
+		school.setAdmitRate(admitRate);
+		school.setDecideRate(decideRate);
+		school.setAcademics(academics);
+		school.setSocialLife(socLife);
+		school.setQualLife(qualLife);
+		this.search(school);
+		this.viewSimple(school);
+		this.viewExpanded(school);
+		this.viewMenu();
 		//make new school
 		//set every field that is not black to the above ^^
 		//this method will use this.search(above school)
@@ -176,6 +205,13 @@ public class UserUI{
 	 * @param idealSchool, the school entered by the user.
 	 */
 	public void search(School idealSchool) {
+		SchoolHome sch = new SchoolHome();
+		School[] scl = sch.listOfSchools();
+		for(int i = 0; i < scl.length; i++){
+			if (idealSchool.equals(scl[i])){
+				System.out.println(idealSchool.getName());
+			}
+		}
 		
 	}
 	
@@ -198,7 +234,12 @@ public class UserUI{
 	 * @param school, the school to be viewed.
 	 */
 	public void viewSimple(School school) {
-		
+		System.out.println("  Location: ");
+		System.out.println(school.getLocation());
+		System.out.println("  State: ");
+		System.out.println(school.getState());
+		System.out.println("  Tuition: ");
+		System.out.println(school.getTuition());
 	}
 	
 	/**
@@ -253,7 +294,37 @@ public class UserUI{
 	 * @param school, the school to be viewed in full.
 	 */
 	public void viewExpanded(School school) {
-		
+		System.out.println(school.getName());
+		System.out.println("  State: ");
+		System.out.println(school.getState());
+		System.out.println("  Location: ");
+		System.out.println(school.getLocation());
+		System.out.println("  Control: ");
+		System.out.println(school.getControl());
+		System.out.println("  Number of Students Enrolled: ");
+		System.out.println(school.getNumStudentsEnrolled());
+		System.out.println("  Percent of Females Enrolled: ");
+		System.out.println(school.getPercentFemEnrolled());
+		System.out.println("  SAT Verbal: ");
+		System.out.println(school.getSatVerb());
+		System.out.println("  SAT Math: ");
+		System.out.println(school.getSatMath());
+		System.out.println("  Tuition: ");
+		System.out.println(school.getTuition());
+		System.out.println("  % Financial Aid: ");
+		System.out.println(school.getPercFinAid());
+		System.out.println("  Number of Applicants : ");
+		System.out.println(school.getNumApplications());
+		System.out.println("  %  Admit Rate: ");
+		System.out.println(school.getAdmitRate());
+		System.out.println("  %  Decide Rate: ");
+		System.out.println(school.getDecideRate());
+		System.out.println("  Academics Scale (1-5): ");
+		System.out.println(school.getAcademics());
+		System.out.println("  Social Life Scale (1-5): ");
+		System.out.println(school.getSocialLife());
+		System.out.println("  Quality Life Scale (1-5): ");
+		System.out.println(school.getQualityLife());
 	}
 	
 	/**
@@ -262,14 +333,25 @@ public class UserUI{
 	 * @param school, the school to be saved.
 	 */
 	public void saveSchool(School school) {
-		
+		School[] sc = user.getSavedSchools();
+		sc = Arrays.copyOf(sc, sc.length+1);
+		if(!failureToSave(school)){
+			sc[sc.length-1] = school;
+		}
 	}
 	
 	/**
 	 * Shows a failure message if the school is already in the saved schools list.
 	 */
-	private void failureToSave() {
-		
+	private boolean failureToSave(School school) {
+		School[] sc = user.getSavedSchools();  
+		for(int i = 0; i < sc.length; i ++){
+			if(school.equals(sc[i])){
+				System.out.println("School is already in saved list");
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**

@@ -309,7 +309,7 @@ public class School
 	 * Sets tuition of a school
 	 * @param double tuition
 	 */
-	public void setTution(Double tuition) 
+	public void setTuition(Double tuition) 
 	{
 		this.tuition = tuition;
 	}
@@ -363,5 +363,10 @@ public class School
 	public void setDecideRate(Double decideRate) 
 	{
 		this.decideRate = decideRate;
+	}
+
+	public void setTuition(double tuition2) {
+		// TODO Auto-generated method stub
+		
 	}
 }
