@@ -1,17 +1,12 @@
 package cmc.home;
 
-import java.util.Scanner;
-
-import cmc.entity.Person;
 import cmc.entity.School;
 import dblibrary.project.csci230.UniversityDBLibrary;
 
 public class SchoolHome 
 {
 	private UniversityDBLibrary db = new UniversityDBLibrary("straightou", "straightou", "adem4");
-	private School sch;
 	private School[] schoolList;
-	private Scanner inTwo;
 	
 	public School[] listOfSchools()
 	{
@@ -69,9 +64,8 @@ public class SchoolHome
 					emphases);
 		}
 		return schoolList;
-	}
+	}	
 
-	
 	public void updateSchool(String name, String state, String location, String control, int numStudentsEnrolled,
 			double percentFemEnrolled, double satVerbal, double satMath, double tuition, double percentFinAid,
 			int numApplicatns, double admitRate, double decideRate, int academics, int socialLife, int qualityLife) 
@@ -80,8 +74,6 @@ public class SchoolHome
 						numStudentsEnrolled,percentFemEnrolled, satVerbal, satMath, tuition, percentFinAid,
 						numApplicatns, admitRate,decideRate,academics,socialLife,qualityLife);	
 	}
-
-
 	
 	public void addSchool(String name, String state, String location, String control, int numStudentsEnrolled,
 			double percentFemEnrolled, double satVerbal, double satMath, double tuition, double percentFinAid,

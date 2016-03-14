@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import cmc.controller.LoginController;
 import cmc.entity.Person;
-import dblibrary.project.csci230.UniversityDBLibrary;
 
 
 /**
@@ -17,13 +16,14 @@ public class LoginUI
 {
 	private LoginController logControl;
 	private Person user;
+	private Scanner s;
 	
 	/**
 	 * Used to handle logging in.
 	 */
 	public void login()
 	{
-		Scanner s = new Scanner(System.in);
+		s = new Scanner(System.in);
 		System.out.println(" * ENTER \"reset\" IF RESET IS NEEDED *");
 		System.out.print("# Enter a username: " );
 		String username = s.next();

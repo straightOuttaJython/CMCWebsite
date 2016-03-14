@@ -5,21 +5,17 @@ package cmc.ui;
 
 import java.util.Scanner;
 
-import javax.swing.text.html.StyleSheet.ListPainter;
 
 import cmc.entity.Person;
 import cmc.entity.School;
 import cmc.home.PersonHome;
 import cmc.home.SchoolHome;
-import dblibrary.project.csci230.UniversityDBLibrary;
 
 /**
  * @author Alex Seefeldt
  *
  */
 public class AdminUI implements AbstractUI {
-	
-	private UniversityDBLibrary db = new UniversityDBLibrary("straightou", "straightou", "adem4");
 	
 	private SchoolHome sh = new SchoolHome();
 
@@ -445,8 +441,7 @@ public class AdminUI implements AbstractUI {
 		{
 			if(list[i].getUsername().equals(username))
 			{
-				System.out.println("THIS USERNAME HAS BEEN TAKEN ALREADY *** REVERTING BACK TO ADD USER*** \n");
-				this.addUser();
+				this.denyAddUser();
 			}
 		}
 		
@@ -456,7 +451,7 @@ public class AdminUI implements AbstractUI {
 		System.out.println("Please enter an \"a\" if the person is an Admin or a \"u\" if the person is a User: ");
 		char type = addUser.nextLine().charAt(0);
 		
-		db.user_addUser(firstName, lastName, username, password, type);
+		aASH.addUser(firstName, lastName, username, password, type);
 		
 		System.out.println("*** USER HAS BEEN ADDED SUCCESSFULLY ***");
 		this.viewMenu();
@@ -467,7 +462,8 @@ public class AdminUI implements AbstractUI {
 	 */
 	private void denyAddUser() 
 	{
-		System.out.println("*** YOUR ATTEMPT OF ADDING A USER HAS BEEN DENIED ***");
+		System.out.println("THIS USERNAME HAS BEEN TAKEN ALREADY *** REVERTING BACK TO ADD USER*** \n");
+		this.addUser();
 	}
 	
 	/**
