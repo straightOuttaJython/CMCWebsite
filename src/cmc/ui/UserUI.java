@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import cmc.entity.Person;
 import cmc.entity.School;
+import cmc.home.PersonHome;
 import cmc.home.SchoolHome;
 import dblibrary.project.csci230.UniversityDBLibrary;
 
@@ -435,8 +436,7 @@ public class UserUI{
 			this.user.setPassword(password);
 		} 
 		System.out.println("*** YOUR PROFILE HAS BEEN CHANGED SUCCESSFULLY ***");
-		UniversityDBLibrary db = new UniversityDBLibrary("straightou", "straightou", "adem4");
-		db.user_editUser(user.getUsername(), user.getFirstName(), user.getLastName(), 
+		new PersonHome().updatePerson(user.getUsername(), user.getFirstName(), user.getLastName(), 
 		user.getPassword(), user.getType(), user.getStatus());
 	}
 	
