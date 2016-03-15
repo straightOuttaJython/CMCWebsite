@@ -29,6 +29,11 @@ public class UserUI{
 	 */
 	private Scanner s;
 	
+	/**
+	 * This is the list of matches for the last search made.
+	 */
+	private ArrayList<School> lastMatchList;
+	
 	/** Constructor
 	 * @param user
 	 */
@@ -205,16 +210,44 @@ public class UserUI{
 				}
 			}
 		}
-		SearchController sC = new SearchController();
-		ArrayList<School> matchList = sC.search((String[])idealSchool.toArray());
-		int resultNum = 0;
-		for (School match : matchList) {
-			// display simple school information
-		}
+		String[] idealSchoolArray = (String[])idealSchool.toArray();
+		this.searchForSchools(idealSchoolArray);
 		// get input of match's index and go to expanded view
 		// ^ should be able to call another method for that I think (I hope)
 		// have a quit option like '-' or something
 		// anything else???
+	}
+	
+	public void searchForSchools(String[] idealSchool) {
+		SearchController sC = new SearchController();
+		ArrayList<School> matchList =  sC.search(idealSchool);
+		this.lastMatchList = matchList;
+		this.showResults(matchList);
+	}
+	
+	/**
+	 * Shows search results.
+	 */
+	private void showResults(ArrayList<School> matchList) {
+		int resultNum = 0;
+		s = new Scanner(System.in);
+		String input;
+		System.out.println("***SEARCH RESULTS***");
+		for (School match : matchList) {
+			System.out.println("Match "+(resultNum++)+":");
+			this.viewSimple(match);
+		}
+		System.out.println("Type a match number to see the Expanded School View, "
+							+ "or type \"-\" to quit the search");
+		System.out.println("Match number:");
+		input = s.nextLine();
+		while (input.charAt(0)!='-' || !(input.matches("[0-9]*") && Integer.parseInt(input)>=0 && Integer.parseInt(input)<matchList.size())) {
+			System.out.println("Please enter a valid match number (0-"+(matchList.size()-1)+") or \"-\" to quit");
+			System.out.println("Match number:");
+			input = s.nextLine();
+		}
+		if (input.charAt(0)!='-')
+			this.viewExpanded(matchList.get(Integer.parseInt(input)));
 	}
 	
 	/**
@@ -355,13 +388,6 @@ public class UserUI{
 	}
 	
 	/**
-	 * Shows search results.
-	 */
-	private void showResults() {
-		
-	}
-	
-	/**
 	 * Used to view all of the details of a school.
 	 * 
 	 * @param school, the school to be viewed in full.
@@ -398,6 +424,16 @@ public class UserUI{
 		System.out.println(school.getSocialLife());
 		System.out.println("  Quality Life Scale (1-5): ");
 		System.out.println(school.getQualityLife());
+		System.out.println("  Emphases: ");
+		for (String em : school.getEmphases()) {
+			System.out.println("    -"+em);
+		}
+		System.out.println(" *Recommended Schools for "+school.getName()+": ");
+		SearchController sC = new SearchController();
+		for (School rec : sC.getReccomendedSchools(school)) {
+			System.out.println(":");
+			this.viewSimple(rec);
+		} // Functionality to go to expanded view from here must be added later
 	}
 	
 	/**

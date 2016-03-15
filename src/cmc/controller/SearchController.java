@@ -153,9 +153,41 @@ public class SearchController
 		avg/=divisor;
 		return avg;
 	}
+	
+	private double calculateReccomendationVector(String[] idealSchool, String[] compSchool, ArrayList<String> compEm) {
+		return 0.0;
+	}
 
-	public void getRecSchool(School school)
-	{
-
+	public ArrayList<School> getReccomendedSchools(School school) {
+		// TODO: use makeSearchableSchool and calculateReccomendationVector and get the top 5 vectors.
+		// If you can abstract anything away between this method and the other search method, do it
+		// you might be able to abstract away parts of the reccomendation vector, but don't do that now
+		return null;
+	}
+	
+	private String[] makeSearchableSchool(School school) {
+		String[] schoolArray = new String[17];
+		schoolArray[0] = school.getName();
+		schoolArray[1] = school.getState();
+		schoolArray[2] = school.getLocation();
+		schoolArray[3] = school.getControl();
+		schoolArray[4] = ""+school.getNumStudentsEnrolled();
+		schoolArray[5] = ""+school.getPercentFemEnrolled();
+		schoolArray[6] = ""+school.getSatVerb();
+		schoolArray[7] = ""+school.getSatMath();
+		schoolArray[8] = ""+school.getTuition();
+		schoolArray[9] = ""+school.getPercFinAid();
+		schoolArray[10] = ""+school.getNumApplications();
+		schoolArray[11] = ""+school.getAdmitRate();
+		schoolArray[12] = ""+school.getDecideRate();
+		schoolArray[13] = ""+school.getAcademics();
+		schoolArray[14] = ""+school.getSocialLife();
+		schoolArray[15] = ""+school.getQualityLife();
+		StringBuilder sB = new StringBuilder();
+		for (String em : school.getEmphases()) {
+			sB.append(em+":");
+		}
+		schoolArray[16] = sB.substring(0, sB.length());
+		return schoolArray;
 	}
 }
