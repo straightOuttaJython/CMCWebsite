@@ -14,8 +14,19 @@ import cmc.entity.Person;
  */
 public class LoginUI 
 {
+	/*
+	 * Creates a LoginController to process the information between this UI and the dataBase
+	 */
 	private LoginController logControl;
+	
+	/*
+	 * A Person named user is created to access its information
+	 */
 	private Person user;
+	
+	/*
+	 * Scanner used in various methods.
+	 */
 	private Scanner s;
 	
 	/**

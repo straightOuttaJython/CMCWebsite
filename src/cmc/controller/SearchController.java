@@ -7,15 +7,18 @@ import dblibrary.project.csci230.UniversityDBLibrary;
 
 /**
  * The SearchController class controls how/when a Person would search for specific school.
+ * (NOT YET COMPLETE!)
  * 
- * @author Duong
+ * @author Duong, Alex
  * @version March 9, 2016
  */
 public class SearchController 
 {
 	
 	private static final int[] STRING_LOCATIONS = {0,1,2,3};
+	
 	private static final int[] INT_LOCATIONS = {4,10,13,14,15};
+	
 	private static final int[] DOUBLE_LOCATIONS = {5,6,7,8,9,11,12};
 	
 	
@@ -156,6 +159,6 @@ public class SearchController
 
 	public void getRecSchool(School school)
 	{
-
+		
 	}
 }

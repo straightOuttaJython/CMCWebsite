@@ -2,8 +2,8 @@ package cmc.entity;
 
 /*
  * This saves the information for a given school
- * @Erin Queme
- * @1.0 
+ * @author Erin Queme
+ * @Version March 6, 2016
  */
 
 public class School 
@@ -365,8 +365,4 @@ public class School
 		this.decideRate = decideRate;
 	}
 
-	public void setTuition(double tuition2) {
-		// TODO Auto-generated method stub
-		
-	}
 }

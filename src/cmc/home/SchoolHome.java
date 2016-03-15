@@ -3,11 +3,27 @@ package cmc.home;
 import cmc.entity.School;
 import dblibrary.project.csci230.UniversityDBLibrary;
 
+/**
+ * The SchoolHome controls the ebb and flow of Schools in the Choose my College system.
+ * 
+ * @author Matthew Kounniyom, Erin Queme
+ * @version March 6, 2016
+ */
 public class SchoolHome 
 {
+	/**
+	 * New database created to use
+	 */
 	private UniversityDBLibrary db = new UniversityDBLibrary("straightou", "straightou", "adem4");
+	
+	/**
+	 * a list of schools
+	 */
 	private School[] schoolList;
 	
+	/**
+	 * Creates a list of schools and places them into schoolList
+	 */
 	public School[] listOfSchools()
 	{
 		String[][] universities = db.university_getUniversities();
@@ -66,6 +82,9 @@ public class SchoolHome
 		return schoolList;
 	}	
 
+	/**
+	 * updates the school and saves the edits to the db
+	 */
 	public void updateSchool(String name, String state, String location, String control, int numStudentsEnrolled,
 			double percentFemEnrolled, double satVerbal, double satMath, double tuition, double percentFinAid,
 			int numApplicatns, double admitRate, double decideRate, int academics, int socialLife, int qualityLife) 
@@ -75,6 +94,9 @@ public class SchoolHome
 						numApplicatns, admitRate,decideRate,academics,socialLife,qualityLife);	
 	}
 	
+	/**
+	 * adds a school and saves it into the db
+	 */
 	public void addSchool(String name, String state, String location, String control, int numStudentsEnrolled,
 			double percentFemEnrolled, double satVerbal, double satMath, double tuition, double percentFinAid,
 			int numApplicatns, double admitRate, double decideRate, int academics, int socialLife, int qualityLife) 

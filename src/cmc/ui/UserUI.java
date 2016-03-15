@@ -8,7 +8,6 @@ import cmc.controller.SearchController;
 import cmc.entity.Person;
 import cmc.entity.School;
 import cmc.home.PersonHome;
-import cmc.home.SchoolHome;
 import dblibrary.project.csci230.UniversityDBLibrary;
 
 /**
@@ -17,10 +16,11 @@ import dblibrary.project.csci230.UniversityDBLibrary;
 * @author Duong, Matthew Kounniyom
 * @version March 14, 2016
 */
-public class UserUI{
+public class UserUI 
+{
 	
 	/**
-	 * Instance variable
+	 * A Person named user is created to access its information
 	 */
 	private Person user;
 	
@@ -29,16 +29,24 @@ public class UserUI{
 	 */
 	private Scanner s;
 	
-	/** Constructor
-	 * @param user
+	/**
+	 * String Locations
 	 */
-	public UserUI(Person user) {
-		this.user = user;
-	}
-	
 	private static final int[] STRING_LOCATIONS = {0,1,2,3};
+	
+	/**
+	 * Integer locations
+	 */
 	private static final int[] INT_LOCATIONS = {4,10,13,14,15};
+	
+	/**
+	 * double Locations
+	 */
 	private static final int[] DOUBLE_LOCATIONS = {5,6,7,8,9,11,12};
+	
+	/**
+	 * Messages shown for entry messages
+	 */
 	private static final String[] SEARCH_ENTRY_MESSAGES = {"  School Name (String): ",
 															"  State (String): ",
 															"  Location (SUBURBAN, URBAN, SMALL-CITY, -1 if Unknown): ",
@@ -56,6 +64,13 @@ public class UserUI{
 															"  Social Life Scale (1-5) Minimum: ",
 															"  Quality Life Scale (1-5) Minimum: ",
 															"  Emphases (type \"-\" when done): "};
+	
+	/** Constructor
+	 * @param user
+	 */
+	public UserUI(Person user) {
+		this.user = user;
+	}
 	
 	/**
 	 *  Displays a menu full of all the options available to a "user".
