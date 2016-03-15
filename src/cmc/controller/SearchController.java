@@ -1,6 +1,8 @@
 package cmc.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import cmc.entity.School;
 import dblibrary.project.csci230.UniversityDBLibrary;
@@ -17,7 +19,7 @@ public class SearchController
 	private static final int[] STRING_LOCATIONS = {0,1,2,3};
 	private static final int[] INT_LOCATIONS = {4,10,13,14,15};
 	private static final int[] DOUBLE_LOCATIONS = {5,6,7,8,9,11,12};
-	
+	private UniversityDBLibrary dbase = new UniversityDBLibrary("straightou", "straightou", "adem4");
 	
 	/**
 	 * The login method users an school name to find school
@@ -28,7 +30,6 @@ public class SearchController
 	 */
 	public ArrayList<School> search(String[] idealSchool) 
 	{
-		UniversityDBLibrary dbase = new UniversityDBLibrary("straightou", "straightou", "adem4");
 		String[][] compSchools = dbase.university_getUniversities();
 		String[][] emphases = dbase.university_getEmphases();
 		double[] scores = new double[compSchools.length];
@@ -155,15 +156,66 @@ public class SearchController
 		return avg;
 	}
 	
-	private double calculateReccomendationVector(String[] idealSchool, String[] compSchool, ArrayList<String> compEm) {
-		return 0.0;
+	private double calculateRecommendationVector(String[] idealSchool, String[] compSchool, ArrayList<String> compEm) {
+		// TODO: make this a real method!!!
+		return Math.random();
 	}
 
 	public ArrayList<School> getReccomendedSchools(School school) {
 		// TODO: use makeSearchableSchool and calculateReccomendationVector and get the top 5 vectors.
 		// If you can abstract anything away between this method and the other search method, do it
 		// you might be able to abstract away parts of the reccomendation vector, but don't do that now
-		return null;
+		String[][] compSchools = dbase.university_getUniversities();
+		String[][] emphases = dbase.university_getEmphases();
+		double[] scores = new double[compSchools.length];
+		String[] idealSchool = makeSearchableSchool(school);
+		for (int i=0; i<compSchools.length; i++) {
+			ArrayList<String> compEm = new ArrayList<String>();
+			for (String[] em : emphases) {
+				if (em[0].equals(compSchools[i][0]))
+					compEm.add(em[1]);
+			}
+			scores[i] = this.calculateRecommendationVector(idealSchool, compSchools[i], compEm);
+		}
+		ArrayList<Integer> matchIndexes = new ArrayList<Integer>();
+		double[] scoresTop5 = scores;
+		Arrays.sort(scoresTop5);
+		scoresTop5 = Arrays.copyOfRange(scores, scores.length-5, scores.length);
+		for (double score : scoresTop5) {
+			int foundIndex = 0;
+			for (int i=0; i<scores.length; i++) {
+				if (scores[i]==score)
+					foundIndex = i;
+			}
+			matchIndexes.add(foundIndex);
+		}
+		ArrayList<School> matchList = new ArrayList<School>();
+		for (Integer i : matchIndexes) {
+			ArrayList<String> compEm = new ArrayList<String>();
+			for (String[] em : emphases) {
+				if (em[0].equals(compSchools[i][0]))
+					compEm.add(em[1]);
+			}
+			String[] emArray = (String[])compEm.toArray();
+			matchList.add(new School(compSchools[i][0],
+									compSchools[i][1],
+									compSchools[i][2],
+									compSchools[i][3],
+									Integer.parseInt(compSchools[i][4]),
+									Double.parseDouble(compSchools[i][5]),
+									Double.parseDouble(compSchools[i][6]),
+									Double.parseDouble(compSchools[i][7]),
+									Double.parseDouble(compSchools[i][8]),
+									Double.parseDouble(compSchools[i][9]),
+									Integer.parseInt(compSchools[i][10]),
+									Double.parseDouble(compSchools[i][11]),
+									Double.parseDouble(compSchools[i][12]),
+									Integer.parseInt(compSchools[i][13]),
+									Integer.parseInt(compSchools[i][14]),
+									Integer.parseInt(compSchools[i][15]),
+									emArray));
+		}
+		return matchList;
 	}
 	
 	private String[] makeSearchableSchool(School school) {

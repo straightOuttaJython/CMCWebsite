@@ -39,9 +39,9 @@ public class Driver {
 			System.out.println("*************************");
 		}
 		
-		// tests login
-		
-		System.out.println("***************REMEBER TO SEE ABOVE***************\n");
+			
+		System.out.println("***************REMEBER TO SEE ABOVE BEFORE GOING FORWARD***************\n");
+		System.out.println("***************THIS IS AN INTRACTIVE VIEW OF OUR WEBSITE***************\n");
 		LoginUI login = new LoginUI();
 		login.login();
 		if(login.getLoggedPerson().getType() == 'a') 
@@ -55,22 +55,6 @@ public class Driver {
 			//user ui stuff
 			UserUI user = new UserUI(login.getLoggedPerson());
 			user.viewMenu();
-		}
-		
-		//Seeing all the Users Information
-		System.out.println("*****ALL THE USER'S INFORMATION AFTER PLAYING WITH THE WEBSITE*****");
-		PersonHome person1 = new PersonHome();
-		Person[] listOfPersons1 = person1.getAllUsers();
-		for(Person pe : listOfPersons1)
-		{
-			System.out.println(pe.getUsername() + "'s Information: ");
-			System.out.println("     First Name: " + pe.getFirstName());
-			System.out.println("     Last Name:  " + pe.getLastName());
-			System.out.println("     Password:   " + pe.getPassword());
-			System.out.println("     Status:     " + pe.getStatus());
-			System.out.println("     Type:       " + pe.getType());
-			System.out.println("     Username:   " + pe.getUsername());
-			System.out.println("*************************");
 		}
 	}
 }
