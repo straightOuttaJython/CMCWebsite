@@ -102,9 +102,8 @@ public class UserUI{
 	 */
 	public void searchForSchools() {
 		System.out.println("*** PLEASE ENTER THE REQUIREMENTS FOR A SCHOOL YOU WANT TO SEARCH ***");
-		System.out.println(" ** IF YOU WANT TO LEAVE OUT A FIELD LEAVE BLANK FOR STRINGS ** \n ** PUT A 0 FOR INTEGERS OR DOUBLES **");
+		System.out.println(" ** IF YOU WANT TO LEAVE OUT A FIELD LEAVE BLANK **");
 		s = new Scanner(System.in);
-		String input;
 		boolean inputDone;
 		ArrayList<String> idealSchool = new ArrayList<String>(); 
 		for (int i=0; i<17; i++) {
@@ -116,9 +115,10 @@ public class UserUI{
 					searchForSchools();
 					return;
 				}
-				if (Arrays.binarySearch(STRING_LOCATIONS,i)>=0) {
+				else if (Arrays.binarySearch(STRING_LOCATIONS,i)>=0) {
 					if (nextString.length()==0) {
 						idealSchool.add(null);
+						inputDone = true;
 					}
 					else {
 						if (!nextString.matches("[A-Z]*"))
@@ -129,7 +129,7 @@ public class UserUI{
 						}
 					}
 				}
-				if (Arrays.binarySearch(INT_LOCATIONS,i)>=0) {
+				else if (Arrays.binarySearch(INT_LOCATIONS,i)>=0) {
 					String min = "*", max = min;
 					if (nextString.length()!=0) {
 						try {Integer.parseInt(nextString);}
@@ -140,7 +140,7 @@ public class UserUI{
 						min = nextString;
 					}
 					while (!inputDone) {
-						System.out.println("Maximum:  ");
+						System.out.println("  Maximum:  ");
 						nextString = s.nextLine().toUpperCase();
 						if (nextString.equals("RESET")) {
 							searchForSchools();
@@ -158,7 +158,7 @@ public class UserUI{
 					}
 					idealSchool.add(min+"-"+max);
 				}
-				if (Arrays.binarySearch(DOUBLE_LOCATIONS,i)>=0) {
+				else if (Arrays.binarySearch(DOUBLE_LOCATIONS,i)>=0) {
 					String min = "*", max = min;
 					if (nextString.length()!=0) {
 						try {Double.parseDouble(nextString);}
@@ -169,7 +169,7 @@ public class UserUI{
 						min = nextString;
 					}
 					while (!inputDone) {
-						System.out.println("Maximum:  ");
+						System.out.println("  Maximum:  ");
 						nextString = s.nextLine().toUpperCase();
 						if (nextString.equals("RESET")) {
 							searchForSchools();
@@ -198,7 +198,7 @@ public class UserUI{
 					else {
 						StringBuilder sB = new StringBuilder(nextString+":");
 						nextString = s.nextLine().toUpperCase();
-						while (nextString.charAt(0)!='-') {
+						while (nextString.length()>0 && nextString.charAt(0)!='-') {
 							if (!nextString.matches("[A-Z]*"))
 								System.out.println("Bad input; please try again! (Letters only please)");
 							else
@@ -206,11 +206,13 @@ public class UserUI{
 							nextString = s.nextLine().toUpperCase();
 						}
 						idealSchool.add(sB.substring(0, sB.length()-1));
+						inputDone = true;
 					}
 				}
 			}
 		}
-		String[] idealSchoolArray = (String[])idealSchool.toArray();
+		String[] idealSchoolArray = {""};
+		idealSchoolArray = idealSchool.toArray(idealSchoolArray);
 		this.searchForSchools(idealSchoolArray);
 		// get input of match's index and go to expanded view
 		// ^ should be able to call another method for that I think (I hope)
@@ -241,7 +243,7 @@ public class UserUI{
 							+ "or type \"-\" to quit the search");
 		System.out.println("Match number:");
 		input = s.nextLine();
-		while (input.charAt(0)!='-' || !(input.matches("[0-9]*") && Integer.parseInt(input)>=0 && Integer.parseInt(input)<matchList.size())) {
+		while (input.charAt(0)!='-' && !(input.matches("[0-9]*") && Integer.parseInt(input)>=0 && Integer.parseInt(input)<matchList.size())) {
 			System.out.println("Please enter a valid match number (0-"+(matchList.size()-1)+") or \"-\" to quit");
 			System.out.println("Match number:");
 			input = s.nextLine();

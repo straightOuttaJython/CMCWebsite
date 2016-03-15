@@ -55,7 +55,8 @@ public class SearchController
 				if (em[0].equals(compSchools[i][0]))
 					compEm.add(em[1]);
 			}
-			String[] emArray = (String[])compEm.toArray();
+			String[] emArray = {""};
+			emArray = compEm.toArray(emArray);
 			matchList.add(new School(compSchools[i][0],
 									compSchools[i][1],
 									compSchools[i][2],
