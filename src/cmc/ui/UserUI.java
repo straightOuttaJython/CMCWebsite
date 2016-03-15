@@ -1,8 +1,10 @@
 package cmc.ui;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import cmc.controller.SearchController;
 import cmc.entity.Person;
 import cmc.entity.School;
 import cmc.home.PersonHome;
@@ -34,33 +36,50 @@ public class UserUI{
 		this.user = user;
 	}
 	
+	private static final int[] STRING_LOCATIONS = {0,1,2,3};
+	private static final int[] INT_LOCATIONS = {4,10,13,14,15};
+	private static final int[] DOUBLE_LOCATIONS = {5,6,7,8,9,11,12};
+	private static final String[] SEARCH_ENTRY_MESSAGES = {"  School Name (String): ",
+															"  State (String): ",
+															"  Location (SUBURBAN, URBAN, SMALL-CITY, -1 if Unknown): ",
+															"  Control (PRIVATE, STATE, CITY, -1 if Unknown): ",
+															"  Number of Students Enrolled (Integer) Minimum: ",
+															"  Percent of Females Enrolled (0.0-100.0) Minimum: ",
+															"  SAT Verbal (0.0-800.0) Minimum: ",
+															"  SAT Math (0.0-800.0) Minimum: ",
+															"  Tuition (Double) Minimum: ",
+															"  % Financial Aid (0.0-100.0) Minimum: ",
+															"  Number of Applicants (Integer) Minimum: ",
+															"  %  Admit Rate (0.0-100.0) Minimum: ",
+															"  %  Decide Rate (0.0-100.0) Minimum: ",
+															"  Academics Scale (1-5) Minimum: ",
+															"  Social Life Scale (1-5) Minimum: ",
+															"  Quality Life Scale (1-5) Minimum: ",
+															"  Emphases (type \"-\" when done): "};
+	
 	/**
 	 *  Displays a menu full of all the options available to a "user".
 	 */
 	public void viewMenu(){
 		System.out.println("*** USER MENU ***");
-		System.out.println("   - Search For Schools: (\"search\")");
-		System.out.println("   - Manage Saved Schools: (\"saved\")");
-		System.out.println("   - Manage User Profile: (\"profile\")");
-		System.out.println("   - Logout: (\"logout\")");
+		System.out.println("   - Search For Schools: (\"s\")");
+		System.out.println("   - Manage Saved Schools: (\"v\")");
+		System.out.println("   - Manage User Profile: (\"p\")");
+		System.out.println("   - Logout: (\"l\")");
 		s = new Scanner(System.in);
 		System.out.print("  Please enter a valid command: ");
-		String cmd = s.next();
+		char cmd = s.next().charAt(0);
 		switch (cmd) {
-			case "search":
-				try{ 
-					this.searchForSchools();
-				} catch(ResetException re) {
-					this.resetForm('s');
-				}
+			case 's':
+				this.searchForSchools();
 				break;
-			case "saved":
+			case 'v':
 				this.manageSchools();
 				break;
-			case "profile":
+			case 'p':
 				this.manageUserProfile();
 				break;
-			case "logout":
+			case 'l':
 				this.logout();
 				break;
 			default:
@@ -76,216 +95,126 @@ public class UserUI{
 	 * 
 	 * @throws ResetException if the user is trying to reset.
 	 */
-	public void searchForSchools() throws ResetException {
+	public void searchForSchools() {
 		System.out.println("*** PLEASE ENTER THE REQUIREMENTS FOR A SCHOOL YOU WANT TO SEARCH ***");
 		System.out.println(" ** IF YOU WANT TO LEAVE OUT A FIELD LEAVE BLANK FOR STRINGS ** \n ** PUT A 0 FOR INTEGERS OR DOUBLES **");
 		s = new Scanner(System.in);
 		String input;
-		
-		System.out.print("  School Name (String): ");
-		String schoolName = s.nextLine().toUpperCase();
-		if(schoolName.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		
-		System.out.print("  State (String): ");
-		String state = s.nextLine().toUpperCase();
-		if(state.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		
-		System.out.print("  Location (SUBURBAN, URBAN, SMALL-CITY, -1 if Unknown): ");
-		String location = s.nextLine().toUpperCase();
-		if(location.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		
-		System.out.print("  Control (PRIVATE, STATE, CITY, -1 if Unknown): ");
-		String control = s.nextLine().toUpperCase();
-		if(control.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		
-		System.out.println("  Number of Students Enrolled (Integer): ");
-		System.out.print("   Lower Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		int numStudentsEnrolledLower = Integer.parseInt(input);
-		System.out.print("   Upper Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		int numStudentsEnrolledUpper = Integer.parseInt(input);
-		
-		System.out.println("  Percent of Females Enrolled (0.0-100.0): ");
-		System.out.print("   Lower Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		double percFemEnrolledLower = Double.parseDouble(input);
-		System.out.print("   Upper Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		double percFemEnrolledUpper = Double.parseDouble(input);
-		
-		System.out.println("  SAT Verbal (0.0-800.0): ");
-		System.out.print("   Lower Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		double satVerbalLower = Double.parseDouble(input);
-		System.out.print("   Upper Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		double satVerbalUpper = Double.parseDouble(input);
-		
-		System.out.println("  SAT Math (0.0-800.0): ");
-		System.out.print("   Lower Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		double satMathLower = Double.parseDouble(input);
-		System.out.print("   Upper Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		double satMathUpper = Double.parseDouble(input);
-		
-		System.out.println("  Tuition (Double): ");
-		System.out.print("   Lower Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		double tuitionLower = Double.parseDouble(input);
-		System.out.print("   Upper Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		double tuitionUpper = Double.parseDouble(input);
-		
-		System.out.println("  % Financial Aid (0.0-100.0): ");
-		System.out.print("   Lower Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		double percentFinAidLower = Double.parseDouble(input);
-		System.out.print("   Upper Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		double percentFinAidUpper = Double.parseDouble(input);
-		
-		System.out.println("  Number of Applicants (Integer): ");
-		System.out.print("   Lower Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		int numApplicantsLower = Integer.parseInt(input);
-		System.out.print("   Upper Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		int numApplicantsUpper = Integer.parseInt(input);
-		
-		System.out.println("  %  Admit Rate (0.0-100.0): ");
-		System.out.print("   Lower Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		double admitRateLower = Double.parseDouble(input);
-		System.out.print("   Upper Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		double admitRateUpper = Double.parseDouble(input);
-		
-		System.out.println("  %  Decide Rate (0.0-100.0): ");
-		System.out.print("   Lower Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		double decideRateLower = Double.parseDouble(input);
-		System.out.print("   Upper Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		double decideRateUpper = Double.parseDouble(input);
-		
-		System.out.println("  Academics Scale (1-5): ");
-		System.out.print("   Lower Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		int academicsLower = Integer.parseInt(input);
-		System.out.print("   Upper Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		int academicsUpper = Integer.parseInt(input);
-		
-		System.out.println("  Social Life Scale (1-5): ");
-		System.out.print("   Lower Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		int socLifeLower = Integer.parseInt(input);
-		System.out.print("   Upper Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		int socLifeUpper = Integer.parseInt(input);
-		
-		System.out.println("  Quality Life Scale (1-5): ");
-		System.out.print("   Lower Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		int qualLifeLower = Integer.parseInt(input);
-		System.out.print("   Upper Value: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		int qualLifeUpper = Integer.parseInt(input);
-		
-		System.out.println("  Emphases: ");
-		String[] emphases = new String[5];
-		System.out.print("   1: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		emphases[0] = input.toUpperCase();
-		System.out.print("   2: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		emphases[1] = input.toUpperCase();
-		System.out.print("   3: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		emphases[2] = input.toUpperCase();
-		System.out.print("   4: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		emphases[3] = input.toUpperCase();
-		System.out.print("   5: ");
-		input = s.nextLine();
-		if(input.equals("RESET"))
-			throw new ResetException("User wants to reset.");
-		emphases[4] = input.toUpperCase();
-		
-		
-		//School school = new School();
-		//this.search(school);
-		//this.viewSimple(school);
-		//this.viewExpanded(school);
-		//this.viewMenu();
-		//make new school
-		//set every field that is not black to the above ^^
-		//this method will use this.search(above school)
-		//controller will get a list of all schools, compare their fields to above school
-		//display options
-		//you can add/view simple/ view expanded
+		boolean inputDone;
+		ArrayList<String> idealSchool = new ArrayList<String>(); 
+		for (int i=0; i<17; i++) {
+			inputDone = false;
+			while (!inputDone) {
+				System.out.println(SEARCH_ENTRY_MESSAGES[i]);
+				String nextString = s.nextLine().toUpperCase();
+				if (nextString.equals("RESET")) {
+					searchForSchools();
+					return;
+				}
+				if (Arrays.binarySearch(STRING_LOCATIONS,i)>=0) {
+					if (nextString.length()==0) {
+						idealSchool.add(null);
+					}
+					else {
+						if (!nextString.matches("[A-Z]*"))
+							System.out.println("Bad input; please try again! (Letters only please)");
+						else {
+							idealSchool.add(nextString);
+							inputDone = true;
+						}
+					}
+				}
+				if (Arrays.binarySearch(INT_LOCATIONS,i)>=0) {
+					String min = "*", max = min;
+					if (nextString.length()!=0) {
+						try {Integer.parseInt(nextString);}
+						catch (NumberFormatException nFE) {
+							System.out.println("Bad input; please try again! (input an int)");
+							continue;
+						}
+						min = nextString;
+					}
+					while (!inputDone) {
+						System.out.println("Maximum:  ");
+						nextString = s.nextLine().toUpperCase();
+						if (nextString.equals("RESET")) {
+							searchForSchools();
+							return;
+						}
+						if (nextString.length()!=0) {
+							try {Integer.parseInt(nextString);}
+							catch (NumberFormatException nFE) {
+								System.out.println("Bad input; please try again! (input an int)");
+								continue;
+							}
+							max = nextString;
+						}
+						inputDone = true;
+					}
+					idealSchool.add(min+"-"+max);
+				}
+				if (Arrays.binarySearch(DOUBLE_LOCATIONS,i)>=0) {
+					String min = "*", max = min;
+					if (nextString.length()!=0) {
+						try {Double.parseDouble(nextString);}
+						catch (NumberFormatException nFE) {
+							System.out.println("Bad input; please try again! (input a double)");
+							continue;
+						}
+						min = nextString;
+					}
+					while (!inputDone) {
+						System.out.println("Maximum:  ");
+						nextString = s.nextLine().toUpperCase();
+						if (nextString.equals("RESET")) {
+							searchForSchools();
+							return;
+						}
+						if (nextString.length()!=0) {
+							try {Double.parseDouble(nextString);}
+							catch (NumberFormatException nFE) {
+								System.out.println("Bad input; please try again! (input a double)");
+								continue;
+							}
+							max = nextString;
+						}
+						inputDone = true;
+					}
+					idealSchool.add(min+"-"+max);
+				}
+				else {
+					if (nextString.length()==0 || nextString.charAt(0)=='-') {
+						idealSchool.add(null);
+						inputDone = true;
+						continue;
+					}
+					if (!nextString.matches("[A-Z]*"))
+						System.out.println("Bad input; please try again! (Letters only please)");
+					else {
+						StringBuilder sB = new StringBuilder(nextString+":");
+						nextString = s.nextLine().toUpperCase();
+						while (nextString.charAt(0)!='-') {
+							if (!nextString.matches("[A-Z]*"))
+								System.out.println("Bad input; please try again! (Letters only please)");
+							else
+								sB.append(nextString+":");
+							nextString = s.nextLine().toUpperCase();
+						}
+						idealSchool.add(sB.substring(0, sB.length()-1));
+					}
+				}
+			}
+		}
+		SearchController sC = new SearchController();
+		ArrayList<School> matchList = sC.search((String[])idealSchool.toArray());
+		int resultNum = 0;
+		for (School match : matchList) {
+			// display simple school information
+		}
+		// get input of match's index and go to expanded view
+		// ^ should be able to call another method for that I think (I hope)
+		// have a quit option like '-' or something
+		// anything else???
 	}
 	
 	/**
@@ -355,24 +284,6 @@ public class UserUI{
 	}
 	
 	/**
-	 * Searchs for a specific school given by the user.
-	 * 
-	 * @param idealSchool, the school entered by the user.
-	 */
-	public void search(School idealSchool) {
-		SchoolHome sch = new SchoolHome();
-		School[] scl = sch.listOfSchools();
-		System.out.println("*** SEARCH RESULTS ***"); 
-		for(int i = 0; i < scl.length; i++){
-			if (idealSchool.getName().equals(scl[i].getName())){
-				System.out.println("  - " + idealSchool.getName());
-			}
-		}
-		System.out.println("*** END SEARCH RESULTS ***"); 
-		
-	}
-	
-	/**
 	 * Resets the search form.
 	 * 
 	 * @param method, indicates which method it was called from.
@@ -383,11 +294,7 @@ public class UserUI{
 		} else if (method == 'v') {
 			this.viewMenu();
 		} else if (method == 's') {
-			try{ 
-				this.searchForSchools();
-			} catch(ResetException re) {
-				this.resetForm('s');
-			}
+			this.searchForSchools();
 		}
 	}
 	
@@ -527,49 +434,5 @@ public class UserUI{
 	 */
 	public Person getUser() {
 		return this.user;
-	}
-	
-	/**
-	 * Custom exception for resetting the form.
-	 * 
-	 * @author Matthew Kounniyom
-	 * @version March 14, 2016
-	 */
-	public class ResetException extends Exception {
-		
-		/**
-		 * Default Constructor.
-		 */
-		public ResetException() {
-			super();
-		}
-		
-		/**
-		 * Second Constructor, inputs a message to be output to the user.
-		 * 
-		 * @param message, the string to be output.
-		 */
-		public ResetException(String message) {
-			super(message);
-		}
-		
-		/**
-		 * Third Constructor, inputs a message and a cause.
-		 * 
-		 * @param message, the string to be output.
-		 * @param cause, used to be retrieved for later.
-		 */
-		public ResetException(String message, Throwable cause) {
-			super(message, cause);
-		}
-		
-		/**
-		 * Fourth Constructor, takes in a cause to be used for later.
-		 * 
-		 * @param cause, used to be retrieved for later.
-		 */
-		public ResetException(Throwable cause) {
-			super(cause);
-		}
 	}
 }

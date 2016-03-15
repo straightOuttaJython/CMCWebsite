@@ -50,8 +50,29 @@ public class SearchController
 		}
 		ArrayList<School> matchList = new ArrayList<School>();
 		for (Integer i : matchIndexes) {
-			//construct the school as newSchool
-			matchList.add(newSchool);
+			ArrayList<String> compEm = new ArrayList<String>();
+			for (String[] em : emphases) {
+				if (em[0].equals(compSchools[i][0]))
+					compEm.add(em[1]);
+			}
+			String[] emArray = (String[])compEm.toArray();
+			matchList.add(new School(compSchools[i][0],
+									compSchools[i][1],
+									compSchools[i][2],
+									compSchools[i][3],
+									Integer.parseInt(compSchools[i][4]),
+									Double.parseDouble(compSchools[i][5]),
+									Double.parseDouble(compSchools[i][6]),
+									Double.parseDouble(compSchools[i][7]),
+									Double.parseDouble(compSchools[i][8]),
+									Double.parseDouble(compSchools[i][9]),
+									Integer.parseInt(compSchools[i][10]),
+									Double.parseDouble(compSchools[i][11]),
+									Double.parseDouble(compSchools[i][12]),
+									Integer.parseInt(compSchools[i][13]),
+									Integer.parseInt(compSchools[i][14]),
+									Integer.parseInt(compSchools[i][15]),
+									emArray));
 		}
 		return matchList;
 	}
