@@ -24,6 +24,6 @@ public class searchController
 
 	public void getRecSchool(School school)
 	{
-
+		
 	}
 }
