@@ -177,7 +177,7 @@ public class SearchController
 			}
 			scores[i] = this.calculateRecommendationVector(idealSchool, compSchools[i], compEm);
 		}
-		ArrayList<Integer> matchIndexes = new ArrayList<Integer>();
+		ArrayList<Integer> matchIndexes = new ArrayList<Integer>(); // test this breakpoint cause something is going screwy
 		double[] scoresTop5 = scores;
 		Arrays.sort(scoresTop5);
 		scoresTop5 = Arrays.copyOfRange(scores, scores.length-5, scores.length);
@@ -196,7 +196,8 @@ public class SearchController
 				if (em[0].equals(compSchools[i][0]))
 					compEm.add(em[1]);
 			}
-			String[] emArray = (String[])compEm.toArray();
+			String[] emArray = {""};
+			emArray = compEm.toArray(emArray);
 			matchList.add(new School(compSchools[i][0],
 									compSchools[i][1],
 									compSchools[i][2],

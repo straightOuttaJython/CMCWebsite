@@ -430,7 +430,7 @@ public class UserUI{
 		for (String em : school.getEmphases()) {
 			System.out.println("    -"+em);
 		}
-		System.out.println(" *Recommended Schools for "+school.getName()+": ");
+		System.out.println("***Recommended Schools for "+school.getName()+"***");
 		SearchController sC = new SearchController();
 		for (School rec : sC.getReccomendedSchools(school)) {
 			System.out.println(":");
