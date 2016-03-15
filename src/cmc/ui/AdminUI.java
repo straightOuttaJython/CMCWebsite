@@ -12,13 +12,19 @@ import cmc.home.PersonHome;
 import cmc.home.SchoolHome;
 
 /**
- * @author Alex Seefeldt
+ * @author Alex Seefeldt, Erin Queme 
  *
  */
 public class AdminUI implements AbstractUI {
 	
-	private SchoolHome sh = new SchoolHome();
+	/**
+	 * Creates a schoolHome to access and process the information of the database
+	 */
+	private SchoolHome sh;
 
+	/**
+	 * Scanner used in various methods.
+	 */
 	private Scanner adminOptions, editUser, deactUser, addOrEdit, again, in, inTwo, userNameIn, addUser;
 
 	/**
@@ -27,7 +33,7 @@ public class AdminUI implements AbstractUI {
 	public AdminUI() 
 	{
 		// TODO Auto-generated constructor stub
-		
+		sh = new SchoolHome();
 	}
 	
 	/**
@@ -136,7 +142,6 @@ public class AdminUI implements AbstractUI {
 		}
 	}
 	
-
 	/**
 	 * Log Admin out of session
 	 */
@@ -172,8 +177,7 @@ public class AdminUI implements AbstractUI {
 	}
 	
 	/**
-	 * Add the given School object to the database.
-	 * 
+	 * Add the given School object to the database. 
 	 */
 	public void addSchool() 
 	{
@@ -348,7 +352,8 @@ public class AdminUI implements AbstractUI {
 	}
 
 	/**
-	 * @param user
+	 * Lets you update the Users info by username
+	 * @param username
 	 */
 	public void editUser(String username)
 	{
@@ -400,7 +405,8 @@ public class AdminUI implements AbstractUI {
 	}
 
 	/**
-	 * @param user
+	 * Lets you deactivate the user by their username
+	 * @param username
 	 */
 	public void deactivate(String username) 
 	{
@@ -421,7 +427,7 @@ public class AdminUI implements AbstractUI {
 	}
 	
 	/**
-	 * 
+	 * Lets you add a new User
 	 */
 	public void addUser() 
 	{
@@ -458,7 +464,7 @@ public class AdminUI implements AbstractUI {
 	}
 	
 	/**
-	 * 
+	 * Deny the addition of a new User
 	 */
 	private void denyAddUser() 
 	{
@@ -467,7 +473,7 @@ public class AdminUI implements AbstractUI {
 	}
 	
 	/**
-	 * 
+	 * notifies you that no user was found edit
 	 */
 	private void failureToEditUser() 
 	{
