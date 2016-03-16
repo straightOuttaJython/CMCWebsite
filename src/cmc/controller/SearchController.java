@@ -141,16 +141,18 @@ public class SearchController
 					avg+=1;
 			}
 		}
-		String[] idealEmphases = idealSchool[16].split(":");
-		for (String em : compEm) {
-			divisor++;
-			boolean matches = false;
-			for (String id : idealEmphases) {
-				if (id.contains(em))
-					matches = true;
+		if (idealSchool[16]!=null) {
+			String[] idealEmphases = idealSchool[16].split(":");
+			for (String em : compEm) {
+				divisor++;
+				boolean matches = false;
+				for (String id : idealEmphases) {
+					if (id.contains(em))
+						matches = true;
+				}
+				if (matches)
+					avg+=1;
 			}
-			if (matches)
-				avg+=1;
 		}
 		avg/=divisor;
 		return avg;
@@ -178,9 +180,9 @@ public class SearchController
 			scores[i] = this.calculateRecommendationVector(idealSchool, compSchools[i], compEm);
 		}
 		ArrayList<Integer> matchIndexes = new ArrayList<Integer>(); // test this breakpoint cause something is going screwy
-		double[] scoresTop5 = scores;
+		double[] scoresTop5 = Arrays.copyOf(scores,scores.length);
 		Arrays.sort(scoresTop5);
-		scoresTop5 = Arrays.copyOfRange(scores, scores.length-5, scores.length);
+		scoresTop5 = Arrays.copyOfRange(scoresTop5, scoresTop5.length-5, scoresTop5.length);
 		for (double score : scoresTop5) {
 			int foundIndex = 0;
 			for (int i=0; i<scores.length; i++) {
