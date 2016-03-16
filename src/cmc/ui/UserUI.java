@@ -243,7 +243,7 @@ public class UserUI{
 							+ "or type \"-\" to quit the search");
 		System.out.println("Match number:");
 		input = s.nextLine();
-		while (input.charAt(0)!='-' && !(input.matches("[0-9]*") && Integer.parseInt(input)>=0 && Integer.parseInt(input)<matchList.size())) {
+		while (input.length()==0 || input.charAt(0)!='-' && !(input.matches("[0-9]*") && Integer.parseInt(input)>=0 && Integer.parseInt(input)<matchList.size())) {
 			System.out.println("Please enter a valid match number (0-"+(matchList.size()-1)+") or \"-\" to quit");
 			System.out.println("Match number:");
 			input = s.nextLine();
@@ -432,10 +432,35 @@ public class UserUI{
 		}
 		System.out.println("***Recommended Schools for "+school.getName()+"***");
 		SearchController sC = new SearchController();
-		for (School rec : sC.getReccomendedSchools(school)) {
-			System.out.println(":");
+		ArrayList<School> recommendations = sC.getReccomendedSchools(school);
+		int entryNum = 1;
+		for (School rec : recommendations) {
+			System.out.println("Entry "+(entryNum++));
 			this.viewSimple(rec);
 		} // Functionality to go to expanded view from here must be added later
+		System.out.println(" ** To save or view a school, type a recommendation number **");
+		System.out.println(" * Type \"-\" to quit *");
+		s = new Scanner(System.in);
+		String input = s.nextLine();
+		while (input.length()==0 || input.charAt(0)!='-' && !input.matches("[1-5]")) {
+			System.out.println("Please enter a valid recommendation number (1-5) or \"-\" to quit");
+			input = s.nextLine();
+		}
+		if (input.charAt(0)!='-') {
+			School schoolChoice =  recommendations.get(Integer.parseInt(input)-1);
+			System.out.println(" ** To save the school, type \"s\". To view the school, type \"v\". **");
+			input = s.nextLine();
+			while (input.length()==0 || input.charAt(0)!='-' && input.toUpperCase().charAt(0)!='S' && input.toUpperCase().charAt(0)!='V') {
+				System.out.println("To save the school, type \"s\". To view the school, type \"v\".");
+				input = s.nextLine();
+			}
+			if (input.toUpperCase().charAt(0)=='S') {
+				this.saveSchool(schoolChoice);
+			}
+			else if (input.toUpperCase().charAt(0)=='V') {
+				this.viewExpanded(schoolChoice);
+			}
+		}
 	}
 	
 	/**
