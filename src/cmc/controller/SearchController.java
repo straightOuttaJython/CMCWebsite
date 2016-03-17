@@ -157,8 +157,68 @@ public class SearchController
 	}
 	
 	private double calculateRecommendationVector(String[] idealSchool, String[] compSchool, ArrayList<String> compEm) {
-		// TODO: make this a real method!!!
-		return Math.random();
+		// TODO: make this work
+		double avg = 0;
+		int divisor = 0;
+		for (int index : STRING_LOCATIONS) {
+			String idealString = idealSchool[index];
+			if (idealString!=null && !idealString.matches("-1")) {
+				divisor++;
+				if (idealString.matches(compSchool[index]))
+					avg+=1;
+			}
+		}
+		for (int index : INT_LOCATIONS) {
+			String[] idealRange = idealSchool[index].split("-");
+			if (idealRange[0].equals("*")&&(!idealRange[1].equals("*"))) {
+				divisor++;
+				if (Integer.parseInt(compSchool[index])<=Integer.parseInt(idealRange[1]))
+					avg+=1;
+			}
+			else if (idealRange[1].equals("*")&&(!idealRange[0].equals("*"))) {
+				divisor++;
+				if (Integer.parseInt(compSchool[index])>=Integer.parseInt(idealRange[0]))
+					avg+=1;
+			}
+			else if ((!idealRange[0].equals("*"))&&(!idealRange[1].equals("*"))) {
+				divisor++;
+				if (Integer.parseInt(compSchool[index])>=Integer.parseInt(idealRange[0]) && 
+					Integer.parseInt(compSchool[index])<=Integer.parseInt(idealRange[1]))
+					avg+=1;
+			}
+		}
+		for (int index : DOUBLE_LOCATIONS) {
+			String[] idealRange = idealSchool[index].split("-");
+			if (idealRange[0].equals("*")&&(!idealRange[1].equals("*"))) {
+				divisor++;
+				if (Double.parseDouble(compSchool[index])<=Double.parseDouble(idealRange[1]))
+					avg+=1;
+			}
+			else if (idealRange[1].equals("*")&&(!idealRange[0].equals("*"))) {
+				divisor++;
+				if (Double.parseDouble(compSchool[index])>=Double.parseDouble(idealRange[0]))
+					avg+=1;
+			}
+			else if ((!idealRange[0].equals("*"))&&(!idealRange[1].equals("*"))) {
+				divisor++;
+				if (Double.parseDouble(compSchool[index])>=Double.parseDouble(idealRange[0]) && 
+					Double.parseDouble(compSchool[index])<=Double.parseDouble(idealRange[1]))
+					avg+=1;
+			}
+		}
+		String[] idealEmphases = idealSchool[16].split(":");
+		for (String em : compEm) {
+			divisor++;
+			boolean matches = false;
+			for (String id : idealEmphases) {
+				if (id.contains(em))
+					matches = true;
+			}
+			if (matches)
+				avg+=1;
+		}
+		avg/=divisor;
+		return avg;
 	}
 
 	public ArrayList<School> getReccomendedSchools(School school) {
