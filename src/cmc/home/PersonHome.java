@@ -19,8 +19,9 @@ public class PersonHome {
 	 * 
 	 * @param username
 	 * @return the person object associated with the entered username.
+	 * @throws IllegalArgumentException, if the username is not bound to an account.
 	 */
-	public Person getPerson(String username) 
+	public Person getPerson(String username)
 	{
 		Person[] personArray = this.getAllUsers();
 		Person foundPerson = new Person();
@@ -29,6 +30,8 @@ public class PersonHome {
 			if(personArray[i].getUsername().equals(username)) 
 			{
 				foundPerson = personArray[i];
+			} else {
+				throw new IllegalArgumentException("The entered username is not bound to an account.");
 			}
 		}
 		return foundPerson;
