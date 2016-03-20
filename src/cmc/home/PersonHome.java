@@ -8,7 +8,7 @@ import dblibrary.project.csci230.UniversityDBLibrary;
  * The PersonHome controls the ebb and flow of Persons in the Choose my College system.
  * 
  * @author Matthew Kounniyom
- * @version March 6, 2016
+ * @version March 20, 2016
  */
 public class PersonHome {
 	
@@ -44,10 +44,14 @@ public class PersonHome {
 	 * 
 	 * @param person, the Person to be updated
 	 */
-	public void updatePerson(String username, String firstName, String lastName, String password, char type1,
+	public void updatePerson(String username, String firstName, String lastName, String password, char type,
 			char status)
 	{
-		db.user_editUser(username, firstName, lastName, password, type1, status);
+		if(type != 'u' || type != 'a') 
+			throw new IllegalArgumentException("Invalid Type");
+		if(status != 'Y' || status != 'N') 
+			throw new IllegalArgumentException("Invalid Status");
+		db.user_editUser(username, firstName, lastName, password, type, status);
 	}
 	
 	/**
