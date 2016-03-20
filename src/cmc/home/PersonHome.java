@@ -47,9 +47,9 @@ public class PersonHome {
 	public void updatePerson(String username, String firstName, String lastName, String password, char type,
 			char status)
 	{
-		if(type != 'u' || type != 'a') 
+		if(type != 'u' && type != 'a') 
 			throw new IllegalArgumentException("Invalid Type");
-		if(status != 'Y' || status != 'N') 
+		if(status != 'Y' && status != 'N') 
 			throw new IllegalArgumentException("Invalid Status");
 		db.user_editUser(username, firstName, lastName, password, type, status);
 	}
