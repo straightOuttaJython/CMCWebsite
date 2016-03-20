@@ -30,9 +30,11 @@ public class PersonHome {
 			if(personArray[i].getUsername().equals(username)) 
 			{
 				foundPerson = personArray[i];
-			} else {
-				throw new IllegalArgumentException("The entered username is not bound to an account.");
-			}
+			} 
+		} 
+		if(!foundPerson.getUsername().equals(username)) 
+		{
+			throw new IllegalArgumentException("The entered username is not bound to an account.");
 		}
 		return foundPerson;
 	}

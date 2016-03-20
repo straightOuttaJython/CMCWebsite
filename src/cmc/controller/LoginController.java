@@ -6,8 +6,8 @@ import cmc.home.PersonHome;
 /**
  * The LoginController class controls how/when a Person would log in.
  * 
- * @author Matthew
- * @version March 6, 2016
+ * @author Matthew Kounniyom
+ * @version March 20, 2016
  */
 public class LoginController {
 	
@@ -23,18 +23,57 @@ public class LoginController {
 	 * @param password, the password that is entered.
 	 * @param database, the database to search through.
 	 * @return Person object that was found based on the username and password. 
+	 * @throws Exception, if the the account bound to the input username is inactive, or if the password is invalid.
 	 */
-	public Person login(String username, String password) 
+	public Person login(String username, String password)
 	{
 		personHome = new PersonHome();
 		Person foundPerson = personHome.getPerson(username);
 		if (foundPerson.getStatus() == 'N') {
-			System.out.println("*** ACCESS TO ACCOUNT IS DENIED ***");
+			throw new InactiveAccountException("That account is Deactivated");
 		} else {
 			if(foundPerson.getPassword().equals(password)) {
 				return foundPerson;
+			} else {
+				throw new IllegalArgumentException("Password is invalid.");
 			}
 		}
-		return new Person();
+	}
+	
+	/**
+	 * Custom Exception used for when an account is found inactive.
+	 * 
+	 * @author Matthew Kounniyom
+	 * @version March 20, 2016
+	 */
+	public class InactiveAccountException extends IllegalArgumentException{
+		
+		/**
+		 * Constructs a new InactiveAccountException with null as its detail message.
+		 */
+		public InactiveAccountException() {
+			super();
+		}
+		
+		/**
+		 *  Constructs a new InactiveAccountException with a specified detail message.
+		 */
+		public InactiveAccountException(String message) {
+			super(message);
+		}
+		
+		/**
+		 *  Constructs a new InactiveAccountException with a specified detail message and cause.
+		 */
+		public InactiveAccountException(String message, Throwable cause) {
+			super(message, cause);
+		}
+		
+		/**
+		 *  Constructs a new InactiveAccountException with a specified cause.
+		 */
+		public InactiveAccountException(Throwable cause) {
+			super(cause);
+		}
 	}
 }

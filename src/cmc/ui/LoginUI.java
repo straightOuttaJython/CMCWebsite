@@ -47,7 +47,12 @@ public class LoginUI
 				this.resetForm();
 			} else {
 				logControl = new LoginController();
-				user = logControl.login(username, password);
+				try {
+					user = logControl.login(username, password);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				if(user.getFirstName().equals("")) 
 				{
 					this.denyLogin();
