@@ -74,6 +74,10 @@ public class School
 		this.admitRate = 0.0;
 		this.decideRate = 0.0;
 		this.emphases = new String[3];
+		
+		this.emphases[0] = "";
+		this.emphases[1] = "";
+		this.emphases[2] = "";
 	}
 	/*
 	 * Gets name of school
