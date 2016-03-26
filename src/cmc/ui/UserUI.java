@@ -73,7 +73,7 @@ public class UserUI{
 		System.out.println("   - Logout: (\"l\")");
 		s = new Scanner(System.in);
 		System.out.print("  Please enter a valid command: ");
-		char cmd = s.next().charAt(0);
+		char cmd = s.next().toLowerCase().charAt(0);
 		switch (cmd) {
 			case 's':
 				this.searchForSchools();

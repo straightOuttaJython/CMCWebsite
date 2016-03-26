@@ -10,7 +10,7 @@ import dblibrary.project.csci230.UniversityDBLibrary;
 /**
  * The SearchController class controls how/when a Person would search for specific school.
  * 
- * @author Duong
+ * @author Alex
  * @version March 9, 2016
  */
 public class SearchController 
