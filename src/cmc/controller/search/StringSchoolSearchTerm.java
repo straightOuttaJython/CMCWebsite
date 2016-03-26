@@ -3,16 +3,12 @@ import java.util.IllegalFormatException;
 
 public class StringSchoolSearchTerm extends SchoolSearchTerm {
 
-	private String[] permittedValues = null;
+	private String[] permittedValues;
 	private String value = null;
 	
 	public StringSchoolSearchTerm(int dbIndex, String[] permittedValues) {
 		this.dbIndex = dbIndex;
 		this.permittedValues = permittedValues;
-	}
-	
-	public StringSchoolSearchTerm(int dbIndex) {
-		this.dbIndex = dbIndex;
 	}
 	
 	@Override
@@ -37,6 +33,7 @@ public class StringSchoolSearchTerm extends SchoolSearchTerm {
 	
 	@Override
 	public void setValue(String value) {
+		this.included = true;
 		value = value.toUpperCase();
 		if (permittedValues!=null) {
 			for (String per : permittedValues) {

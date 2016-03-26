@@ -3,7 +3,7 @@ package cmc.controller.search;
 public abstract class SchoolSearchTerm {
 	
 	protected int dbIndex;
-	protected boolean included;
+	protected boolean included = false;
 	
 	public abstract double calculateMatch(String comparison);
 	
@@ -15,9 +15,5 @@ public abstract class SchoolSearchTerm {
 
 	public boolean isIncluded() {
 		return included;
-	}
-	
-	public void setIncluded(boolean included) {
-		this.included = included;
 	}
 }

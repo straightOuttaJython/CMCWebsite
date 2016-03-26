@@ -4,6 +4,10 @@ public class StringArraySchoolSearchTerm extends SchoolSearchTerm {
 
 	private String[] value;
 	
+	public StringArraySchoolSearchTerm(int dbIndex) {
+		this.dbIndex = dbIndex;
+	}
+	
 	@Override
 	public double calculateMatch(String comparison) {
 		if (this.value==null)
@@ -24,6 +28,7 @@ public class StringArraySchoolSearchTerm extends SchoolSearchTerm {
 
 	@Override
 	public void setValue(String value) {
+		this.included = true;
 		this.value = value.split(":");
 	}
 
