@@ -2,11 +2,22 @@ package cmc.ui;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import cmc.controller.SearchController;
+import cmc.controller.search.DoubleSchoolSearchTerm;
+import cmc.controller.search.IntegerSchoolSearchTerm;
+import cmc.controller.search.SchoolSearchClause;
+import cmc.controller.search.StringArraySchoolSearchTerm;
+import cmc.controller.search.StringSchoolSearchTerm;
 import cmc.entity.Person;
 import cmc.entity.School;
+import cmc.entity.dbmapping.DoubleSchoolAttributeMetadata;
+import cmc.entity.dbmapping.IntegerSchoolAttributeMetadata;
+import cmc.entity.dbmapping.SchoolAttributeMetadata;
+import cmc.entity.dbmapping.SchoolDatabaseMapping;
+import cmc.entity.dbmapping.StringSchoolAttributeMetadata;
 import cmc.home.PersonHome;
 import cmc.home.SchoolHome;
 import dblibrary.project.csci230.UniversityDBLibrary;
@@ -32,7 +43,7 @@ public class UserUI{
 	/**
 	 * This is the list of matches for the last search made.
 	 */
-	private ArrayList<School> lastMatchList;
+	private School[] lastMatchList;
 	
 	/** Constructor
 	 * @param user
@@ -103,138 +114,102 @@ public class UserUI{
 	public void searchForSchools() {
 		System.out.println("*** PLEASE ENTER THE REQUIREMENTS FOR A SCHOOL YOU WANT TO SEARCH ***");
 		System.out.println(" ** IF YOU WANT TO LEAVE OUT A FIELD LEAVE BLANK **");
-		s = new Scanner(System.in);
-		boolean inputDone;
-		ArrayList<String> idealSchool = new ArrayList<String>(); 
-		for (int i=0; i<17; i++) {
-			inputDone = false;
-			while (!inputDone) {
-				System.out.println(SEARCH_ENTRY_MESSAGES[i]);
-				String nextString = s.nextLine().toUpperCase();
-				if (nextString.equals("RESET")) {
-					searchForSchools();
-					return;
-				}
-				else if (Arrays.binarySearch(STRING_LOCATIONS,i)>=0) {
-					if (nextString.length()==0) {
-						idealSchool.add(null);
-						inputDone = true;
-					}
-					else {
-						if (!nextString.matches("[A-Z]*"))
-							System.out.println("Bad input; please try again! (Letters only please)");
-						else {
-							idealSchool.add(nextString);
-							inputDone = true;
-						}
-					}
-				}
-				else if (Arrays.binarySearch(INT_LOCATIONS,i)>=0) {
-					String min = "*", max = min;
-					if (nextString.length()!=0) {
-						try {Integer.parseInt(nextString);}
-						catch (NumberFormatException nFE) {
-							System.out.println("Bad input; please try again! (input an int)");
-							continue;
-						}
-						min = nextString;
-					}
-					while (!inputDone) {
-						System.out.println("  Maximum:  ");
-						nextString = s.nextLine().toUpperCase();
-						if (nextString.equals("RESET")) {
-							searchForSchools();
-							return;
-						}
-						if (nextString.length()!=0) {
-							try {Integer.parseInt(nextString);}
-							catch (NumberFormatException nFE) {
-								System.out.println("Bad input; please try again! (input an int)");
-								continue;
-							}
-							max = nextString;
-						}
-						inputDone = true;
-					}
-					idealSchool.add(min+"-"+max);
-				}
-				else if (Arrays.binarySearch(DOUBLE_LOCATIONS,i)>=0) {
-					String min = "*", max = min;
-					if (nextString.length()!=0) {
-						try {Double.parseDouble(nextString);}
-						catch (NumberFormatException nFE) {
-							System.out.println("Bad input; please try again! (input a double)");
-							continue;
-						}
-						min = nextString;
-					}
-					while (!inputDone) {
-						System.out.println("  Maximum:  ");
-						nextString = s.nextLine().toUpperCase();
-						if (nextString.equals("RESET")) {
-							searchForSchools();
-							return;
-						}
-						if (nextString.length()!=0) {
-							try {Double.parseDouble(nextString);}
-							catch (NumberFormatException nFE) {
-								System.out.println("Bad input; please try again! (input a double)");
-								continue;
-							}
-							max = nextString;
-						}
-						inputDone = true;
-					}
-					idealSchool.add(min+"-"+max);
-				}
-				else {
-					if (nextString.length()==0 || nextString.charAt(0)=='-') {
-						idealSchool.add(null);
-						inputDone = true;
-						continue;
-					}
-					if (!nextString.matches("[A-Z]*"))
-						System.out.println("Bad input; please try again! (Letters only please)");
-					else {
-						StringBuilder sB = new StringBuilder(nextString+":");
-						nextString = s.nextLine().toUpperCase();
-						while (nextString.length()>0 && nextString.charAt(0)!='-') {
-							if (!nextString.matches("[A-Z]*"))
-								System.out.println("Bad input; please try again! (Letters only please)");
-							else
-								sB.append(nextString+":");
-							nextString = s.nextLine().toUpperCase();
-						}
-						idealSchool.add(sB.substring(0, sB.length()-1));
-						inputDone = true;
-					}
-				}
-			}
+		SchoolSearchClause searchClause = new SchoolSearchClause();
+		for (int i=0; i<SchoolDatabaseMapping.MAPPING.length; i++) {
+			String value = this.takeSearchInput(SchoolDatabaseMapping.MAPPING[i]);
+			if (!value.equals(""))
+				searchClause.setValueAtIndex(value, i);
 		}
-		String[] idealSchoolArray = {""};
-		idealSchoolArray = idealSchool.toArray(idealSchoolArray);
-		this.searchForSchools(idealSchoolArray);
-		// get input of match's index and go to expanded view
-		// ^ should be able to call another method for that I think (I hope)
-		// have a quit option like '-' or something
-		// anything else???
+		this.searchForSchools(searchClause);
 	}
-	
-	public void searchForSchools(String[] idealSchool) {
+
+	public void searchForSchools(SchoolSearchClause searchClause) {
 		SearchController sC = new SearchController();
-		ArrayList<School> matchList =  sC.search(idealSchool);
+		School[] matchList =  sC.search(searchClause);
 		this.lastMatchList = matchList;
 		this.showResults(matchList);
+	}
+	
+	private String takeSearchInput(SchoolAttributeMetadata sam) {
+		s = new Scanner(System.in);
+		System.out.println(sam.getName()+":");
+		char type = sam.getType();
+		if (type=='s') {
+			String returnLine = s.nextLine();
+			s.close();
+			return returnLine;
+		}
+		else if (type=='i') {
+			System.out.println("Minimum:");
+			boolean validInput = false;
+			Integer lower = null;
+			while (lower==null) {
+				try { lower = Integer.parseInt(s.nextLine()); }
+				catch (NumberFormatException nFE) {
+					System.out.println("Please enter a valid integer");
+				}
+			}
+			System.out.println("Minimum:");
+			validInput = false;
+			Integer upper = null;
+			while (upper==null) {
+				try { upper = Integer.parseInt(s.nextLine()); }
+				catch (NumberFormatException nFE) {
+					System.out.println("Please enter a valid integer");
+				}
+			}
+			s.close();
+			return lower+"-"+upper;
+		}
+		else if (type=='d') {
+			System.out.println("Minimum:");
+			boolean validInput = false;
+			Double lower = null;
+			while (lower==null) {
+				try { lower = Double.parseDouble(s.nextLine()); }
+				catch (NumberFormatException nFE) {
+					System.out.println("Please enter a valid integer");
+				}
+			}
+			System.out.println("Minimum:");
+			validInput = false;
+			Double upper = null;
+			while (upper==null) {
+				try { upper = Double.parseDouble(s.nextLine()); }
+				catch (NumberFormatException nFE) {
+					System.out.println("Please enter a valid integer");
+				}
+			}
+			s.close();
+			return lower+"-"+upper;
+		}
+		else if (type=='a') {
+			System.out.println("Type a dash '-' when done. Do not use colons ':'.");
+			String input = s.nextLine();
+			String inputList = "";
+			while (!input.equals("-")) {
+				if (!input.contains(":"))
+					inputList+=":"+input;
+				else
+					System.out.println("Ignoring illegal input");
+				input = s.nextLine();
+			}
+			s.close();
+			return inputList.equals("") ? inputList : inputList.substring(1);
+		}
+		else {
+			s.close();
+			throw new RuntimeException("SchoolAttributeMetadata had invalid type");
+		}
 	}
 	
 	/**
 	 * Shows search results.
 	 */
-	private void showResults(ArrayList<School> matchList) {
-		int resultNum = 0;
+	private void showResults(School[] matchList) {
 		s = new Scanner(System.in);
-		String input;
 		System.out.println("***SEARCH RESULTS***");
+		int resultNum = 0;
 		for (School match : matchList) {
 			System.out.println("Match "+(resultNum++)+":");
 			this.viewSimple(match);
@@ -242,14 +217,24 @@ public class UserUI{
 		System.out.println("Type a match number to see the Expanded School View, "
 							+ "or type \"-\" to quit the search");
 		System.out.println("Match number:");
-		input = s.nextLine();
-		while (input.length()==0 || input.charAt(0)!='-' && !(input.matches("[0-9]*") && Integer.parseInt(input)>=0 && Integer.parseInt(input)<matchList.size())) {
-			System.out.println("Please enter a valid match number (0-"+(matchList.size()-1)+") or \"-\" to quit");
-			System.out.println("Match number:");
-			input = s.nextLine();
+		boolean validInput = false;
+		Integer input = null;
+		while (input==null) {
+			String inputAttempt = s.nextLine();
+			if (!inputAttempt.equals("-")) {
+				try { input = Integer.parseInt(inputAttempt); }
+				catch (NumberFormatException nFE) {
+					System.out.println("Please enter a valid integer");
+				}
+				if (input < 0 || input >= matchList.length) {
+					System.out.println("Please enter a valid integer");
+					input = null;
+				}
+			}
+			else
+				return;
 		}
-		if (input.charAt(0)!='-')
-			this.viewExpanded(matchList.get(Integer.parseInt(input)));
+		this.viewExpanded(matchList[input]);
 	}
 	
 	/**
@@ -432,7 +417,9 @@ public class UserUI{
 		}
 		System.out.println("***Recommended Schools for "+school.getName()+"***");
 		SearchController sC = new SearchController();
-		ArrayList<School> recommendations = sC.getReccomendedSchools(school);
+		SchoolSearchClause searchClause = SchoolDatabaseMapping.convertDatabaseItemToSearchClause(
+										  SchoolDatabaseMapping.convertSchoolToDatabaseItem(school),school.getEmphases());
+		School[] recommendations = sC.search(searchClause); // here is where you implement the other fix
 		int entryNum = 1;
 		for (School rec : recommendations) {
 			System.out.println("Entry "+(entryNum++));
@@ -447,7 +434,7 @@ public class UserUI{
 			input = s.nextLine();
 		}
 		if (input.charAt(0)!='-') {
-			School schoolChoice =  recommendations.get(Integer.parseInt(input)-1);
+			School schoolChoice =  recommendations[Integer.parseInt(input)-1];
 			System.out.println(" ** To save the school, type \"s\". To view the school, type \"v\". **");
 			input = s.nextLine();
 			while (input.length()==0 || input.charAt(0)!='-' && input.toUpperCase().charAt(0)!='S' && input.toUpperCase().charAt(0)!='V') {
