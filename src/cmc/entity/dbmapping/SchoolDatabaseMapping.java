@@ -68,7 +68,7 @@ public class SchoolDatabaseMapping {
 	public static SchoolSearchClause convertDatabaseItemToSearchClause(String[] dbItem, String[] emphasesArray) {
 		String emphases = "";
 		for (String emphasis : emphasesArray)
-			emphases+=emphasis+":";
-		return new SchoolSearchClause(dbItem,emphases);
+			emphases+=":"+emphasis;
+		return new SchoolSearchClause(dbItem,emphases.substring(1));
 	}
 }

@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import cmc.controller.search.SchoolSearchClause;
+import cmc.controller.search.SearchResult;
 import cmc.entity.School;
+import cmc.entity.dbmapping.SchoolDatabaseMapping;
 import dblibrary.project.csci230.UniversityDBLibrary;
 
 /**
@@ -16,10 +19,36 @@ import dblibrary.project.csci230.UniversityDBLibrary;
 public class SearchController 
 {
 	
-	private static final int[] STRING_LOCATIONS = {0,1,2,3};
-	private static final int[] INT_LOCATIONS = {4,10,13,14,15};
-	private static final int[] DOUBLE_LOCATIONS = {5,6,7,8,9,11,12};
 	private UniversityDBLibrary dbase = new UniversityDBLibrary("straightou", "straightou", "adem4");
+	private String[][] schoolData = dbase.university_getUniversities();
+	private String[][] emphasisData = dbase.university_getEmphases();
+	
+	private SearchResult[] getResultList(SchoolSearchClause searchClause) {
+		SearchResult[] results = new SearchResult[schoolData.length]; 
+		for (int i=0; i<schoolData.length; i++) {
+			String emphases = "";
+			for (String[] em : emphasisData) {
+				if (em[0].equals(schoolData[i][0]))
+					emphases+=":"+em[1];
+			}
+			results[i] = new SearchResult(searchClause.scoreSchoolData(schoolData[i], emphases),
+						SchoolDatabaseMapping.convertDatabaseItemToSchool(schoolData[i], emphases.split(":")));
+		}
+		return results;
+	}
+	
+	public School[] search(SchoolSearchClause searchClause) {
+		SearchResult[] results = this.getResultList(searchClause);
+		Arrays.sort(results);
+		School[] schoolList = new School[50];
+		for (int i=0; i<50; i++) {
+			schoolList[i] = results[results.length-i-1].getSchool();
+		}
+		return schoolList;
+	}
+	
+		//SchoolSearchClause searchClause = SchoolDatabaseMapping.convertDatabaseItemToSearchClause(
+		//								  SchoolDatabaseMapping.convertSchoolToDatabaseItem(school),school.getEmphases());
 	
 	/**
 	 * The login method users an school name to find school
@@ -28,6 +57,7 @@ public class SearchController
 
 	 * @return School object that was found based on the school name
 	 */
+	/** ---------------------------------------------------
 	public ArrayList<School> search(String[] idealSchool) 
 	{
 		String[][] compSchools = dbase.university_getUniversities();
@@ -78,6 +108,7 @@ public class SearchController
 		}
 		return matchList;
 	}
+	*/
 
 	/**
 	 * School String (must be unique among universities), State String, Location String, Control String,
@@ -92,6 +123,7 @@ public class SearchController
 	 * @param compEm List of emphases to be compared
 	 * @return a number representing the similarity between the schools from 0-1
 	 */
+	/** ---------------------------------------------------
 	private double calculateVector(String[] idealSchool, String[] compSchool, ArrayList<String> compEm) {
 		double avg = 0;
 		int divisor = 0;
@@ -224,9 +256,6 @@ public class SearchController
 	}
 
 	public ArrayList<School> getReccomendedSchools(School school) {
-		// TODO: use makeSearchableSchool and calculateReccomendationVector and get the top 5 vectors.
-		// If you can abstract anything away between this method and the other search method, do it
-		// you might be able to abstract away parts of the reccomendation vector, but don't do that now
 		String[][] compSchools = dbase.university_getUniversities();
 		String[][] emphases = dbase.university_getEmphases();
 		double[] scores = new double[compSchools.length];
@@ -239,7 +268,7 @@ public class SearchController
 			}
 			scores[i] = this.calculateRecommendationVector(idealSchool, compSchools[i], compEm);
 		}
-		ArrayList<Integer> matchIndexes = new ArrayList<Integer>(); // test this breakpoint cause something is going screwy
+		ArrayList<Integer> matchIndexes = new ArrayList<Integer>();
 		double[] scoresTop5 = Arrays.copyOf(scores,scores.length);
 		Arrays.sort(scoresTop5);
 		scoresTop5 = Arrays.copyOfRange(scoresTop5, scoresTop5.length-5, scoresTop5.length);
@@ -306,4 +335,5 @@ public class SearchController
 		schoolArray[16] = sB.substring(0, sB.length());
 		return schoolArray;
 	}
+	*/
 }
