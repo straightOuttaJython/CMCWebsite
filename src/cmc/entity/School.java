@@ -392,9 +392,10 @@ public class School
 					this.qualityLife==school.getQualityLife() &&
 					this.emphases.length==emphases.length) {
 				for (int i = 0; i < this.emphases.length; i++) {
-					if (this.emphases[i].equals(emphases[i]))
-						return true;
+					if (!this.emphases[i].equals(emphases[i]))
+						return false;
 				}
+					return true;
 			}
 		}
 		return false;

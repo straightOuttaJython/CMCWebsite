@@ -9,8 +9,8 @@ public class SchoolDatabaseMapping {
 	public static final SchoolAttributeMetadata[] MAPPING = 
 		{new StringSchoolAttributeMetadata("Name"),
 		 new StringSchoolAttributeMetadata("State"),
-		 new StringSchoolAttributeMetadata("Location",new String[]{"SUBURBAN","URBAN","SMALL-CITY","-1"}),
-		 new StringSchoolAttributeMetadata("Control",new String[]{"PRIVATE","STATE","CITY","-1"}),
+		 new StringSchoolAttributeMetadata("Location",new String[]{"URBAN","SUBURBAN","SMALL-CITY","-1"}),
+		 new StringSchoolAttributeMetadata("Control",new String[]{"PRIVATE","CITY","STATE","-1"}),
 		 new IntegerSchoolAttributeMetadata("Number of Students"),
 		 new DoubleSchoolAttributeMetadata("Percentage of Female Students",0,100),
 		 new DoubleSchoolAttributeMetadata("Average SAT Verbal",0,800),

@@ -44,7 +44,7 @@ public class StringSchoolSearchTermTest {
 	 */
 	@Test
 	public void testCalculateMatchPartialMatch() {
-		searchTerm = new StringSchoolSearchTerm(0,new String[]{"Cat","Dog","Bunny","-1"});
+		searchTerm = new StringSchoolSearchTerm(0,null);
 		searchTerm.setValue("Cat");
 		double expectedResult = 1.0;
 		double result = searchTerm.calculateMatch("at");
@@ -60,6 +60,30 @@ public class StringSchoolSearchTermTest {
 		searchTerm.setValue("CAt");
 		double expectedResult = 1.0;
 		double result = searchTerm.calculateMatch("CaT");
+		assertTrue("expected result: "+expectedResult+" actual result: "+result,result==expectedResult);
+	}
+	
+	/**
+	 * Test method for {@link cmc.controller.search.StringSchoolSearchTerm#calculateMatch(java.lang.String)}.
+	 */
+	@Test
+	public void testCalculateMatchBadMatch() {
+		searchTerm = new StringSchoolSearchTerm(0,new String[]{"Cat","Dog","Bunny","-1"});
+		searchTerm.setValue("Cat");
+		double expectedResult = 0.0;
+		double result = searchTerm.calculateMatch("Horse");
+		assertTrue("expected result: "+expectedResult+" actual result: "+result,result==expectedResult);
+	}
+	
+	/**
+	 * Test method for {@link cmc.controller.search.StringSchoolSearchTerm#calculateMatch(java.lang.String)}.
+	 */
+	@Test
+	public void testCalculateMatchBadPermittedMatch() {
+		searchTerm = new StringSchoolSearchTerm(0,new String[]{"Cat","Dog","Bunny","-1"});
+		searchTerm.setValue("Cat");
+		double expectedResult = 0.0;
+		double result = searchTerm.calculateMatch("Dog");
 		assertTrue("expected result: "+expectedResult+" actual result: "+result,result==expectedResult);
 	}
 
