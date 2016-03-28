@@ -9,6 +9,8 @@ public class DoubleSchoolSearchTerm extends SchoolSearchTerm {
 	
 	public DoubleSchoolSearchTerm(int dbIndex, double min, double max) {
 		this.dbIndex = dbIndex;
+		if (min > max)
+			throw new IllegalArgumentException("Minimum value is greater than maximum value");
 		this.min = min;
 		this.max = max;
 	}
@@ -17,9 +19,9 @@ public class DoubleSchoolSearchTerm extends SchoolSearchTerm {
 	public double calculateMatch(String comparison) {
 		if (this.lower==-1 || this.upper==-1)
 			throw new IllegalStateException("Term value not set");
-		int comp = Integer.parseInt(comparison);
+		double comp = Double.parseDouble(comparison);
 		assert comp<0 : comp;
-		assert comp < min || comp > max : "comp:"+comp+" min:"+min+" max:"+max; // ask Dad about if this is legit
+		assert comp < min || comp > max : "comp:"+comp+" min:"+min+" max:"+max;
 		if (comp >= this.lower && comp <= this.upper)
 			return 1.0;
 		else if (this.max==Double.MAX_VALUE)
@@ -27,17 +29,8 @@ public class DoubleSchoolSearchTerm extends SchoolSearchTerm {
 		else {
 			double dividend;
 			double divisor;
-			if (comp < lower)
-				dividend = comp - min;
-			else {
-				assert comp > this.upper : "comp:"+comp+" upper:"+this.upper; // ask him about this too
-				dividend = max - comp;
-			}
-			if (lower - min >= max - upper)
-				divisor = lower - min;
-			else
-				divisor = max - upper;
-			assert dividend < divisor : "dividend:"+dividend+" divisor:"+divisor;
+			divisor = Double.max(lower - min, max - upper);
+			dividend = comp < lower ? divisor - (lower - comp) : divisor - (comp - upper);
 			return dividend/divisor;
 		}
 	}
@@ -49,21 +42,18 @@ public class DoubleSchoolSearchTerm extends SchoolSearchTerm {
 		if (dashIndex==-1) {
 			this.lower = Double.parseDouble(value);
 			this.upper = Double.parseDouble(value);
+			return;
 		}
 		double lower = Double.parseDouble(value.substring(0,dashIndex));
 		double upper = Double.parseDouble(value.substring(dashIndex+1, value.length()));
-		if (lower < 0 || upper < 0)
-			throw new IllegalArgumentException("No negative numbers");
-		else if (lower > upper)
+		if (lower > upper)
 			throw new IllegalArgumentException("Lower value is greater than upper value");
-		else if (lower < min || lower > max || upper < min || upper > max)
+		else if (lower < min || upper > max)
 			throw new IllegalArgumentException("Numbers out of range ("+min+"-"+max+")");
-		else
+		else {
 			this.lower = lower;
-		if (upper > lower)
 			this.upper = upper;
-		else
-			this.upper = upper;
+		}
 	}
 
 }

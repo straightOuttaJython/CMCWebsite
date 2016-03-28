@@ -13,16 +13,14 @@ public class StringArraySchoolSearchTerm extends SchoolSearchTerm {
 		if (this.value==null)
 			throw new IllegalStateException("Term value not set");
 		String[] comp = comparison.split(":");
-		int dividend = 0;
-		int divisor = comp.length;
+		double dividend = 0;
+		double divisor = value.length;
 		for (String c : comp) {
 			for (String v : value) {
 				if (c.toUpperCase().equals(v.toUpperCase()))
 						dividend++;
 			}
 		}
-		dividend/=2;
-		assert dividend <= divisor : "dividend:"+dividend+" divisor:"+divisor;
 		return dividend/divisor;
 	}
 

@@ -159,7 +159,7 @@ public class UserUI{
 				}
 			}
 			s.close();
-			return lower+"-"+upper;
+			return lower+":"+upper;
 		}
 		else if (type=='d') {
 			System.out.println("Minimum:");
@@ -181,7 +181,7 @@ public class UserUI{
 				}
 			}
 			s.close();
-			return lower+"-"+upper;
+			return lower+":"+upper;
 		}
 		else if (type=='a') {
 			System.out.println("Type a dash '-' when done. Do not use colons ':'.");
