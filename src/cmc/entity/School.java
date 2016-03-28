@@ -11,18 +11,18 @@ public class School
 	private String name, state, location, control, emphases[];
 	private int numStudentsEnrolled, numApplications,academics, 
 		socialLife, qualityLife;
-	private Double percentFemEnrolled, satVerbal, 
+	private double percentFemEnrolled, satVerbal, 
 		satMath, tuition, percentFinAid, admitRate, decideRate;
 
 	/*
 	 * Sets the parameters with the variables
 	 * @param String name,state,location,control,enphases[]
 	 * @param int numStudentsEnrolled, numApplications,academics,socialLife, qualityLife
-	 * @param Double percentFemEnrolled, satVerbal, satMath, tuition, percentFinAid, admitRate, decideRate
+	 * @param double percentFemEnrolled, satVerbal, satMath, tuition, percentFinAid, admitRate, decideRate
 	 */
 	public School(String name, String state, String location, String control, 
-			int numStudentsEnrolled,Double percentFemEnrolled, Double satVerbal, Double satMath, Double tuition, Double percentFinAid,
-			int numApplications, Double admitRate, Double decideRate, 
+			int numStudentsEnrolled,double percentFemEnrolled, double satVerbal, double satMath, double tuition, double percentFinAid,
+			int numApplications, double admitRate, double decideRate, 
 			int academics,int socialLife, int qualityLife, 
 			String emphases[])
 	{
@@ -53,7 +53,7 @@ public class School
 	 * Sets the variables as a default state
 	 * @param String name,state,location,control,enphases[]
 	 * @param int numStudentsEnrolled, numApplications,academics,socialLife, qualityLife
-	 * @param Double percentFemEnrolled, satVerbal, satMath, tuition, percentFinAid, admitRate, decideRate
+	 * @param double percentFemEnrolled, satVerbal, satMath, tuition, percentFinAid, admitRate, decideRate
 	 */
 	public School()
 	{
@@ -253,7 +253,7 @@ public class School
 	/*
 	 * Gets the percentage of Females that enrolled
 	 */
-	public Double getPercentFemEnrolled() 
+	public double getPercentFemEnrolled() 
 	{
 		return percentFemEnrolled;
 	}
@@ -262,7 +262,7 @@ public class School
 	 * Sets the percentage of Female Enrolled
 	 * @param double percFemEnrolled
 	 */
-	public void setPercFemEnrolled(Double percFemEnrolled) 
+	public void setPercFemEnrolled(double percFemEnrolled) 
 	{
 		this.percentFemEnrolled = percFemEnrolled;
 	}
@@ -270,7 +270,7 @@ public class School
 	/*
 	 * Gets the SAT Verbal score
 	 */
-	public Double getSatVerb() 
+	public double getSatVerb() 
 	{
 		return satVerbal;
 	}
@@ -279,7 +279,7 @@ public class School
 	 * Sets the SAT Verbal Score
 	 * @param double satVerb
 	 */
-	public void setSatVerbal(Double satVerb) 
+	public void setSatVerbal(double satVerb) 
 	{
 		this.satVerbal = satVerb;
 	}
@@ -287,7 +287,7 @@ public class School
 	/*
 	 * Gets the SAT Math score
 	 */
-	public Double getSatMath() 
+	public double getSatMath() 
 	{
 		return satMath;
 	}
@@ -296,7 +296,7 @@ public class School
 	 * Sets the SAT Math Score
 	 * @param double satMath
 	 */
-	public void setSatMath(Double satMath) 
+	public void setSatMath(double satMath) 
 	{
 		this.satMath = satMath;
 	}
@@ -304,7 +304,7 @@ public class School
 	/*
 	 * Gets the tuition of the school
 	 */
-	public Double getTuition() 
+	public double getTuition() 
 	{
 		return tuition;
 	}
@@ -313,7 +313,7 @@ public class School
 	 * Sets tuition of a school
 	 * @param double tuition
 	 */
-	public void setTuition(Double tuition) 
+	public void setTuition(double tuition) 
 	{
 		this.tuition = tuition;
 	}
@@ -321,7 +321,7 @@ public class School
 	/*
 	 * Gets the percentage of financial aid of the school
 	 */
-	public Double getPercFinAid() 
+	public double getPercFinAid() 
 	{
 		return percentFinAid;
 	}
@@ -330,7 +330,7 @@ public class School
 	 * Sets the percentage of financial aid of the school
 	 * @param double percFinAid
 	 */
-	public void setPercFinAid(Double percFinAid) 
+	public void setPercFinAid(double percFinAid) 
 	{
 		this.percentFinAid = percFinAid;
 	}
@@ -338,7 +338,7 @@ public class School
 	/*
 	 * Gets the admit rate of a school
 	 */
-	public Double getAdmitRate() 
+	public double getAdmitRate() 
 	{
 		return admitRate;
 	}
@@ -347,7 +347,7 @@ public class School
 	 * Sets the admit rate of the school
 	 * @param double admitRate
 	 */
-	public void setAdmitRate(Double admitRate) 
+	public void setAdmitRate(double admitRate) 
 	{
 		this.admitRate = admitRate;
 	}
@@ -355,7 +355,7 @@ public class School
 	/*
 	 * Gets the decision rate
 	 */
-	public Double getDecideRate() 
+	public double getDecideRate() 
 	{
 		return decideRate;
 	}
@@ -364,9 +364,40 @@ public class School
 	 * Sets the deciding rate
 	 * @param double decideRate
 	 */
-	public void setDecideRate(Double decideRate) 
+	public void setDecideRate(double decideRate) 
 	{
 		this.decideRate = decideRate;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof School) {
+			School school = (School)obj;
+			String[] emphases = school.getEmphases();
+			if (this.name.equals(school.getName()) &&
+					this.state.equals(school.getState()) &&
+					this.location.equals(school.getLocation()) &&
+					this.control.equals(school.getControl()) &&
+					this.numStudentsEnrolled==school.getNumStudentsEnrolled() &&
+					this.percentFemEnrolled==school.getPercentFemEnrolled() &&
+					this.satVerbal==school.getSatVerb() &&
+					this.satMath==school.getSatMath() &&
+					this.tuition==school.getTuition() &&
+					this.percentFinAid==school.getPercFinAid() &&
+					this.numApplications==school.getNumApplications() &&
+					this.admitRate==school.getAdmitRate() &&
+					this.decideRate==school.getDecideRate() &&
+					this.academics==school.getAcademics() &&
+					this.socialLife==school.getSocialLife() &&
+					this.qualityLife==school.getQualityLife() &&
+					this.emphases.length==emphases.length) {
+				for (int i = 0; i < this.emphases.length; i++) {
+					if (this.emphases[i].equals(emphases[i]))
+						return true;
+				}
+			}
+		}
+		return false;
 	}
 
 }

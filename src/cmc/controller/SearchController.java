@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import cmc.controller.search.SchoolSearchClause;
-import cmc.controller.search.SearchResult;
 import cmc.entity.School;
 import cmc.entity.dbmapping.SchoolDatabaseMapping;
 import dblibrary.project.csci230.UniversityDBLibrary;
@@ -25,10 +24,10 @@ public class SearchController
 	public SearchController() {
 		UniversityDBLibrary dbase = new UniversityDBLibrary("straightou", "straightou", "adem4");
 		schoolData = dbase.university_getUniversities();
-		emphasisData = dbase.university_getEmphases();
+		emphasisData = dbase.university_getNamesWithEmphases();
 	}
 
-	SearchController(String[][] schoolData, String[][] emphasisData) {
+	public SearchController(String[][] schoolData, String[][] emphasisData) {
 		this.schoolData = schoolData;
 		this.emphasisData = emphasisData;
 	}
@@ -50,10 +49,36 @@ public class SearchController
 	public School[] search(SchoolSearchClause searchClause) {
 		SearchResult[] results = this.getResultList(searchClause);
 		Arrays.sort(results);
-		School[] schoolList = new School[50];
-		for (int i=0; i<50; i++) {
+		int schoolListLength = Integer.min(results.length, 50);
+		School[] schoolList = new School[schoolListLength];
+		for (int i=0; i<schoolListLength; i++) {
 			schoolList[i] = results[results.length-i-1].getSchool();
 		}
 		return schoolList;
+	}
+	
+	private class SearchResult implements Comparable<SearchResult> {
+		
+		private double score;
+		private School school;
+		
+		public SearchResult(double score, School associatedSchool) {
+			super();
+			this.score = score;
+			this.school = associatedSchool;
+		}
+		
+		public double getScore() {
+			return this.score;
+		}
+
+		public School getSchool() {
+			return school;
+		}
+
+		@Override
+		public int compareTo(SearchResult sR) {
+			return new Double(score).compareTo(new Double(sR.getScore()));
+		}
 	}
 }

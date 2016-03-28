@@ -64,11 +64,4 @@ public class SchoolDatabaseMapping {
 						  Integer.parseInt(dbItem[15]),
 						  emphasesArray);
 	}
-	
-	public static SchoolSearchClause convertDatabaseItemToSearchClause(String[] dbItem, String[] emphasesArray) {
-		String emphases = "";
-		for (String emphasis : emphasesArray)
-			emphases+=":"+emphasis;
-		return new SchoolSearchClause(dbItem,emphases.substring(1));
-	}
 }

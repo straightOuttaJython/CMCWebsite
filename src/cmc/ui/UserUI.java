@@ -417,8 +417,10 @@ public class UserUI{
 		}
 		System.out.println("***Recommended Schools for "+school.getName()+"***");
 		SearchController sC = new SearchController();
-		SchoolSearchClause searchClause = SchoolDatabaseMapping.convertDatabaseItemToSearchClause(
-										  SchoolDatabaseMapping.convertSchoolToDatabaseItem(school),school.getEmphases());
+		String emphases = "";
+		for (String emphasis : school.getEmphases())
+			emphases+=":"+emphasis;
+		SchoolSearchClause searchClause = new SchoolSearchClause(SchoolDatabaseMapping.convertSchoolToDatabaseItem(school),emphases);
 		School[] recommendations = sC.search(searchClause); // here is where you implement the other fix
 		int entryNum = 1;
 		for (School rec : recommendations) {
