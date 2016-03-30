@@ -1,48 +1,47 @@
 /**
  * 
  */
-package controller.search;
+package test.controller.search;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import cmc.controller.LoginController.InactiveAccountException;
-import cmc.controller.search.IntegerSchoolSearchTerm;
+import cmc.controller.search.DoubleSchoolSearchTerm;
 
 /**
  * @author Alex
  *
  */
-public class IntegerSchoolSearchTermTest {
+public class DoubleSchoolSearchTermTest {
 	
-	IntegerSchoolSearchTerm searchTerm;
+	DoubleSchoolSearchTerm searchTerm;
 
 	/**
-	 * Test method for {@link cmc.controller.search.IntegerSchoolSearchTerm#calculateMatch(java.lang.String)}.
+	 * Test method for {@link cmc.controller.search.DoubleSchoolSearchTerm#calculateMatch(java.lang.String)}.
 	 */
 	@Test (expected = IllegalStateException.class)
 	public void testCalculateMatchFailIfUnset() {
-		searchTerm = new IntegerSchoolSearchTerm(4,0,Integer.MAX_VALUE);
+		searchTerm = new DoubleSchoolSearchTerm(4,0,Double.MAX_VALUE);
 		searchTerm.calculateMatch("20");
 	}
 	
 	/**
-	 * Test method for {@link cmc.controller.search.IntegerSchoolSearchTerm#calculateMatch(java.lang.String)}.
+	 * Test method for {@link cmc.controller.search.DoubleSchoolSearchTerm#calculateMatch(java.lang.String)}.
 	 */
 	@Test (expected = NumberFormatException.class)
-	public void testCalculateMatchFailIfNotInt() {
-		searchTerm = new IntegerSchoolSearchTerm(4,0,Integer.MAX_VALUE);
+	public void testCalculateMatchFailIfNotDouble() {
+		searchTerm = new DoubleSchoolSearchTerm(4,0,Double.MAX_VALUE);
 		searchTerm.setValue("10:30");
 		searchTerm.calculateMatch("G");
 	}
 	
 	/**
-	 * Test method for {@link cmc.controller.search.IntegerSchoolSearchTerm#calculateMatch(java.lang.String)}.
+	 * Test method for {@link cmc.controller.search.DoubleSchoolSearchTerm#calculateMatch(java.lang.String)}.
 	 */
 	@Test
 	public void testCalculateMatchInRange() {
-		searchTerm = new IntegerSchoolSearchTerm(4,0,Integer.MAX_VALUE);
+		searchTerm = new DoubleSchoolSearchTerm(4,0,Double.MAX_VALUE);
 		searchTerm.setValue("10:30");
 		double expectedResult = 1.0;
 		double result = searchTerm.calculateMatch("20");
@@ -50,11 +49,11 @@ public class IntegerSchoolSearchTermTest {
 	}
 	
 	/**
-	 * Test method for {@link cmc.controller.search.IntegerSchoolSearchTerm#calculateMatch(java.lang.String)}.
+	 * Test method for {@link cmc.controller.search.DoubleSchoolSearchTerm#calculateMatch(java.lang.String)}.
 	 */
 	@Test
 	public void testCalculateMatchSingleNumber() {
-		searchTerm = new IntegerSchoolSearchTerm(4,0,Integer.MAX_VALUE);
+		searchTerm = new DoubleSchoolSearchTerm(4,0,Double.MAX_VALUE);
 		searchTerm.setValue("20");
 		double expectedResult = 1.0;
 		double result = searchTerm.calculateMatch("20");
@@ -62,11 +61,11 @@ public class IntegerSchoolSearchTermTest {
 	}
 	
 	/**
-	 * Test method for {@link cmc.controller.search.IntegerSchoolSearchTerm#calculateMatch(java.lang.String)}.
+	 * Test method for {@link cmc.controller.search.DoubleSchoolSearchTerm#calculateMatch(java.lang.String)}.
 	 */
 	@Test
 	public void testCalculateMatchOutOfRangeAboveNoGradient() {
-		searchTerm = new IntegerSchoolSearchTerm(4,0,Integer.MAX_VALUE);
+		searchTerm = new DoubleSchoolSearchTerm(4,0,Double.MAX_VALUE);
 		searchTerm.setValue("10:30");
 		double expectedResult = 0.0;
 		double result = searchTerm.calculateMatch("40");
@@ -74,11 +73,11 @@ public class IntegerSchoolSearchTermTest {
 	}
 	
 	/**
-	 * Test method for {@link cmc.controller.search.IntegerSchoolSearchTerm#calculateMatch(java.lang.String)}.
+	 * Test method for {@link cmc.controller.search.DoubleSchoolSearchTerm#calculateMatch(java.lang.String)}.
 	 */
 	@Test
 	public void testCalculateMatchOutOfRangeBelowNoGradient() {
-		searchTerm = new IntegerSchoolSearchTerm(4,0,Integer.MAX_VALUE);
+		searchTerm = new DoubleSchoolSearchTerm(4,0,Double.MAX_VALUE);
 		searchTerm.setValue("10:30");
 		double expectedResult = 0.0;
 		double result = searchTerm.calculateMatch("5");
@@ -86,11 +85,11 @@ public class IntegerSchoolSearchTermTest {
 	}
 	
 	/**
-	 * Test method for {@link cmc.controller.search.IntegerSchoolSearchTerm#calculateMatch(java.lang.String)}.
+	 * Test method for {@link cmc.controller.search.DoubleSchoolSearchTerm#calculateMatch(java.lang.String)}.
 	 */
 	@Test
 	public void testCalculateMatchOutOfRangeAboveWithLowRangeGradient() {
-		searchTerm = new IntegerSchoolSearchTerm(4,0,100);
+		searchTerm = new DoubleSchoolSearchTerm(4,0,100);
 		searchTerm.setValue("20:40");
 		double expectedResult = 0.6;
 		double result = searchTerm.calculateMatch("64");
@@ -98,11 +97,11 @@ public class IntegerSchoolSearchTermTest {
 	}
 	
 	/**
-	 * Test method for {@link cmc.controller.search.IntegerSchoolSearchTerm#calculateMatch(java.lang.String)}.
+	 * Test method for {@link cmc.controller.search.DoubleSchoolSearchTerm#calculateMatch(java.lang.String)}.
 	 */
 	@Test
 	public void testCalculateMatchOutOfRangeBelowWithLowRangeGradient() {
-		searchTerm = new IntegerSchoolSearchTerm(4,0,100);
+		searchTerm = new DoubleSchoolSearchTerm(4,0,100);
 		searchTerm.setValue("20:40");
 		double expectedResult = 0.8;
 		double result = searchTerm.calculateMatch("8");
@@ -110,11 +109,11 @@ public class IntegerSchoolSearchTermTest {
 	}
 	
 	/**
-	 * Test method for {@link cmc.controller.search.IntegerSchoolSearchTerm#calculateMatch(java.lang.String)}.
+	 * Test method for {@link cmc.controller.search.DoubleSchoolSearchTerm#calculateMatch(java.lang.String)}.
 	 */
 	@Test
 	public void testCalculateMatchOutOfRangeAboveWithHighRangeGradient() {
-		searchTerm = new IntegerSchoolSearchTerm(4,0,100);
+		searchTerm = new DoubleSchoolSearchTerm(4,0,100);
 		searchTerm.setValue("60:80");
 		double expectedResult = 0.8;
 		double result = searchTerm.calculateMatch("92");
@@ -122,11 +121,11 @@ public class IntegerSchoolSearchTermTest {
 	}
 	
 	/**
-	 * Test method for {@link cmc.controller.search.IntegerSchoolSearchTerm#calculateMatch(java.lang.String)}.
+	 * Test method for {@link cmc.controller.search.DoubleSchoolSearchTerm#calculateMatch(java.lang.String)}.
 	 */
 	@Test
 	public void testCalculateMatchOutOfRangeBelowWithHighRangeGradient() {
-		searchTerm = new IntegerSchoolSearchTerm(4,0,100);
+		searchTerm = new DoubleSchoolSearchTerm(4,0,100);
 		searchTerm.setValue("60:80");
 		double expectedResult = 0.4;
 		double result = searchTerm.calculateMatch("24");
@@ -134,65 +133,65 @@ public class IntegerSchoolSearchTermTest {
 	}
 
 	/**
-	 * Test method for {@link cmc.controller.search.IntegerSchoolSearchTerm#setValue(java.lang.String)}.
+	 * Test method for {@link cmc.controller.search.DoubleSchoolSearchTerm#setValue(java.lang.String)}.
 	 */
 	@Test (expected = NumberFormatException.class)
-	public void testSetValueFailForSingleInvalidInt() {
-		searchTerm = new IntegerSchoolSearchTerm(4,0,Integer.MAX_VALUE);
+	public void testSetValueFailForSingleInvalidDouble() {
+		searchTerm = new DoubleSchoolSearchTerm(4,0,Double.MAX_VALUE);
 		searchTerm.setValue("G");
 	}
 	
 	/**
-	 * Test method for {@link cmc.controller.search.IntegerSchoolSearchTerm#setValue(java.lang.String)}.
+	 * Test method for {@link cmc.controller.search.DoubleSchoolSearchTerm#setValue(java.lang.String)}.
 	 */
 	@Test (expected = NumberFormatException.class)
 	public void testSetValueFailForColon() {
-		searchTerm = new IntegerSchoolSearchTerm(4,0,Integer.MAX_VALUE);
+		searchTerm = new DoubleSchoolSearchTerm(4,0,Double.MAX_VALUE);
 		searchTerm.setValue(":");
 	}
 	
 	/**
-	 * Test method for {@link cmc.controller.search.IntegerSchoolSearchTerm#setValue(java.lang.String)}.
+	 * Test method for {@link cmc.controller.search.DoubleSchoolSearchTerm#setValue(java.lang.String)}.
 	 */
 	@Test (expected = NumberFormatException.class)
-	public void testSetValueFailForTwoInvalidInts() {
-		searchTerm = new IntegerSchoolSearchTerm(4,0,Integer.MAX_VALUE);
+	public void testSetValueFailForTwoInvalidDoubles() {
+		searchTerm = new DoubleSchoolSearchTerm(4,0,Double.MAX_VALUE);
 		searchTerm.setValue("G:H");
 	}
 	
 	/**
-	 * Test method for {@link cmc.controller.search.IntegerSchoolSearchTerm#setValue(java.lang.String)}.
+	 * Test method for {@link cmc.controller.search.DoubleSchoolSearchTerm#setValue(java.lang.String)}.
 	 */
 	@Test (expected = IllegalArgumentException.class)
 	public void testSetValueFailForBackwardsRange() {
-		searchTerm = new IntegerSchoolSearchTerm(4,0,Integer.MAX_VALUE);
+		searchTerm = new DoubleSchoolSearchTerm(4,0,Double.MAX_VALUE);
 		searchTerm.setValue("40:20");
 	}
 	
 	/**
-	 * Test method for {@link cmc.controller.search.IntegerSchoolSearchTerm#setValue(java.lang.String)}.
+	 * Test method for {@link cmc.controller.search.DoubleSchoolSearchTerm#setValue(java.lang.String)}.
 	 */
 	@Test (expected = IllegalArgumentException.class)
 	public void testSetValueFailForOutOfRangeLower() {
-		searchTerm = new IntegerSchoolSearchTerm(4,20,50);
+		searchTerm = new DoubleSchoolSearchTerm(4,20,50);
 		searchTerm.setValue("10:30");
 	}
 	
 	/**
-	 * Test method for {@link cmc.controller.search.IntegerSchoolSearchTerm#setValue(java.lang.String)}.
+	 * Test method for {@link cmc.controller.search.DoubleSchoolSearchTerm#setValue(java.lang.String)}.
 	 */
 	@Test (expected = IllegalArgumentException.class)
 	public void testSetValueFailForOutOfRangeUpper() {
-		searchTerm = new IntegerSchoolSearchTerm(4,20,50);
+		searchTerm = new DoubleSchoolSearchTerm(4,20,50);
 		searchTerm.setValue("30:60");
 	}
 
 	/**
-	 * Test method for {@link cmc.controller.search.IntegerSchoolSearchTerm#IntegerSchoolSearchTerm(int, int, int)}.
+	 * Test method for {@link cmc.controller.search.DoubleSchoolSearchTerm#DoubleSchoolSearchTerm(Double, Double, Double)}.
 	 */
 	@Test (expected = IllegalArgumentException.class)
 	public void testConstructorFailForBackwardsRange() {
-		searchTerm = new IntegerSchoolSearchTerm(4,40,20);
+		searchTerm = new DoubleSchoolSearchTerm(4,40,20);
 	}
 
 }

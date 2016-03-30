@@ -1,7 +1,7 @@
 /**
  * 
  */
-package controller.search;
+package test.controller.search;
 
 import static org.junit.Assert.*;
 

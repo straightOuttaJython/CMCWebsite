@@ -1,7 +1,7 @@
 /**
  * 
  */
-package controller;
+package test.controller;
 
 import static org.junit.Assert.*;
 
@@ -68,7 +68,7 @@ public class SearchControllerTest {
 	School[] expectedResults, actualResults;
 	
 	/**
-	 * Test method for {@link controller.SearchControllerTest#generateSchoolDataForIndex(int)}.
+	 * Test method for {@link test.controller.SearchControllerTest#generateSchoolDataForIndex(int)}.
 	 */
 	@Test
 	public void testGenerateSchoolDataForIndex() {
@@ -88,7 +88,7 @@ public class SearchControllerTest {
 	}
 	
 	/**
-	 * Test method for {@link controller.SearchControllerTest#generateSchoolDataForIndex(int)}.
+	 * Test method for {@link test.controller.SearchControllerTest#generateSchoolDataForIndex(int)}.
 	 */
 	@Test
 	public void testGenerateSchoolDataForIndexSpecialCase() {
@@ -114,7 +114,7 @@ public class SearchControllerTest {
 	}
 	
 	/**
-	 * Test method for {@link controller.SearchControllerTest#generateSchoolDataForIndex(int)}.
+	 * Test method for {@link test.controller.SearchControllerTest#generateSchoolDataForIndex(int)}.
 	 */
 	@Test
 	public void testGenerateEmphasisData() {
@@ -139,7 +139,7 @@ public class SearchControllerTest {
 	}
 	
 	/**
-	 * Test method for {@link controller.SearchControllerTest#generateSchoolDataForIndex(int)}.
+	 * Test method for {@link test.controller.SearchControllerTest#generateSchoolDataForIndex(int)}.
 	 */
 	@Test
 	public void testGenerateEmphasisDataSpecialCase() {
@@ -176,7 +176,7 @@ public class SearchControllerTest {
 	}
 	
 	/**
-	 * Test method for {@link controller.SearchControllerTest#generateSchoolDataForIndex(int)}.
+	 * Test method for {@link test.controller.SearchControllerTest#generateSchoolDataForIndex(int)}.
 	 */
 	@Test
 	public void testGenerateEmphasisDataOneSchool() {
@@ -197,7 +197,7 @@ public class SearchControllerTest {
 	}
 	
 	/**
-	 * Test method for {@link controller.SearchControllerTest#generateSchoolDataForIndex(int)}.
+	 * Test method for {@link test.controller.SearchControllerTest#generateSchoolDataForIndex(int)}.
 	 */
 	@Test
 	public void testGenerateExpectedSchoolResults() {
@@ -221,7 +221,7 @@ public class SearchControllerTest {
 	}
 	
 	/**
-	 * Test method for {@link controller.SearchControllerTest#generateSchoolDataForIndex(int)}.
+	 * Test method for {@link test.controller.SearchControllerTest#generateSchoolDataForIndex(int)}.
 	 */
 	@Test
 	public void testGenerateExpectedSchoolResultsSpecialCase() {
