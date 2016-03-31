@@ -87,43 +87,43 @@ public class SchoolTest {
 	
 	public boolean testSetPercFemEnrolled(double percFemEnrolled) {
 		testSchool.setPercFemEnrolled(percFemEnrolled);
-		return testSchool.getPercentFemEnrolled().equals(percFemEnrolled);
+		return testSchool.getPercentFemEnrolled() == percFemEnrolled;
 	}
 
 	
 	public boolean testSetSatVerbal(double satVerb) {
 		testSchool.setSatVerbal(satVerb);
-		return testSchool.getSatVerb().equals(satVerb);
+		return testSchool.getSatVerb() == satVerb;
 	}
 
 	
 	public boolean testSetSatMath(double satMath) {
 		testSchool.setSatMath(satMath);
-		return testSchool.getSatMath().equals(satMath);
+		return testSchool.getSatMath() == satMath;
 	}
 
 	
 	public boolean testSetTuition(double tuition) {
 		testSchool.setTuition(tuition);
-		return testSchool.getTuition().equals(tuition);
+		return testSchool.getTuition() == tuition;
 	}
 
 	
 	public boolean testSetPercFinAid(double percFinAid) {
 		testSchool.setPercFinAid(percFinAid);
-		return testSchool.getPercFinAid().equals(percFinAid);
+		return testSchool.getPercFinAid() == percFinAid;
 	}
 
 	
 	public boolean testSetAdmitRate(double admitRate) {
 		testSchool.setAdmitRate(admitRate);
-		return testSchool.getAdmitRate().equals(admitRate);
+		return testSchool.getAdmitRate() == admitRate;
 	}
 
 	
 	public boolean testSetDecideRate(double decideRate) {
 		testSchool.setDecideRate(decideRate);
-		return testSchool.getDecideRate().equals(decideRate);
+		return testSchool.getDecideRate() == decideRate;
 	}
 
 }

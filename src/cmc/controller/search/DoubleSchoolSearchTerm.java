@@ -27,10 +27,8 @@ public class DoubleSchoolSearchTerm extends SchoolSearchTerm {
 		else if (this.max==Double.MAX_VALUE)
 			return 0.0;
 		else {
-			double dividend;
-			double divisor;
-			divisor = Double.max(lower - min, max - upper);
-			dividend = comp < lower ? divisor - (lower - comp) : divisor - (comp - upper);
+			double divisor = Double.max(lower - min, max - upper);
+			double dividend = comp < lower ? divisor - (lower - comp) : divisor - (comp - upper);
 			return dividend/divisor;
 		}
 	}
@@ -39,13 +37,17 @@ public class DoubleSchoolSearchTerm extends SchoolSearchTerm {
 	public void setValue(String value) {
 		this.included = true;
 		int dashIndex = value.indexOf(':');
+		double lower;
+		double upper;
 		if (dashIndex==-1) {
-			this.lower = Double.parseDouble(value);
-			this.upper = Double.parseDouble(value);
+			lower = Integer.parseInt(value);
+			upper = Integer.parseInt(value);
 			return;
 		}
-		double lower = Double.parseDouble(value.substring(0,dashIndex));
-		double upper = Double.parseDouble(value.substring(dashIndex+1, value.length()));
+		else {
+			lower = Integer.parseInt(value.substring(0,dashIndex));
+			upper = Integer.parseInt(value.substring(dashIndex+1, value.length()));
+		}
 		if (lower > upper)
 			throw new IllegalArgumentException("Lower value is greater than upper value");
 		else if (lower < min || upper > max)

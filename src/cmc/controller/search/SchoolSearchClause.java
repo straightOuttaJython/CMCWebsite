@@ -68,12 +68,10 @@ public class SchoolSearchClause {
 			SchoolSearchTerm term = terms[i];
 			if (term.isIncluded()) {
 				divisor++;
-				if (SchoolDatabaseMapping.MAPPING[i].getType()=='a') {
+				if (SchoolDatabaseMapping.MAPPING[i].getType()=='a')
 					dividend+=term.calculateMatch(emphases);
-				}
-				else {
+				else
 					dividend+=term.calculateMatch(school[i]);
-				}
 			}
 		}
 		assert dividend > divisor : "dividend:"+dividend+" divisor:"+divisor;
