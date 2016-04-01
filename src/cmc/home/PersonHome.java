@@ -8,7 +8,7 @@ import dblibrary.project.csci230.UniversityDBLibrary;
  * The PersonHome controls the ebb and flow of Persons in the Choose my College system.
  * 
  * @author Matthew Kounniyom
- * @version March 20, 2016
+ * @version April 1, 2016
  */
 public class PersonHome {
 	
@@ -21,7 +21,7 @@ public class PersonHome {
 	 * @return the person object associated with the entered username.
 	 * @throws IllegalArgumentException, if the username is not bound to an account.
 	 */
-	public Person getPerson(String username)
+	public Person getPerson(String username) throws IllegalArgumentException
 	{
 		Person[] personArray = this.getAllUsers();
 		Person foundPerson = new Person();
