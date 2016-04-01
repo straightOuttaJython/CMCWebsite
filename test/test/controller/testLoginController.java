@@ -12,7 +12,7 @@ import cmc.entity.Person;
  * Used WhiteBoxTesting
  * 
  * @author Matthew Kounniyom
- * @version March 20, 2016
+ * @version April 1, 2016
  */
 public class testLoginController {
 
