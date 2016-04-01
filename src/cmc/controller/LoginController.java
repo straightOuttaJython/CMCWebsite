@@ -7,7 +7,7 @@ import cmc.home.PersonHome;
  * The LoginController class controls how/when a Person would log in.
  * 
  * @author Matthew Kounniyom
- * @version March 20, 2016
+ * @version April 1, 2016
  */
 public class LoginController {
 	

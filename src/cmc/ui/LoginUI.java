@@ -11,7 +11,7 @@ import cmc.entity.Person;
  * The LogUI is a boundary that Logs in the person bound to the given username through the login method.
  * 
  * @author Matthew Kounniyom, Erin Queme
- * @version March 11, 2016
+ * @version April 1, 2016
  */
 public class LoginUI 
 {
