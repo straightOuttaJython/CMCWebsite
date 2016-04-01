@@ -1,5 +1,9 @@
 package cmc.controller.search;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
+
 /**
  * This is an implementation for the SchoolSearchTerm class for String
  * array values.
@@ -33,6 +37,7 @@ public class StringArraySchoolSearchTerm extends SchoolSearchTerm {
 		if (this.value==null)
 			throw new IllegalStateException("Term value not set");
 		String[] comp = comparison.split(":");
+		comp = removeDuplicates(comp);
 		double dividend = 0;
 		double divisor = value.length;
 		for (String c : comp) {
@@ -43,7 +48,7 @@ public class StringArraySchoolSearchTerm extends SchoolSearchTerm {
 		}
 		return dividend/divisor;
 	}
-	
+
 	/**
 	 * {@inheritDoc SchoolSearchTerm#setValue(String)}
 	 * For StringArraySchoolSearchTerm, the method interprets the given String as an array
@@ -54,6 +59,16 @@ public class StringArraySchoolSearchTerm extends SchoolSearchTerm {
 	public void setValue(String value) {
 		this.included = true;
 		this.value = value.split(":");
+		this.value = removeDuplicates(this.value);
 	}
 
+	private String[] removeDuplicates(String[] array) {
+		HashSet<String> set = new HashSet<String>(Arrays.asList(array));
+		String[] newArray = new String[set.size()];
+		Iterator<String> iter = set.iterator();
+		for (int i=0; i<set.size(); i++) {
+			newArray[i] = iter.next();
+		}
+		return newArray;
+	}
 }
