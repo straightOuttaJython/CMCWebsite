@@ -1,13 +1,16 @@
+package test.entity;
+
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import cmc.entity.Person;
+import cmc.entity.School;
 
 
 public class PersonTest {
 	
 	private Person person, user, student;
-    private School[] savedSchool = {"SJU", "CSB"}
+    private School[] savedSchool = {"SJU", "CSB"};
 	
     @Before
 	public PersonTest() {
