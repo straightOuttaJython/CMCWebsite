@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import cmc.entity.Person;
 import cmc.home.PersonHome;
+import dblibrary.project.csci230.UniversityDBLibrary;
 
 /**
  * Tests the PersonHome class that is apart of the CMC Software.
@@ -191,6 +192,8 @@ public class testPersonHome {
 		assertTrue("Last name is equal", matt.getLastName().equals(lName));
 		assertTrue("Password is equal", matt.getPassword().equals(password));
 		assertTrue("Type is equal", matt.getType() == type);
+		UniversityDBLibrary db = new UniversityDBLibrary("straightou", "straightou", "adem4");
+		db.user_deleteUser(username);
 	}
 
 }
