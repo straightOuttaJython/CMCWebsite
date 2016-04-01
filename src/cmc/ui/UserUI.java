@@ -26,9 +26,9 @@ import dblibrary.project.csci230.UniversityDBLibrary;
 * The UserUI class controls user's action.
 * 
 * @author Duong, Matthew Kounniyom
-* @version March 14, 2016
+* @version April 1, 2016
 */
-public class UserUI{
+public class UserUI {
 	
 	/**
 	 * Instance variable
