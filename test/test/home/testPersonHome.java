@@ -218,7 +218,12 @@ public class testPersonHome {
 	}
 
 	/*
-	 * Basic Test for PersonHome
+	 * Basic Test for PersonHome.addUser(firstName, lastName, username, password, type)
+	 * 
+	 * Description				Input firstName			Input lastName		Input username		Input password		Input type		Expected Output
+	 * 
+	 * Add New User				Matthew					Kounniyom			makounniyom			123456				u				User has been added.
+	 * 
 	 */
 	@Test
 	public void testAddUser() {

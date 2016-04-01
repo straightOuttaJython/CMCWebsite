@@ -21,7 +21,7 @@ public class PersonHome {
 	 * @return the person object associated with the entered username.
 	 * @throws IllegalArgumentException, if the username is not bound to an account.
 	 */
-	public Person getPerson(String username)
+	public Person getPerson(String username) throws IllegalArgumentException
 	{
 		Person[] personArray = this.getAllUsers();
 		Person foundPerson = new Person();

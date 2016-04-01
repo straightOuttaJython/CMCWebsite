@@ -23,9 +23,10 @@ public class LoginController {
 	 * @param password, the password that is entered.
 	 * @param database, the database to search through.
 	 * @return Person object that was found based on the username and password. 
-	 * @throws Exception, if the the account bound to the input username is inactive, or if the password is invalid.
+	 * @throws InactiveAccountException, if the the account bound to the input username is inactive.
+	 * @throws IllegalArgumentException, if the the account bound to the input username is inactive.
 	 */
-	public Person login(String username, String password)
+	public Person login(String username, String password) throws InactiveAccountException, IllegalArgumentException
 	{
 		personHome = new PersonHome();
 		Person foundPerson = personHome.getPerson(username);
