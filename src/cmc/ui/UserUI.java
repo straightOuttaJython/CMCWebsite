@@ -74,39 +74,6 @@ public class UserUI {
 															"  Emphases (type \"-\" when done): "};
 	
 	/**
-	 *  Displays a menu full of all the options available to a "user".
-	 */
-	public void viewMenu(){
-		System.out.println("*** USER MENU ***");
-		System.out.println("   - Search For Schools: (\"s\")");
-		System.out.println("   - Manage Saved Schools: (\"v\")");
-		System.out.println("   - Manage User Profile: (\"p\")");
-		System.out.println("   - Logout: (\"l\")");
-		s = new Scanner(System.in);
-		System.out.print("  Please enter a valid command: ");
-		char cmd = s.next().toLowerCase().charAt(0);
-		switch (cmd) {
-			case 's':
-				this.searchForSchools();
-				break;
-			case 'v':
-				this.manageSchools();
-				break;
-			case 'p':
-				this.manageUserProfile();
-				break;
-			case 'l':
-				this.logout();
-				break;
-			default:
-				System.out.println("*** INVALID ENTRY RESETTING ***");
-				this.resetForm('v');
-				break;
-		}
-		this.viewMenu();
-	}
-	
-	/**
 	 * Handles the User wanting to search for schools.
 	 * 
 	 * @throws ResetException if the user is trying to reset.
@@ -287,38 +254,6 @@ public class UserUI {
 	}
 	
 	/**
-	 * Logs out the user.
-	 */
-	public void logout() {
-		UniversityDBLibrary db = new UniversityDBLibrary("straightou", "straightou", "adem4");
-		db.user_editUser(user.getUsername(), user.getFirstName(), user.getLastName(), 
-				user.getPassword(), user.getType(), user.getStatus());
-		user = new Person();
-		System.out.println("*** WOULD YOU LIKE TO QUIT Y or N ***");
-		s = new Scanner(System.in);
-		System.out.print(" - ");
-		char answer = s.next().charAt(0);
-		if(answer == 'Y' || answer == 'y') {
-			System.exit(0);
-		}
-	}
-	
-	/**
-	 * Resets the search form.
-	 * 
-	 * @param method, indicates which method it was called from.
-	 */
-	private void resetForm(char method) {
-		if(method == 'u') {
-			this.manageUserProfile();
-		} else if (method == 'v') {
-			this.viewMenu();
-		} else if (method == 's') {
-			this.searchForSchools();
-		}
-	}
-	
-	/**
 	 * Pulls up a simple view of the entered school, which contains some information of the school.
 	 * 
 	 * @param school, the school to be viewed.
@@ -365,13 +300,6 @@ public class UserUI {
 		System.out.println("*** YOUR PROFILE HAS BEEN CHANGED SUCCESSFULLY ***");
 		new PersonHome().updatePerson(user.getUsername(), user.getFirstName(), user.getLastName(), 
 		user.getPassword(), user.getType(), user.getStatus());
-	}
-	
-	/**
-	 * Denies the an edit if given arguments are invalid.
-	 */
-	private void denyEdit() {
-		
 	}
 	
 	/**
@@ -477,14 +405,5 @@ public class UserUI {
 			}
 		}
 		return false;
-	}
-	
-	/**
-	 * Gets the current user.
-	 * 
-	 * @return user, the current user.
-	 */
-	public Person getUser() {
-		return this.user;
 	}
 }
