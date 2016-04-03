@@ -26,9 +26,9 @@ import dblibrary.project.csci230.UniversityDBLibrary;
 * The UserUI class controls user's action.
 * 
 * @author Duong, Matthew Kounniyom
-* @version March 14, 2016
+* @version April 1, 2016
 */
-public class UserUI{
+public class UserUI {
 	
 	/**
 	 * Instance variable
@@ -72,39 +72,6 @@ public class UserUI{
 															"  Social Life Scale (1-5) Minimum: ",
 															"  Quality Life Scale (1-5) Minimum: ",
 															"  Emphases (type \"-\" when done): "};
-	
-	/**
-	 *  Displays a menu full of all the options available to a "user".
-	 */
-	public void viewMenu(){
-		System.out.println("*** USER MENU ***");
-		System.out.println("   - Search For Schools: (\"s\")");
-		System.out.println("   - Manage Saved Schools: (\"v\")");
-		System.out.println("   - Manage User Profile: (\"p\")");
-		System.out.println("   - Logout: (\"l\")");
-		s = new Scanner(System.in);
-		System.out.print("  Please enter a valid command: ");
-		char cmd = s.next().toLowerCase().charAt(0);
-		switch (cmd) {
-			case 's':
-				this.searchForSchools();
-				break;
-			case 'v':
-				this.manageSchools();
-				break;
-			case 'p':
-				this.manageUserProfile();
-				break;
-			case 'l':
-				this.logout();
-				break;
-			default:
-				System.out.println("*** INVALID ENTRY RESETTING ***");
-				this.resetForm('v');
-				break;
-		}
-		this.viewMenu();
-	}
 	
 	/**
 	 * Handles the User wanting to search for schools.
@@ -204,118 +171,11 @@ public class UserUI{
 	}
 	
 	/**
-	 * Shows search results.
-	 */
-	private void showResults(School[] matchList) {
-		s = new Scanner(System.in);
-		System.out.println("***SEARCH RESULTS***");
-		int resultNum = 0;
-		for (School match : matchList) {
-			System.out.println("Match "+(resultNum++)+":");
-			this.viewSimple(match);
-		}
-		System.out.println("Type a match number to see the Expanded School View, "
-							+ "or type \"-\" to quit the search");
-		System.out.println("Match number:");
-		boolean validInput = false;
-		Integer input = null;
-		while (input==null) {
-			String inputAttempt = s.nextLine();
-			if (!inputAttempt.equals("-")) {
-				try { input = Integer.parseInt(inputAttempt); }
-				catch (NumberFormatException nFE) {
-					System.out.println("Please enter a valid integer");
-				}
-				if (input < 0 || input >= matchList.length) {
-					System.out.println("Please enter a valid integer");
-					input = null;
-				}
-			}
-			else
-				return;
-		}
-		this.viewExpanded(matchList[input]);
-	}
-	
-	/**
 	 * Manages the users saved school list.
 	 */
-	public void manageSchools() {
+	public School[] manageSchools() {
 		School[] schoolArray = this.user.getSavedSchools();
-		//lists names
-		System.out.println("*** LIST OF ALL OF YOUR SAVED SCHOOLS ***");
-		for(School sc: schoolArray) {
-			System.out.println(sc.getName());
-		}
-		//remove
-		//view
-	}
-	
-	/**
-	 * Manages the users profile.
-	 */
-	public void manageUserProfile() {
-		System.out.println("*** MANAGING PROFILE ***");
-		System.out.println(" - Current Data: ");
-		System.out.println("     Username: " + user.getUsername());
-		System.out.println("     First name: " + user.getFirstName());
-		System.out.println("     Last name: " + user.getLastName());
-		System.out.println("     Password: " + user.getPassword());
-		System.out.println("     Type: " + user.getType());
-		System.out.println(" ** Enter ($) if you don't want to change them **");
-		System.out.println(" * ENTER \"reset\" IF RESET IS NEEDED *");
-		s = new Scanner(System.in);
-		System.out.print("   - Enter new first name: ");
-		String newFirst = s.next();
-		if(newFirst.equals("reset")) {
-			this.resetForm('u');
-		} else {
-			System.out.print("   - Enter new last name: ");
-			String newLast = s.next();
-			if(newLast.equals("reset")) {
-				this.resetForm('u');
-			} else {
-				System.out.print("   - Enter new password: ");
-				String newPass = s.next();
-				if(newPass.equals("reset")) {
-					this.resetForm('u');
-				} else {
-					this.editUser(newFirst, newLast, newPass);
-				}
-			}
-		}
-	}
-	
-	/**
-	 * Logs out the user.
-	 */
-	public void logout() {
-		UniversityDBLibrary db = new UniversityDBLibrary("straightou", "straightou", "adem4");
-		db.user_editUser(user.getUsername(), user.getFirstName(), user.getLastName(), 
-				user.getPassword(), user.getType(), user.getStatus());
-		user = new Person();
-		System.out.println("*** WOULD YOU LIKE TO QUIT Y or N ***");
-		s = new Scanner(System.in);
-		System.out.print(" - ");
-		char answer = s.next().charAt(0);
-		if(answer == 'Y' || answer == 'y') {
-			System.exit(0);
-		}
-	}
-	
-	/**
-	 * Resets the search form.
-	 * 
-	 * @param method, indicates which method it was called from.
-	 */
-	private void resetForm(char method) {
-		if(method == 'u') {
-			this.manageUserProfile();
-		} else if (method == 'v') {
-			this.viewMenu();
-		} else if (method == 's') {
-			this.searchForSchools();
-		}
+		return schoolArray;
 	}
 	
 	/**
@@ -353,25 +213,8 @@ public class UserUI{
 	 * @param password, the password to change to.
 	 */
 	public void editUser(String firstName, String lastName, String password) {
-		if(!firstName.equals("$")) {
-			this.user.setFirstName(firstName);
-		} 
-		if(!lastName.equals("$")) {
-			this.user.setLastName(lastName);
-		} 
-		if(!password.equals("$")) {
-			this.user.setPassword(password);
-		} 
-		System.out.println("*** YOUR PROFILE HAS BEEN CHANGED SUCCESSFULLY ***");
-		new PersonHome().updatePerson(user.getUsername(), user.getFirstName(), user.getLastName(), 
-		user.getPassword(), user.getType(), user.getStatus());
-	}
-	
-	/**
-	 * Denies the an edit if given arguments are invalid.
-	 */
-	private void denyEdit() {
-		
+		PersonHome ph = new PersonHome();
+		ph.updatePerson(user.getUsername(), firstName, lastName, password, user.getType(), user.getStatus());
 	}
 	
 	/**
@@ -457,11 +300,13 @@ public class UserUI{
 	 * 
 	 * @param school, the school to be saved.
 	 */
-	public void saveSchool(School school) {
+	public void saveSchool(School school) throws IllegalArgumentException {
 		School[] sc = user.getSavedSchools();
 		sc = Arrays.copyOf(sc, sc.length+1);
 		if(!failureToSave(school)){
 			sc[sc.length-1] = school;
+		} else {
+			throw new IllegalArgumentException("The school you are trying to add is already in your list.");
 		}
 	}
 	
@@ -472,19 +317,9 @@ public class UserUI{
 		School[] sc = user.getSavedSchools();  
 		for(int i = 0; i < sc.length; i ++){
 			if(school.equals(sc[i])){
-				System.out.println("School is already in saved list");
 				return true;
 			}
 		}
 		return false;
-	}
-	
-	/**
-	 * Gets the current user.
-	 * 
-	 * @return user, the current user.
-	 */
-	public Person getUser() {
-		return this.user;
 	}
 }
