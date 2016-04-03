@@ -42,16 +42,4 @@ public class IntegerSchoolAttributeMetadataTest {
 		result = meta.getMax();
 		assertTrue("expected result: "+expected+" actual result: "+result,result==expected);
 	}
-
-	/**
-	 * Test method for {@link cmc.entity.dbmapping.SchoolAttributeMetadata#getName()}.
-	 */
-	@Test
-	public void testGetName() {
-		meta = new IntegerSchoolAttributeMetadata("Cats on Stilts");
-		String expected = "Cats on Stilts";
-		String result = meta.getName();
-		assertTrue("expected result: "+expected+" actual result: "+result,result.equals(expected));
-	}
-
 }
