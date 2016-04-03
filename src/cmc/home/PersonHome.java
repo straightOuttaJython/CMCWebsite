@@ -1,5 +1,8 @@
 package cmc.home;
 
+import java.util.Arrays;
+import java.util.List;
+
 import cmc.entity.Person;
 import cmc.entity.School;
 import dblibrary.project.csci230.UniversityDBLibrary;
@@ -130,6 +133,34 @@ public class PersonHome {
 	public void addUser(String firstName, String lastName, String username, String password, char type)
 	{
 		db.user_addUser(firstName, lastName, username, password, type);	
+	}
+	
+	public void saveSchool(Person user, School school) {
+		int errorInt = db.user_saveSchool(user.getUsername(), school.getName());
+		if (errorInt==-1) {
+			throw new RuntimeException("Database Error");
+		}
+		else {
+			School[] savedSchools = user.getSavedSchools();
+			List<School> schoolList = Arrays.asList(savedSchools);  
+			schoolList.add(school);
+			savedSchools = schoolList.toArray(savedSchools);
+			user.setSavedSchools(savedSchools);
+		}
+	}
+	
+	public void removeSchool(Person user, School school) {
+		int errorInt = db.user_removeSchool(user.getUsername(), school.getName());
+		if (errorInt==-1) {
+			throw new RuntimeException("Database Error");
+		}
+		else {
+			School[] savedSchools = user.getSavedSchools();
+			List<School> schoolList = Arrays.asList(savedSchools);  
+			schoolList.remove(school);
+			savedSchools = schoolList.toArray(savedSchools);
+			user.setSavedSchools(savedSchools);
+		}
 	}
 
 }
