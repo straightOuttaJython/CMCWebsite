@@ -60,16 +60,16 @@ public class testSchoolHome
 			String admitRate1 = wholeList[i][11];
 			double admitRate = Double.parseDouble(admitRate1);
 			
-			String decideRate1 = wholeList[i][11];
+			String decideRate1 = wholeList[i][12];
 			double decideRate = Double.parseDouble(decideRate1);
 			
-			String academics1 = wholeList[i][12];
+			String academics1 = wholeList[i][13];
 			int academics = Integer.parseInt(academics1);
 			
-			String socialLife1 = wholeList[i][13];
+			String socialLife1 = wholeList[i][14];
 			int socialLife = Integer.parseInt(socialLife1);
 			
-			String qualityLife1 = wholeList[i][14];
+			String qualityLife1 = wholeList[i][15];
 			int qualityLife = Integer.parseInt(qualityLife1);
 			
 			String emphases1 = wholeList[i][15];
@@ -85,18 +85,25 @@ public class testSchoolHome
 	@Test
 	public void testTheListofSchools()
 	{
-		assertTrue("The list of schools should equal to schoolList", sh.listOfSchools()[1].getName().equals(schoolList[1].getName()));
+		assertTrue("The list of schools should equal to schoolList", sh.listOfSchools()[0].equals(schoolList[0]));
 	}
 
 	@Test
 	public void testUpdateSchool()
-	{
-		assertTrue("Checks if school name is still College Test University",school.getName().equals("College Test University") );
-		sh.updateSchool("College Test University", "Loser", "Urban", "Private", 
+	{	
+		sh.updateSchool("College Test University", "Texas", "Urban", "Private", 
 				33, 15.5, 200.0, 200.0, 30000.52, 35.5, 
-				6500, 58.6, 36.8, 
-				5,5,5);
-		assertTrue("Changes the College Test University name to test1 University", school.getState().equals("Loser") );
+				6500, 58.6, 36.8,5,5,5);
+
+		for(int i =0; i < sh.listOfSchools().length; i++)
+		{
+			if(sh.listOfSchools()[i].getName().equals("College Test University"))
+			{
+				school = sh.listOfSchools()[i];
+			}
+		}
+		
+		assertTrue("Changes the College Test University name to test1 University", school.getState().equals("Texas") );
 	}
 	
 	@Test
@@ -109,13 +116,15 @@ public class testSchoolHome
 				6500, 58.6, 36.8, 
 				5,5,5);
 		
-		for(int i =0; i < schoolList.length; i++)
+		for(int i =0; i < sh.listOfSchools().length; i++)
 		{
-			if(schoolList[i].getName().equals("nschool"))
+			if(sh.listOfSchools()[i].getName().equals("nschool"))
 			{
 				t = true;
 			}
 		}
+		
+		db.university_deleteUniversity("nschool");
 		
 		assertTrue("There is a school named New School added", t == true);
 	}

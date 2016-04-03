@@ -59,16 +59,16 @@ public class SchoolHome
 			String admitRate1 = universities[i][11];
 			double admitRate = Double.parseDouble(admitRate1);
 			
-			String decideRate1 = universities[i][11];
+			String decideRate1 = universities[i][12];
 			double decideRate = Double.parseDouble(decideRate1);
 			
-			String academics1 = universities[i][12];
+			String academics1 = universities[i][13];
 			int academics = Integer.parseInt(academics1);
 			
-			String socialLife1 = universities[i][13];
+			String socialLife1 = universities[i][14];
 			int socialLife = Integer.parseInt(socialLife1);
 			
-			String qualityLife1 = universities[i][14];
+			String qualityLife1 = universities[i][15];
 			int qualityLife = Integer.parseInt(qualityLife1);
 			
 			String emphases1 = universities[i][15];
