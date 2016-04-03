@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import cmc.entity.School;
 
-public class testSchool {
+public class SchoolTest {
 
 	public School school, fullSchool;
 	public String list[], Default;

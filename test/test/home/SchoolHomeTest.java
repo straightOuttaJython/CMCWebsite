@@ -1,3 +1,4 @@
+package test.home;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
@@ -7,7 +8,7 @@ import cmc.entity.School;
 import cmc.home.SchoolHome;
 import dblibrary.project.csci230.UniversityDBLibrary;
 
-public class testSchoolHome 
+public class SchoolHomeTest 
 {
 
 	private SchoolHome sh;

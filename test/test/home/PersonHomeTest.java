@@ -15,7 +15,7 @@ import dblibrary.project.csci230.UniversityDBLibrary;
  * @author Matthew Kounniyom
  * @version April 1, 2016
  */
-public class testPersonHome {
+public class PersonHomeTest {
 
 	private PersonHome ph;
 	private String username, fName, lName, password;

@@ -14,7 +14,7 @@ import cmc.entity.Person;
  * @author Matthew Kounniyom
  * @version April 1, 2016
  */
-public class testLoginController {
+public class LoginControllerTest {
 
 	private LoginController lc;
 	private Person p;
