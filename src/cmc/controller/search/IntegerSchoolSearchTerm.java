@@ -4,7 +4,7 @@ package cmc.controller.search;
  * This is an implementation for the SchoolSearchTerm class for integer
  * values. The values can be single values or ranges.
  * @author Alex
- *
+ * @version 4/1/16
  */
 public class IntegerSchoolSearchTerm extends SchoolSearchTerm {
 

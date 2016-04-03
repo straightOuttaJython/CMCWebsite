@@ -7,7 +7,7 @@ package cmc.controller.search;
  * The value restrictions are provided through the constructor, and when the
  * value is set, it must pass the value restrictions in order to be accepted. 
  * @author Alex
- *
+ * @version 4/1/16
  */
 public abstract class SchoolSearchTerm {
 	

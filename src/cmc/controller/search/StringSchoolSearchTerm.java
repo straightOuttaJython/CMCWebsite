@@ -5,7 +5,7 @@ import java.util.IllegalFormatException;
  * This is an implementation for the SchoolSearchTerm class for String
  * values. Values may be optionally restricted to a set of permitted values.
  * @author Alex
- *
+ * @version 4/1/16
  */
 public class StringSchoolSearchTerm extends SchoolSearchTerm {
 

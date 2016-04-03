@@ -4,8 +4,18 @@ import java.util.ArrayList;
 import cmc.controller.search.SchoolSearchClause;
 import cmc.entity.School;
 
+/**
+ * SchoolDatabaseMapping allows for easy conversion between database outputs and
+ * School objects, as well as iterable metadata of all School fields, which allows
+ * for easy programmatic manipulation of all school attributes. 
+ * @author Alex
+ * @version 3/27/16
+ */
 public class SchoolDatabaseMapping {
 	
+	/**
+	 * A constant containing the SchoolAttributeMetadata objects for all School instance fields.
+	 */
 	public static final SchoolAttributeMetadata[] MAPPING = 
 		{new StringSchoolAttributeMetadata("Name"),
 		 new StringSchoolAttributeMetadata("State"),
@@ -26,6 +36,11 @@ public class SchoolDatabaseMapping {
 		 new StringArraySchoolAttributeMetadata("Emphases")
 		};
 	
+	/**
+	 * Converts a School object to a String array, in the same format used by the database.
+	 * @param school the School to be converted
+	 * @return a String array representing the School
+	 */
 	public static String[] convertSchoolToDatabaseItem(School school) {
 		return new String[]{school.getName(),
 							school.getState(),
@@ -45,6 +60,13 @@ public class SchoolDatabaseMapping {
 							""+school.getQualityLife()};
 	}
 	
+	/**
+	 * Converts a String array in the format used by the database with accompanying emphases
+	 * to a School object.
+	 * @param dbItem the String array to be converted
+	 * @param emphasesArray the represented school's emphases
+	 * @return a new School object matching the String array inputs
+	 */
 	public static School convertDatabaseItemToSchool(String[] dbItem, String[] emphasesArray) {
 		return new School(dbItem[0],
 						  dbItem[1],

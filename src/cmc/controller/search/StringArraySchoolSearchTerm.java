@@ -8,7 +8,7 @@ import java.util.Iterator;
  * This is an implementation for the SchoolSearchTerm class for String
  * array values.
  * @author Alex
- *
+ * @version 4/1/16
  */
 public class StringArraySchoolSearchTerm extends SchoolSearchTerm {
 

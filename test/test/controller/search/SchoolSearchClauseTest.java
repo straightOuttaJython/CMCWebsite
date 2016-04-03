@@ -136,5 +136,14 @@ public class SchoolSearchClauseTest {
 		double score = searchClause.scoreSchoolData(searchCriteria, searchEmphases);
 		assertTrue("expected score: "+expectedScore+" actual score: "+score,score==expectedScore);
 	}
+	
+	/**
+	 * Test method for {@link cmc.controller.search.SchoolSearchClause#scoreSchoolData(java.lang.String[], java.lang.String)}.
+	 */
+	@Test (expected = IllegalStateException.class)
+	public void testScoreSchoolDataEmptyClause() {
+		searchClause = new SchoolSearchClause();
+		searchClause.scoreSchoolData(searchCriteria, searchEmphases);
+	}
 
 }
