@@ -1,5 +1,8 @@
 package cmc.home;
 
+import java.util.Arrays;
+import java.util.List;
+
 import cmc.entity.Person;
 import cmc.entity.School;
 import dblibrary.project.csci230.UniversityDBLibrary;
@@ -8,7 +11,7 @@ import dblibrary.project.csci230.UniversityDBLibrary;
  * The PersonHome controls the ebb and flow of Persons in the Choose my College system.
  * 
  * @author Matthew Kounniyom
- * @version March 20, 2016
+ * @version April 1, 2016
  */
 public class PersonHome {
 	
@@ -21,7 +24,7 @@ public class PersonHome {
 	 * @return the person object associated with the entered username.
 	 * @throws IllegalArgumentException, if the username is not bound to an account.
 	 */
-	public Person getPerson(String username)
+	public Person getPerson(String username) throws IllegalArgumentException
 	{
 		Person[] personArray = this.getAllUsers();
 		Person foundPerson = new Person();
@@ -130,6 +133,34 @@ public class PersonHome {
 	public void addUser(String firstName, String lastName, String username, String password, char type)
 	{
 		db.user_addUser(firstName, lastName, username, password, type);	
+	}
+	
+	public void saveSchool(Person user, School school) {
+		int errorInt = db.user_saveSchool(user.getUsername(), school.getName());
+		if (errorInt==-1) {
+			throw new RuntimeException("Database Error");
+		}
+		else {
+			School[] savedSchools = user.getSavedSchools();
+			List<School> schoolList = Arrays.asList(savedSchools);  
+			schoolList.add(school);
+			savedSchools = schoolList.toArray(savedSchools);
+			user.setSavedSchools(savedSchools);
+		}
+	}
+	
+	public void removeSchool(Person user, School school) {
+		int errorInt = db.user_removeSchool(user.getUsername(), school.getName());
+		if (errorInt==-1) {
+			throw new RuntimeException("Database Error");
+		}
+		else {
+			School[] savedSchools = user.getSavedSchools();
+			List<School> schoolList = Arrays.asList(savedSchools);  
+			schoolList.remove(school);
+			savedSchools = schoolList.toArray(savedSchools);
+			user.setSavedSchools(savedSchools);
+		}
 	}
 
 }

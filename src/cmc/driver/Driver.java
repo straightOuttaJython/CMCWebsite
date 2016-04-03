@@ -43,18 +43,15 @@ public class Driver {
 		System.out.println("***************REMEBER TO SEE ABOVE BEFORE GOING FORWARD***************\n");
 		System.out.println("***************THIS IS AN INTRACTIVE VIEW OF OUR WEBSITE***************\n");
 		LoginUI login = new LoginUI();
-		login.login();
 		if(login.getLoggedPerson().getType() == 'a') 
 		{
 			//admin stuff
 			AdminUI admin = new AdminUI();
-			admin.viewMenu();
 		}
 		else 
 		{
 			//user ui stuff
 			UserUI user = new UserUI(login.getLoggedPerson());
-			user.viewMenu();
 		}
 	}
 }

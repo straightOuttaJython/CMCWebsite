@@ -1,13 +1,14 @@
 /**
  * 
  */
-package controller.search;
+package test.controller.search;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 import cmc.controller.LoginController.InactiveAccountException;
+import cmc.controller.search.DoubleSchoolSearchTerm;
 import cmc.controller.search.IntegerSchoolSearchTerm;
 
 /**
@@ -55,9 +56,15 @@ public class IntegerSchoolSearchTermTest {
 	@Test
 	public void testCalculateMatchSingleNumber() {
 		searchTerm = new IntegerSchoolSearchTerm(4,0,Integer.MAX_VALUE);
-		searchTerm.setValue("20");
+		searchTerm.setValue("10:30");
 		double expectedResult = 1.0;
 		double result = searchTerm.calculateMatch("20");
+		assertTrue("expected result: "+expectedResult+" actual result: "+result,result==expectedResult);
+		expectedResult = 1.0;
+		result = searchTerm.calculateMatch("10");
+		assertTrue("expected result: "+expectedResult+" actual result: "+result,result==expectedResult);
+		expectedResult = 1.0;
+		result = searchTerm.calculateMatch("30");
 		assertTrue("expected result: "+expectedResult+" actual result: "+result,result==expectedResult);
 	}
 	
@@ -185,6 +192,25 @@ public class IntegerSchoolSearchTermTest {
 	public void testSetValueFailForOutOfRangeUpper() {
 		searchTerm = new IntegerSchoolSearchTerm(4,20,50);
 		searchTerm.setValue("30:60");
+	}
+	
+	/**
+	 * Test method for {@link cmc.controller.search.IntegerSchoolSearchTerm#setValue(java.lang.String)}.
+	 */
+	@Test
+	public void testSetValueSuccess() {
+		searchTerm = new IntegerSchoolSearchTerm(4,20,50);
+		searchTerm.setValue("20:30");
+		assertTrue("Term is included (i.e., value has been set)",searchTerm.isIncluded());
+		searchTerm = new IntegerSchoolSearchTerm(4,20,50);
+		searchTerm.setValue("20:50");
+		assertTrue("Term is included (i.e., value has been set)",searchTerm.isIncluded());
+		searchTerm = new IntegerSchoolSearchTerm(4,20,50);
+		searchTerm.setValue("30:50");
+		assertTrue("Term is included (i.e., value has been set)",searchTerm.isIncluded());
+		searchTerm = new IntegerSchoolSearchTerm(4,20,50);
+		searchTerm.setValue("20");
+		assertTrue("Term is included (i.e., value has been set)",searchTerm.isIncluded());
 	}
 
 	/**

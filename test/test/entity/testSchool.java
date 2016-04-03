@@ -1,3 +1,5 @@
+package test.entity;
+
 import static org.junit.Assert.*;
 
 import org.junit.Before;
@@ -8,7 +10,7 @@ import cmc.entity.School;
 public class testSchool {
 
 	public School school, fullSchool;
-	public String list[], defaultString;
+	public String list[], Default;
 	public int defaultNum;
 	
 	@Before
@@ -17,7 +19,7 @@ public class testSchool {
 		school = new School();
 		list = new String[3];
 		
-		defaultString = "";
+		Default = "";
 		defaultNum = 0;
 		
 		list[0] = "Fav School";
@@ -33,7 +35,7 @@ public class testSchool {
 	@Test
 	public void testGetName_checksEmptyNameOfSchool()
 	{
-		assertTrue("The name should be set to default", school.getName().equals(defaultString));
+		assertTrue("The name should be set to default", school.getName().equals(Default));
 	}
 
 	@Test
@@ -59,7 +61,7 @@ public class testSchool {
 	@Test
 	public void testGetState_getsStateOfSchool()
 	{
-		assertTrue("The state should be default.", school.getState().equals(defaultString));
+		assertTrue("The state should be default.", school.getState().equals(Default));
 	}
 	
 	@Test
@@ -85,7 +87,7 @@ public class testSchool {
 	@Test
 	public void testGetLocation_getsLocationsOfSchool()
 	{
-		assertTrue("The location should be Default.", school.getLocation().equals(defaultString));
+		assertTrue("The location should be Default.", school.getLocation().equals(Default));
 	}
 	
 	@Test
@@ -111,7 +113,7 @@ public class testSchool {
 	@Test
 	public void testGetControl_getsControlOfSchool()
 	{
-		assertTrue("The Control should be Default.", school.getControl().equals(defaultString));
+		assertTrue("The Control should be Default.", school.getControl().equals(Default));
 	}
 	
 	@Test
@@ -137,9 +139,9 @@ public class testSchool {
 	@Test
 	public void testGetEmphases_getsEmphasesOfSchool()
 	{
-		assertTrue("The Emphases[0] should be Default.", school.getEmphases()[0].equals(defaultString));
-		assertTrue("The Emphases[1] should be Default.", school.getEmphases()[1].equals(defaultString));
-		assertTrue("The Emphases[2] should be Default.", school.getEmphases()[2].equals(defaultString));
+		assertTrue("The Emphases[0] should be Default.", school.getEmphases()[0].equals(Default));
+		assertTrue("The Emphases[1] should be Default.", school.getEmphases()[1].equals(Default));
+		assertTrue("The Emphases[2] should be Default.", school.getEmphases()[2].equals(Default));
 	}
 	
 	@Test

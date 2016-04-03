@@ -76,7 +76,6 @@ public class Person {
 		this.password = "";
 		this.type = ' ';
 		this.status = ' ';
-		this.savedSchools = savedSchools;
 	}
 
 	/**

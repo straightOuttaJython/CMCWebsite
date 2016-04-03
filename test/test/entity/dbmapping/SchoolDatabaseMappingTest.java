@@ -1,7 +1,7 @@
 /**
  * 
  */
-package entity.dbmapping;
+package test.entity.dbmapping;
 
 import static org.junit.Assert.*;
 
