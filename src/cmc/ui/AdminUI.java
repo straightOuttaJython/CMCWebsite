@@ -12,7 +12,7 @@ import cmc.home.PersonHome;
 import cmc.home.SchoolHome;
 
 /**
- * @author Alex Seefeldt, Erin Queme 
+ * @author Erin Queme 
  * 
  * @version April 1, 2016
  *
@@ -25,21 +25,32 @@ public class AdminUI {
 	private SchoolHome sh;
 
 	/**
-	 * Scanner used in various methods.
-	 */
-	private Scanner adminOptions, editUser, deactUser, addOrEdit, again, in, inTwo, userNameIn, addUser;
-
-	/**
 	 * Create a new AdminUI.
 	 */
 	public AdminUI() 
 	{
-		// TODO Auto-generated constructor stub
 		sh = new SchoolHome();
 	}
 	
 	/**
-	 * Add the given School object to the database. 
+	 * Adds a school with the given attributes to the database
+	 * @param name
+	 * @param state
+	 * @param location
+	 * @param control
+	 * @param numStudentsEnrolled
+	 * @param percentFemEnrolled
+	 * @param satVerbal
+	 * @param satMath
+	 * @param tuition
+	 * @param percentFinAid
+	 * @param numApplicants
+	 * @param admitRate
+	 * @param decideRate
+	 * @param academics
+	 * @param socialLife
+	 * @param qualityLife
+	 * @throws IllegalArgumentException if the system already contains a school with this name
 	 */
 	public void addSchool(String name, String state, String location, String control, 
 			int numStudentsEnrolled, double percentFemEnrolled, double satVerbal, double satMath,
@@ -62,13 +73,29 @@ public class AdminUI {
 	}
 	
 	/**
-	 * Update the given School with the data inside it.
-	 * @param school the updated School
+	 * Updates the database representation of the given school
+	 * @param name
+	 * @param state
+	 * @param location
+	 * @param control
+	 * @param numStudentsEnrolled
+	 * @param percentFemEnrolled
+	 * @param satVerbal
+	 * @param satMath
+	 * @param tuition
+	 * @param percentFinAid
+	 * @param numApplicants
+	 * @param admitRate
+	 * @param decideRate
+	 * @param academics
+	 * @param socialLife
+	 * @param qualityLife
+	 * @throws IllegalArgumentException if the school does not exist in the database
 	 */
 	public void editSchool(String name, String state, String location, String control, 
 			int numStudentsEnrolled, double percentFemEnrolled, double satVerbal, double satMath,
 			double tuition, double percentFinAid, int numApplicants, double admitRate, 
-			double decideRate, int academics, int socialLife, int qualityLife) 
+			double decideRate, int academics, int socialLife, int qualityLife) throws IllegalArgumentException
 	{
 		boolean notFound = true;
 		SchoolHome eSH = new SchoolHome();
@@ -83,13 +110,19 @@ public class AdminUI {
 			}
 		}
 		if(notFound) {
-			throw new IllegalArgumentException("The school " + name + " already exists in the system.");
+			throw new IllegalArgumentException("The school " + name + " does not exist in the system.");
 		}
 	}
 
 	/**
-	 * Lets you update the Users info by username
+	 * Updates user attributes. User is selected by given username.
 	 * @param username
+	 * @param firstName
+	 * @param lastName
+	 * @param password
+	 * @param type
+	 * @param status
+	 * @throws IllegalArgumentException if no user with this username exists
 	 */
 	public void editUser(String username, String firstName, String lastName,
 			String password, char type, char status) throws IllegalArgumentException
@@ -111,7 +144,7 @@ public class AdminUI {
 	}
 
 	/**
-	 * Lets you deactivate the user by their username
+	 * Deactivates user by username
 	 * @param username
 	 */
 	public void deactivate(String username) 
@@ -129,9 +162,15 @@ public class AdminUI {
 	}
 	
 	/**
-	 * Lets you add a new User
+	 * Adds a user with the given attributes to the database
+	 * @param firstName
+	 * @param lastName
+	 * @param username
+	 * @param password
+	 * @param type
+	 * @throws IllegalArgumentException if username already exists in system
 	 */
-	public void addUser(String firstName, String lastName, String username, String password, char type) 
+	public void addUser(String firstName, String lastName, String username, String password, char type) throws IllegalArgumentException
 	{
 		boolean notFound = true;
 		PersonHome ph = new PersonHome();

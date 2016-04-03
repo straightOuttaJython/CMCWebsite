@@ -18,7 +18,7 @@ public class LoginUI
 	/*
 	 * Creates a LoginController to process the information between this UI and the dataBase
 	 */
-	private LoginController logControl;
+	private LoginController logControl = new LoginController();
 	
 	/*
 	 * A Person named user is created to access its information
@@ -26,15 +26,11 @@ public class LoginUI
 	private Person user;
 	
 	/**
-	 * Scanner used in various methods.
-	 */
-	private Scanner s;
-	
-	/**
 	 * Used to handle logging in.
 	 * 
 	 * @param	username, the username that is entered.
 	 * @param	password, the password that is entered.
+	 * @return the user or admin that has logged in
 	 */
 	public Person login(String username, String password)
 	{

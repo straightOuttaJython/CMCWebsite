@@ -25,8 +25,8 @@ import dblibrary.project.csci230.UniversityDBLibrary;
 /**
 * The UserUI class controls user's action.
 * 
-* @author Duong, Matthew Kounniyom
-* @version April 1, 2016
+* @author Duong Do, Matthew Kounniyom, Alex Seefeldt
+* @version April 3, 2016
 */
 public class UserUI {
 	
@@ -36,24 +36,23 @@ public class UserUI {
 	private Person user;
 	
 	/**
-	 * Scanner used in various methods.
-	 */
-	private Scanner s;
-	
-	/** Constructor
-	 * @param user
+	 * Constructs a new UserUI serving the specified user.
+	 * @param user the user being served by this UserUI
 	 */
 	public UserUI(Person user) {
 		this.user = user;
 	}
 	
 	/**
-	 * Handles the User wanting to search for schools.
-	 * @return 
-	 * 
-	 * @throws ResetException if the user is trying to reset.
+	 * Takes two String arrays: one containing all search values for this search
+	 * (besides emphases) and the other containing the emphasis search values. If any
+	 * search value is the empty string or null, the search will ignore that attribute.
+	 * Returns an array of up to 50 Schools best matching the search terms. 
+	 * @param searchValues the values being searched for
+	 * @param emphases the emphasis values being searched for
+	 * @return an array of matching Schools
 	 */
-	public School[] searchForSchools(String[] school, String[] emphases) {
+	public School[] searchForSchools(String[] searchValues, String[] emphases) {
 		SchoolSearchClause searchClause = new SchoolSearchClause();
 		String value;
 		String emphasisString = "";
@@ -64,8 +63,8 @@ public class UserUI {
 		}
 		if (!emphasisString.equals(""))
 			searchClause.setValueAtIndex(emphasisString.substring(1), 16);
-		for (int i=0; i<school.length; i++) {
-			value = school[i];
+		for (int i=0; i<searchValues.length; i++) {
+			value = searchValues[i];
 			if (!value.equals(""))
 				searchClause.setValueAtIndex(value, i);
 		}
@@ -73,45 +72,45 @@ public class UserUI {
 	}
 	
 	/**
-	 * Manages the users saved school list.
+	 * Access method for .jsp pages when managing a user's list of saved schools.
+	 * @return an array of this user's saved Schools
 	 */
 	public School[] manageSchools() {
 		return this.user.getSavedSchools();
 	}
 	
 	/**
-	 * Saves the currently viewed school.
-	 * 
-	 * @param school, the school to be saved.
+	 * Access method for .jsp pages to {@link cmc.home.PersonHome#saveSchool(Person, School)}
+	 * @param school the School to be saved
 	 */
 	public void saveSchool(School school) {
 		new PersonHome().removeSchool(this.user, school);
 	}
 	
 	/**
-	 * Removes the given school, from the users saved school list.
-	 * 
-	 * @param school, the school to be removed.
+	 * Access method for .jsp pages to {@link cmc.home.PersonHome#removeSchool(Person, School)}
+	 * @param school the School to be removed
 	 */
 	public void removeSchool(School school) {
 		new PersonHome().removeSchool(this.user, school);
 	}
 	
 	/**
-	 * Changes the users firstname, lastname, and password based on the given parameters.
-	 * 
-	 * @param firstName, the firstname to be changed to.
-	 * @param lastName, the lastname to be changed to.
-	 * @param password, the password to change to.
+	 * Limited access method for .jsp pages to
+	 * {@link cmc.home.PersonHome#updatePerson(String, String, String, String, char, char)}
+	 * @param firstName the firstname to be changed to
+	 * @param lastName the lastname to be changed to
+	 * @param password the password to change to
 	 */
 	public void editUser(String firstName, String lastName, String password) {
 		new PersonHome().updatePerson(this.user.getUsername(), firstName, lastName, password, user.getType(), user.getStatus());
 	}
 	
 	/**
-	 * Used to view all of the details of a school.
-	 * 
-	 * @param school, the school to be viewed in full.
+	 * Returns an array of 5 Schools closely matching the given school. Used for displaying
+	 * the expanded view of a school.
+	 * @param school the School for which these recommendations are generated
+	 * @return an School array of length 5 containing the recommended Schools 
 	 */
 	public School[] getRecommendations(School school) {
 		String[] schoolArray = SchoolDatabaseMapping.convertSchoolToDatabaseItem(school);
