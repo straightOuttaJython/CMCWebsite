@@ -1,4 +1,3 @@
-
 cmc.controller
 cmc.controller.search
 cmc.driver
@@ -6,8 +5,3 @@ cmc.entity
 cmc.entity.dbmapping
 cmc.home
 cmc.ui
-test.controller
-test.controller.search
-test.entity
-test.entity.dbmapping
-test.home
