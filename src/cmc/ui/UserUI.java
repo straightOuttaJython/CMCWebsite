@@ -84,7 +84,7 @@ public class UserUI {
 	 * @param school the School to be saved
 	 */
 	public void saveSchool(School school) {
-		new PersonHome().removeSchool(this.user, school);
+		new PersonHome().saveSchool(this.user, school);
 	}
 	
 	/**

@@ -135,6 +135,13 @@ public class PersonHome {
 		db.user_addUser(firstName, lastName, username, password, type);	
 	}
 	
+	/**
+	 * The saveSchool method saves the input school from the input user's 
+	 * saved school list.  
+	 * 
+	 * @param user, the user who will have the given school added to their list.
+	 * @param school, the school to be added.
+	 */
 	public void saveSchool(Person user, School school) {
 		int errorInt = db.user_saveSchool(user.getUsername(), school.getName());
 		if (errorInt==-1) {
@@ -149,6 +156,13 @@ public class PersonHome {
 		}
 	}
 	
+	/**
+	 * The removeSchool method removes the input school from the input user's 
+	 * saved school list.  
+	 * 
+	 * @param user, the user who will have the given school removed from their list.
+	 * @param school, the school to be removed.
+	 */
 	public void removeSchool(Person user, School school) {
 		int errorInt = db.user_removeSchool(user.getUsername(), school.getName());
 		if (errorInt==-1) {
