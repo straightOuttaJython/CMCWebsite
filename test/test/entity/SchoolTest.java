@@ -7,12 +7,22 @@ import org.junit.Test;
 
 import cmc.entity.School;
 
+/* Tests the PersonHome class that is apart of the CMC Software.
+* 
+* @author Erin Queme
+* @version April 1, 2016
+*/
+
 public class SchoolTest {
 
 	public School school, fullSchool;
 	public String list[], Default;
 	public int defaultNum;
 	
+	/**
+	 * Sets up the parameters
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception
 	{
@@ -32,6 +42,9 @@ public class SchoolTest {
 				5,5,5, list);
 	}
 	
+	/**
+	 * Tests the setters and getters for every method
+	 */
 	@Test
 	public void testGetName_checksEmptyNameOfSchool()
 	{
@@ -48,14 +61,14 @@ public class SchoolTest {
 	public void testSetName_changesNameOfSchool()
 	{
 		school.setName("Univerity of College");
-		assertTrue("The name should be Collge University.", school.getName().equals("Univerity of College"));
+		assertTrue("The name should be Univerity of College.", school.getName().equals("Univerity of College"));
 	}
 	
 	@Test
 	public void testSetName_changesNameOfFullSchool()
 	{
 		fullSchool.setName("Lit College");
-		assertTrue("The name should be Collge University.", fullSchool.getName().equals("Lit College"));
+		assertTrue("The name should be Lit College.", fullSchool.getName().equals("Lit College"));
 	}
 	
 	@Test
@@ -67,7 +80,7 @@ public class SchoolTest {
 	@Test
 	public void testGetState_getsStateOfFullSchool()
 	{
-		assertTrue("The state should be Collge University.", fullSchool.getState().equals("Texas"));
+		assertTrue("The state should be Texas.", fullSchool.getState().equals("Texas"));
 	}
 	
 	@Test
@@ -147,9 +160,9 @@ public class SchoolTest {
 	@Test
 	public void testGetEmphases_getsEmphasesOfFullSchool()
 	{
-		assertTrue("The Control should be Private", fullSchool.getEmphases()[0].equals(list[0]));
-		assertTrue("The Control should be Private", fullSchool.getEmphases()[1].equals(list[1]));
-		assertTrue("The Control should be Private", fullSchool.getEmphases()[2].equals(list[2]));
+		assertTrue("The emphases on position 0 is equal to list[0]", fullSchool.getEmphases()[0].equals(list[0]));
+		assertTrue("The emphases on position 1 is equal to list[1]", fullSchool.getEmphases()[1].equals(list[1]));
+		assertTrue("The emphases on position 2 is equal to list[2]", fullSchool.getEmphases()[2].equals(list[2]));
 	}
 
 	@Test
@@ -175,7 +188,7 @@ public class SchoolTest {
 		
 		school.setEmphases(list);
 		
-		assertTrue("The Emphases[0] should change to Saint Johns University.", fullSchool.getEmphases()[0].equals("Saint Johns UniversityV2"));
+		assertTrue("The Emphases[0] should change to Saint Johns UniversityV2.", fullSchool.getEmphases()[0].equals("Saint Johns UniversityV2"));
 		assertTrue("The Emphases[1] should change to Instagram College.", fullSchool.getEmphases()[1].equals("Instagram College"));
 		assertTrue("The Emphases[2] should change to DoWeReallyHaveASpringBreak University.", fullSchool.getEmphases()[2].equals("DoWeReallyHaveASpringBreak University"));
 	}
@@ -203,33 +216,33 @@ public class SchoolTest {
 	public void testSetNumStudentsEnrolled_setsGetNumStudentsEnrolledOfFullSchool()
 	{
 		fullSchool.setNumStudentsEnrolled(3256);
-		assertTrue("The Control should be changed to Public.", fullSchool.getNumStudentsEnrolled() == (3256));
+		assertTrue("The number of students enrolled should be 3256.", fullSchool.getNumStudentsEnrolled() == (3256));
 	}
 
 	@Test
 	public void testGetNumApplications_GetNumApplicationsOfSchool()
 	{
-		assertTrue("The number of applications enrolled should be defaultNum.", school.getNumApplications() == (defaultNum));
+		assertTrue("The number of applications should be defaultNum.", school.getNumApplications() == (defaultNum));
 	}
 	
 	@Test
 	public void testGetNumApplications_GetNumApplicationsOfFullSchool()
 	{
-		assertTrue("The number of applications enrolled should be 6500", fullSchool.getNumApplications() == (6500));
+		assertTrue("The number of applications should be 6500", fullSchool.getNumApplications() == (6500));
 	}
 	
 	@Test
 	public void testSetNumApplications_SetNumApplicationsOfSchool()
 	{
 		school.setNumApplications(46000);
-		assertTrue("The number of students enrolled should be 300.", school.getNumApplications() == (46000));
+		assertTrue("The number applications should be 46000.", school.getNumApplications() == (46000));
 	}
 	
 	@Test
 	public void testSetNumApplications_SetNumApplicationsOfFullSchool()
 	{
 		fullSchool.setNumApplications(630);
-		assertTrue("The number of students enrolled should be 300.", fullSchool.getNumApplications() == (630));
+		assertTrue("The number of applications should be 630.", fullSchool.getNumApplications() == (630));
 	}
 
 	@Test
@@ -300,40 +313,40 @@ public class SchoolTest {
 	public void testSetQualityLife_SetQualityLifeOfSchool()
 	{
 		school.setQualLife(1);
-		assertTrue("The quality of life rating should be 4.", school.getQualityLife() == 1);
+		assertTrue("The quality of life rating should be 1.", school.getQualityLife() == 1);
 	}
 	
 	@Test
 	public void testSetQualityLife_SetQualityLifeOfFullSchool()
 	{
 		fullSchool.setQualLife(4);
-		assertTrue("The quality of life rating should be 3.", fullSchool.getQualityLife() == 4);
+		assertTrue("The quality of life rating should be 4.", fullSchool.getQualityLife() == 4);
 	}
 	
 	@Test
 	public void testGetPercentFemEnrolled_GetPercentFemEnrolledOfSchool()
 	{
-		assertTrue("The quality of life rating should be defaultNum.", school.getPercentFemEnrolled() == (defaultNum));
+		assertTrue("The percent of females should be defaultNum.", school.getPercentFemEnrolled() == (defaultNum));
 	}
 	
 	@Test
 	public void testGetPercentFemEnrolled_GetPercentFemEnrolledOfFullSchool()
 	{
-		assertTrue("The quality of life rating should be 15.5.", fullSchool.getPercentFemEnrolled() == (15.5));
+		assertTrue("The percent of females should be 15.5.", fullSchool.getPercentFemEnrolled() == (15.5));
 	}
 	
 	@Test
 	public void testSetPercentFemEnrolled_SetPercentFemEnrolledOfSchool()
 	{
 		school.setPercFemEnrolled(18.3);
-		assertTrue("The quality of life rating should be 18.3.", school.getPercentFemEnrolled() == 18.3);
+		assertTrue("The percent of females should be 18.3.", school.getPercentFemEnrolled() == 18.3);
 	}
 	
 	@Test
 	public void testSetPercentFemEnrolled_SetPercentFemEnrolledOfFullSchool()
 	{
 		fullSchool.setPercFemEnrolled(40.5);
-		assertTrue("The quality of life rating should be 40.5.", fullSchool.getPercentFemEnrolled() == 40.5);
+		assertTrue("The percent of females should be 40.5.", fullSchool.getPercentFemEnrolled() == 40.5);
 	}
 
 	@Test
@@ -378,14 +391,14 @@ public class SchoolTest {
 	public void testSetSatMath_SetSatMathOfSchool()
 	{
 		school.setSatMath(297.0);
-		assertTrue("The SAT mathmatic requirements should be 220.0.", school.getSatMath() == 297.0);
+		assertTrue("The SAT mathmatic requirements should be 297.0.", school.getSatMath() == 297.0);
 	}
 	
 	@Test
 	public void testSetSatMath_SetSatMathOfFullSchool()
 	{
 		fullSchool.setSatMath(250.9);
-		assertTrue("The SAT mathmatic requirements should be 250.0.", fullSchool.getSatMath() == 250.9);
+		assertTrue("The SAT mathmatic requirements should be 250.9.", fullSchool.getSatMath() == 250.9);
 	}
 
 	@Test
@@ -430,14 +443,14 @@ public class SchoolTest {
 	public void testSetPercFinAid_SetPercFinAidOfSchool()
 	{
 		school.setPercFinAid(39.3);
-		assertTrue("The percent of finicial aid should be 220.0.", school.getPercFinAid() == 39.3);
+		assertTrue("The percent of finicial aid should be 39.3.", school.getPercFinAid() == 39.3);
 	}
 	
 	@Test
 	public void testSetPercFinAid_SetPercFinAidOfFullSchool()
 	{
 		fullSchool.setPercFinAid(90.3);
-		assertTrue("The percent of finicial aid should be 250.0.", fullSchool.getPercFinAid() == 90.3);
+		assertTrue("The percent of finicial aid should be 90.3.", fullSchool.getPercFinAid() == 90.3);
 	}
 	
 	@Test
@@ -482,13 +495,13 @@ public class SchoolTest {
 	public void testSetDecideRate_SetDecideRateOfSchool()
 	{
 		school.setDecideRate(52.3);
-		assertTrue("The decision rate should be 90.3.", school.getDecideRate() == 52.3);
+		assertTrue("The decision rate should be 52.3.", school.getDecideRate() == 52.3);
 	}
 	
 	@Test
 	public void testSetDecideRate_SetDecideRateOfFullSchool()
 	{
 		fullSchool.setDecideRate(61.3);
-		assertTrue("The decision rate should be 65.3.", fullSchool.getDecideRate() == 61.3);
+		assertTrue("The decision rate should be 61.3.", fullSchool.getDecideRate() == 61.3);
 	}
 }
