@@ -6,7 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import cmc.entity.Person;
+import cmc.entity.School;
 import cmc.home.PersonHome;
+import cmc.home.SchoolHome;
 import dblibrary.project.csci230.UniversityDBLibrary;
 
 /**
@@ -239,6 +241,117 @@ public class PersonHomeTest {
 		assertTrue("Last name is equal", matt.getLastName().equals(lName));
 		assertTrue("Password is equal", matt.getPassword().equals(password));
 		assertTrue("Type is equal", matt.getType() == type);
+		UniversityDBLibrary db = new UniversityDBLibrary("straightou", "straightou", "adem4");
+		db.user_deleteUser(username);
+	}
+	
+	/*
+	 * WhiteBox Testing for PersonHome.saveSchool(user, school)
+	 * 
+	 * Description				Input user			Input school		Expected Output
+	 *
+	 * save error				matt				default school		RuntimeException
+	 * 
+	 * save complete			matt				BARD				BARD has been added to the users saved schools.
+	 *
+	 */
+	@Test(expected=RuntimeException.class)
+	public void testSaveSchool_case1() {
+		fName = "Matthew";
+		lName = "Kounniyom";
+		username = "makounniyom";
+		password = "123456";
+		type = 'u';
+		ph.addUser(fName, lName, username, password, type);
+		Person matt = ph.getPerson(username);
+		School school = new School();
+		
+		ph.saveSchool(matt, school);
+		
+		UniversityDBLibrary db = new UniversityDBLibrary("straightou", "straightou", "adem4");
+		db.user_deleteUser(username);
+	}
+	
+	@Test
+	public void testSaveSchool_case2() {
+		fName = "Matthew";
+		lName = "Kounniyom";
+		username = "makounniyom";
+		password = "123456";
+		type = 'u';
+		ph.addUser(fName, lName, username, password, type);
+		Person matt = ph.getPerson(username);
+		SchoolHome sh = new SchoolHome();
+		School[] sList = sh.listOfSchools();
+		School school = new School();
+		for(int i = 0; i < sList.length; i++) {
+			if(sList[i].getName().equals("BARD")) {
+				school = sList[i];
+			}
+		}
+		
+		ph.saveSchool(matt, school);
+		sList = matt.getSavedSchools();
+		for(int i = 0; i < sList.length; i++) {
+			if(sList[i].getName().equals("BARD")) {
+				assertTrue("The added school exists.", sList[i].equals(school));
+			}
+		}
+		UniversityDBLibrary db = new UniversityDBLibrary("straightou", "straightou", "adem4");
+		db.user_removeSchool(username, "BARD");
+		db.user_deleteUser(username);
+	}
+	
+	/*
+	 * WhiteBox Testing for PersonHome.removeSchool(user, school)
+	 * 
+	 * Description				Input user			Input school		Expected Output
+	 *
+	 * remove error				matt				default school		RuntimeException
+	 * 
+	 * remove complete			matt				BARD				BARD has been removed from the users saved schools.
+	 */
+	@Test(expected=RuntimeException.class)
+	public void testRemoveSchool_case1() {
+		fName = "Matthew";
+		lName = "Kounniyom";
+		username = "makounniyom";
+		password = "123456";
+		type = 'u';
+		ph.addUser(fName, lName, username, password, type);
+		Person matt = ph.getPerson(username);
+		School school = new School();
+		
+		ph.removeSchool(matt, null);
+		
+		UniversityDBLibrary db = new UniversityDBLibrary("straightou", "straightou", "adem4");
+		db.user_deleteUser(username);
+	}
+	
+	@Test
+	public void testRemoveSchool_case2() {
+		fName = "Matthew";
+		lName = "Kounniyom";
+		username = "makounniyom";
+		password = "123456";
+		type = 'u';
+		ph.addUser(fName, lName, username, password, type);
+		Person matt = ph.getPerson(username);
+		SchoolHome sh = new SchoolHome();
+		School[] sList = sh.listOfSchools();
+		School school = new School();
+		for(int i = 0; i < sList.length; i++) {
+			if(sList[i].getName().equals("BARD")) {
+				school = sList[i];
+			}
+		}
+		
+		ph.saveSchool(matt, school);
+		ph.removeSchool(matt, school);
+		sList = matt.getSavedSchools();
+		for(int i = 0; i < sList.length; i++) {
+			assertTrue("The removed school exists.", !(sList[i].equals(school)));
+		}
 		UniversityDBLibrary db = new UniversityDBLibrary("straightou", "straightou", "adem4");
 		db.user_deleteUser(username);
 	}

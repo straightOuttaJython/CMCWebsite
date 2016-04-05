@@ -149,10 +149,15 @@ public class PersonHome {
 		}
 		else {
 			School[] savedSchools = user.getSavedSchools();
-			List<School> schoolList = Arrays.asList(savedSchools);  
-			schoolList.add(school);
-			savedSchools = schoolList.toArray(savedSchools);
-			user.setSavedSchools(savedSchools);
+			School[] newSaved = new School[savedSchools.length+1];
+			int i;
+			for(i = 0; i < savedSchools.length; i++) {
+				if(savedSchools[i] != null) {
+					newSaved[i] = savedSchools[i];
+				}
+			}
+			newSaved[i] = school;
+			user.setSavedSchools(newSaved);
 		}
 	}
 	
@@ -168,12 +173,16 @@ public class PersonHome {
 		if (errorInt==-1) {
 			throw new RuntimeException("Database Error");
 		}
-		else {
+		else {			
 			School[] savedSchools = user.getSavedSchools();
-			List<School> schoolList = Arrays.asList(savedSchools);  
-			schoolList.remove(school);
-			savedSchools = schoolList.toArray(savedSchools);
-			user.setSavedSchools(savedSchools);
+			School[] newSaved = new School[savedSchools.length-1];
+			int i;
+			for(i = 0; i < savedSchools.length; i++) {
+				if(!savedSchools[i].equals(school)) {
+					newSaved[i] = savedSchools[i];
+				}
+			}
+			user.setSavedSchools(newSaved);
 		}
 	}
 
