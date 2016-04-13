@@ -1,8 +1,5 @@
 package cmc.home;
 
-import java.util.Arrays;
-import java.util.List;
-
 import cmc.entity.Person;
 import cmc.entity.School;
 import dblibrary.project.csci230.UniversityDBLibrary;

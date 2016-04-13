@@ -62,7 +62,8 @@ public class SearchController
 				if (em[0].equals(schoolData[i][0]))
 					emphases+=":"+em[1];
 			}
-			emphases = emphases.substring(1);
+			if (emphases.length()>0)
+				emphases = emphases.substring(1);
 			results[i] = new SearchResult(searchClause.scoreSchoolData(schoolData[i], emphases),
 						SchoolDatabaseMapping.convertDatabaseItemToSchool(schoolData[i], emphases.split(":")));
 		}

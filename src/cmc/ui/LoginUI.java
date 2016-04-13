@@ -34,7 +34,13 @@ public class LoginUI
 	 */
 	public Person login(String username, String password)
 	{
-		user = logControl.login(username, password);
+		try {
+			user = logControl.login(username, password);
+		} catch(InactiveAccountException inactive) {
+			System.out.println("Inactive");
+		} catch(IllegalArgumentException illegal) {
+			System.out.println("Illegal");
+		}
 		return user;
 	}
 	
