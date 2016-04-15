@@ -1,5 +1,6 @@
 package cmc.home;
 
+import cmc.entity.Person;
 import cmc.entity.School;
 import dblibrary.project.csci230.UniversityDBLibrary;
 
@@ -104,5 +105,23 @@ public class SchoolHome
 		db.university_addUniversity(name,state,location,control,
 				numStudentsEnrolled,percentFemEnrolled, satVerbal, satMath, tuition, percentFinAid,
 				numApplicatns, admitRate,decideRate,academics,socialLife,qualityLife);
+	}
+
+	public School getSchool(String school) throws IllegalArgumentException
+	{
+		School[] schoolArray = this.listOfSchools();
+		School foundSchool = new School();
+		for(int i = 0; i < schoolArray.length; i++) 
+		{
+			if(schoolArray[i].getName().equals(school)) 
+			{
+				foundSchool = schoolArray[i];
+			} 
+		} 
+		if(!foundSchool.getName().equals(school)) 
+		{
+			throw new IllegalArgumentException("The entered username is not bound to an account.");
+		}
+		return foundSchool;
 	}
 }
