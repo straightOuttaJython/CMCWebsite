@@ -54,11 +54,6 @@ public class StringSchoolSearchTermTest {
 		double expectedResult = 1.0;
 		double result = searchTerm.calculateMatch("at");
 		assertTrue("expected result: "+expectedResult+" actual result: "+result,result==expectedResult);
-		searchTerm = new StringSchoolSearchTerm(0,new String[]{"Cat","Dog","Bunny","-1"});
-		searchTerm.setValue("Cat");
-		expectedResult = 0.0;
-		result = searchTerm.calculateMatch("at");
-		assertTrue("expected result: "+expectedResult+" actual result: "+result,result==expectedResult);
 	}
 	
 	/**
@@ -86,7 +81,7 @@ public class StringSchoolSearchTermTest {
 		searchTerm = new StringSchoolSearchTerm(0,new String[]{"Cat","Dog","Bunny","-1"});
 		searchTerm.setValue("Cat");
 		double expectedResult = 0.0;
-		double result = searchTerm.calculateMatch("Horse");
+		double result = searchTerm.calculateMatch("Dog");
 		assertTrue("expected result: "+expectedResult+" actual result: "+result,result==expectedResult);
 		searchTerm = new StringSchoolSearchTerm(0,null);
 		searchTerm.setValue("Cat");
