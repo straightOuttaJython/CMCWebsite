@@ -1,6 +1,7 @@
 package cmc.controller;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import cmc.controller.search.SchoolSearchClause;
 import cmc.entity.School;
@@ -77,6 +78,7 @@ public class SearchController
 	 */
 	public School[] search(SchoolSearchClause searchClause) {
 		SearchResult[] results = this.getResultList(searchClause);
+		Collections.reverse(Arrays.asList(results));
 		Arrays.sort(results);
 		int schoolListLength = Integer.min(results.length, 50);
 		School[] schoolList = new School[schoolListLength];
@@ -94,7 +96,7 @@ public class SearchController
 	private class SearchResult implements Comparable<SearchResult> {
 		
 		/**
-		 * The score the school recieved when compared to the SchoolSearchClause.
+		 * The score the school received when compared to the SchoolSearchClause.
 		 */
 		private double score;
 		

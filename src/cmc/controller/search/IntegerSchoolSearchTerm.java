@@ -58,7 +58,7 @@ public class IntegerSchoolSearchTerm extends SchoolSearchTerm {
 			throw new IllegalStateException("Term value not set");
 		int comp = Integer.parseInt(comparison);
 		if (comp < min || comp > max)
-			throw new IllegalArgumentException("Outside of valid range for this term ("+min+"-"+max+")");
+			return 0.0;
 		if (comp >= this.lower && comp <= this.upper)
 			return 1.0;
 		else if (this.max==Integer.MAX_VALUE)
