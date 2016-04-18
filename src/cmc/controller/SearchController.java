@@ -105,7 +105,7 @@ public class SearchController
 		
 		/**
 		 * Constructs a new SearchResult with the given fields.
-		 * @param score score the school has recieved
+		 * @param score score the school has receieved
 		 * @param associatedSchool scored School associated with score
 		 */
 		public SearchResult(double score, School associatedSchool) {
