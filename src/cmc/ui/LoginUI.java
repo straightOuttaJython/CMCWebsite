@@ -34,13 +34,7 @@ public class LoginUI
 	 */
 	public Person login(String username, String password)
 	{
-		try {
-			user = logControl.login(username, password);
-		} catch(InactiveAccountException inactive) {
-			System.out.println("Inactive");
-		} catch(IllegalArgumentException illegal) {
-			System.out.println("Illegal");
-		}
+		user = logControl.login(username, password);
 		return user;
 	}
 	
@@ -50,6 +44,10 @@ public class LoginUI
 	 * @return user, the person successfully logged in.
 	 */
 	public Person getLoggedPerson() {
+		if((user == null)) {
+			user = new Person();
+			user.setFirstName("Empty");
+		}
 		return this.user;
 	}
 }
