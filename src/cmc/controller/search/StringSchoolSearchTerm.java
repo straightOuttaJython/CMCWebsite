@@ -1,5 +1,4 @@
 package cmc.controller.search;
-import java.util.IllegalFormatException;
 
 /**
  * This is an implementation for the SchoolSearchTerm class for String
@@ -45,10 +44,10 @@ public class StringSchoolSearchTerm extends SchoolSearchTerm {
 				if (comparison.equals(per.toUpperCase()))
 					return value.equals(comparison) ? 1.0 : 0.0;
 			}
-			throw new IllegalArgumentException("Not a permitted String");
+			return 0.0;
 		}
 		else
-			return value.contains(comparison) ? 1.0 : 0.0;
+			return comparison.contains(value) ? 1.0 : 0.0;
 	}
 	
 	/**

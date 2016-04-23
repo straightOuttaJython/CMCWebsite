@@ -26,7 +26,7 @@ import dblibrary.project.csci230.UniversityDBLibrary;
 * The UserUI class controls user's action.
 * 
 * @author Duong Do, Matthew Kounniyom, Alex Seefeldt
-* @version April 3, 2016
+* @version April 23, 2016
 */
 public class UserUI {
 	
@@ -118,5 +118,25 @@ public class UserUI {
 		School[] fullMatchList = this.searchForSchools(schoolArray, emphases);
 		School[] shortList = Arrays.copyOf(fullMatchList, 5);
 		return shortList;
+	}
+	
+	/**
+	 * The method getSchool, finds the school with the given schoolName and returns
+	 * the school object that it belongs to.
+	 * 
+	 * @param String schoolName, is the string value that is the name of a school.
+	 * @return School school, the school object that has the given schoolName.
+	 */
+	public School getSchool(String schoolName) {
+		School school = new School();
+		SchoolHome sh = new SchoolHome();
+		School[] schoolList = sh.listOfSchools();
+		for(int i = 0; i < schoolList.length; i++)
+		{
+			if(schoolList[i].getName() == schoolName) {
+				school = schoolList[i];
+			}
+		}
+		return school;
 	}
 }

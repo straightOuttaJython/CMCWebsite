@@ -1,7 +1,5 @@
 package cmc.entity.dbmapping;
 
-import java.util.ArrayList;
-import cmc.controller.search.SchoolSearchClause;
 import cmc.entity.School;
 
 /**

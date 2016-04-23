@@ -46,7 +46,7 @@ public class DoubleSchoolSearchTerm extends SchoolSearchTerm {
 	/**
 	 * {@inheritDoc SchoolSearchTerm#calculateMatch(String)}
 	 * For IntegerSchoolSearchTerm, the method will return 1 for any value within
-	 * the term's range value, 0 for the furthest possible value from the range,
+	 * the term's range value, 0 for the farthest possible value from the range,
 	 * and a linear gradient from 0 to 1 for intermediate values.
 	 * @throws NumberFormatException if the given String cannot be parsed by the method
 	 * {@link java.lang.Double#parseDouble(String) Double.parseDouble(String)}
@@ -57,8 +57,11 @@ public class DoubleSchoolSearchTerm extends SchoolSearchTerm {
 		if (this.lower==-1 || this.upper==-1)
 			throw new IllegalStateException("Term value not set");
 		double comp = Double.parseDouble(comparison);
+		if (comp == -1.0) {
+			return 0.0;
+		}
 		if (comp < min || comp > max)
-			throw new IllegalArgumentException("Outside of valid range for this term ("+min+"-"+max+")");
+			return 0.0;
 		if (comp >= this.lower && comp <= this.upper)
 			return 1.0;
 		else if (this.max==Double.MAX_VALUE)
