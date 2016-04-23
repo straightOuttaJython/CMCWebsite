@@ -187,4 +187,15 @@ public class AdminUI {
 			throw new IllegalArgumentException("The account " + username + " already exists.");
 		}
 	}
+
+	public School[] getSchoolList()
+	{
+		return sh.listOfSchools();
+	}
+
+	public School getSchool(String schoolName) {
+		SchoolHome sh = new SchoolHome();
+		School school = sh.getSchool(schoolName);
+		return school;
+	}
 }
