@@ -1,6 +1,5 @@
 package cmc.home;
 
-import cmc.entity.Person;
 import cmc.entity.School;
 import dblibrary.project.csci230.UniversityDBLibrary;
 
@@ -16,6 +15,16 @@ public class SchoolHome
 	 * New database created to use
 	 */
 	private UniversityDBLibrary db = new UniversityDBLibrary("straightou", "straightou", "adem4");
+	
+	/*
+	 * number of emph
+	 */
+	private int num;
+	
+	/*
+	 * final list of emph
+	 */
+	private String[] finalL;
 	
 	/**
 	 * a list of schools
@@ -123,5 +132,45 @@ public class SchoolHome
 			throw new IllegalArgumentException("The entered school does not exist : " + school);
 		}
 		return foundSchool;
+	}
+	
+	public void addSchoolEmph(String schoolName, String emph)
+	{
+		db.university_addUniversityEmphasis(schoolName, emph);
+	}
+	
+	public int getNumOfEmph(String school)
+	{
+		String[][] list =  db.university_getNamesWithEmphases();
+		for(int i = 0; i<list.length; i++)
+		{
+			if(list[i][0].equals(school))
+			{
+				num = list[i].length;
+			}
+		}
+		return num;
+	}
+
+	public void removeSchoolEmph(String schoolNm, String emp)
+	{
+		db.university_removeUniversityEmphasis(schoolNm, emp);
+	}
+
+	public String[] getEmp(String school) 
+	{
+		finalL = new String[10];
+		String[][] allEmpList = db.university_getNamesWithEmphases();
+		String[] listOfEmps = new String[allEmpList.length];
+		int j = 0;
+		for(int i = 0; i < listOfEmps.length; i++)
+		{
+			if(allEmpList[i][0].equals(school))
+			{
+				finalL[j] =  allEmpList[i][1];
+				j = j+1;
+			}
+		}
+		return finalL;
 	}
 }
