@@ -198,4 +198,9 @@ public class AdminUI {
 		School school = sh.getSchool(schoolName);
 		return school;
 	}
+	
+	public String[] getEmph(String school)
+	{
+		return sh.getEmp(school);
+	}
 }
