@@ -120,7 +120,7 @@ public class SchoolHome
 		} 
 		if(!foundSchool.getName().equals(school)) 
 		{
-			throw new IllegalArgumentException("The entered username is not bound to an account.");
+			throw new IllegalArgumentException("The entered school does not exist : " + school);
 		}
 		return foundSchool;
 	}
