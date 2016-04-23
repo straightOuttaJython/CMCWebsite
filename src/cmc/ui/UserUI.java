@@ -128,15 +128,8 @@ public class UserUI {
 	 * @return School school, the school object that has the given schoolName.
 	 */
 	public School getSchool(String schoolName) {
-		School school = new School();
 		SchoolHome sh = new SchoolHome();
-		School[] schoolList = sh.listOfSchools();
-		for(int i = 0; i < schoolList.length; i++)
-		{
-			if(schoolList[i].getName() == schoolName) {
-				school = schoolList[i];
-			}
-		}
+		School school = sh.getSchool(schoolName);
 		return school;
 	}
 }
