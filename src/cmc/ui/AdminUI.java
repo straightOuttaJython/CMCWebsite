@@ -3,9 +3,6 @@
  */
 package cmc.ui;
 
-import java.util.Scanner;
-
-
 import cmc.entity.Person;
 import cmc.entity.School;
 import cmc.home.PersonHome;
@@ -23,12 +20,18 @@ public class AdminUI {
 	 * Creates a schoolHome to access and process the information of the database
 	 */
 	private SchoolHome sh;
+	
+	/**
+	 * The Person logged into the UI
+	 */
+	private Person admin;
 
 	/**
 	 * Create a new AdminUI.
 	 */
-	public AdminUI() 
+	public AdminUI(Person admin) 
 	{
+		this.admin = admin;
 		sh = new SchoolHome();
 	}
 	
@@ -202,5 +205,13 @@ public class AdminUI {
 	public String[] getEmph(String school)
 	{
 		return sh.getEmp(school);
+	}
+	
+	/**
+	 * Gets the first name of this UI's Person object
+	 * @return the admin
+	 */
+	public String getAdminFirstName() {
+		return admin.getFirstName();
 	}
 }

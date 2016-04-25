@@ -46,7 +46,7 @@ public class Driver {
 		if(login.getLoggedPerson().getType() == 'a') 
 		{
 			//admin stuff
-			AdminUI admin = new AdminUI();
+			AdminUI admin = new AdminUI(login.getLoggedPerson());
 		}
 		else 
 		{
