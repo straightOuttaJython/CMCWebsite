@@ -1,26 +1,14 @@
 package cmc.ui;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 import cmc.controller.SearchController;
-import cmc.controller.search.DoubleSchoolSearchTerm;
-import cmc.controller.search.IntegerSchoolSearchTerm;
 import cmc.controller.search.SchoolSearchClause;
-import cmc.controller.search.StringArraySchoolSearchTerm;
-import cmc.controller.search.StringSchoolSearchTerm;
 import cmc.entity.Person;
 import cmc.entity.School;
-import cmc.entity.dbmapping.DoubleSchoolAttributeMetadata;
-import cmc.entity.dbmapping.IntegerSchoolAttributeMetadata;
-import cmc.entity.dbmapping.SchoolAttributeMetadata;
 import cmc.entity.dbmapping.SchoolDatabaseMapping;
-import cmc.entity.dbmapping.StringSchoolAttributeMetadata;
 import cmc.home.PersonHome;
 import cmc.home.SchoolHome;
-import dblibrary.project.csci230.UniversityDBLibrary;
 
 /**
 * The UserUI class controls user's action.
@@ -31,7 +19,7 @@ import dblibrary.project.csci230.UniversityDBLibrary;
 public class UserUI {
 	
 	/**
-	 * Instance variable
+	 * The Person logged into the UI
 	 */
 	private Person user;
 	
@@ -131,5 +119,13 @@ public class UserUI {
 		SchoolHome sh = new SchoolHome();
 		School school = sh.getSchool(schoolName);
 		return school;
+	}
+
+	/**
+	 * Gets the first name of this UI's Person object
+	 * @return the user
+	 */
+	public String getUserFirstName() {
+		return user.getFirstName();
 	}
 }
