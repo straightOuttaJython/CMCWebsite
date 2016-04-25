@@ -122,10 +122,10 @@ public class UserUI {
 	}
 
 	/**
-	 * Gets the first name of this UI's Person object
+	 * Gets this UI's Person object
 	 * @return the user
 	 */
-	public String getUserFirstName() {
-		return user.getFirstName();
+	public Person getUser() {
+		return this.user;
 	}
 }

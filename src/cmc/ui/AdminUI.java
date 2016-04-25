@@ -208,10 +208,10 @@ public class AdminUI {
 	}
 	
 	/**
-	 * Gets the first name of this UI's Person object
+	 * Gets this UI's Person object
 	 * @return the admin
 	 */
-	public String getAdminFirstName() {
-		return admin.getFirstName();
+	public Person getAdmin() {
+		return this.admin;
 	}
 }
