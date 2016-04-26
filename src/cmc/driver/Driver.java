@@ -46,7 +46,17 @@ public class Driver {
 			System.out.println(s);
 		}
 		
-		sc.removeSchoolEmph("ABILENE CHRISTIAN UNIVERSITY", "Erin");
+		sc.removeSchoolEmph("ABILENE CHRISTIAN UNIVERSITY", "CS");
+		sc.removeSchoolEmph("ABILENE CHRISTIAN UNIVERSITY", "Math");
+		sc.removeSchoolEmph("ABILENE CHRISTIAN UNIVERSITY", "Geography");
+		sc.removeSchoolEmph("ABILENE CHRISTIAN UNIVERSITY", "History");
+		sc.removeSchoolEmph("ABILENE CHRISTIAN UNIVERSITY", "Science");
+		
+		sc.addSchoolEmph("ABILENE CHRISTIAN UNIVERSITY", "Computer Science");
+		sc.addSchoolEmph("ABILENE CHRISTIAN UNIVERSITY", "Math");
+		sc.addSchoolEmph("ABILENE CHRISTIAN UNIVERSITY", "Geography");
+		sc.addSchoolEmph("ABILENE CHRISTIAN UNIVERSITY", "History");
+		sc.addSchoolEmph("ABILENE CHRISTIAN UNIVERSITY", "Science");
 		
 		System.out.println("*************************");
 		for(String s : sc.getEmp("ABILENE CHRISTIAN UNIVERSITY"))
