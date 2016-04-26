@@ -40,7 +40,8 @@ public class PersonHomeTest {
 	@Test
 	public void testGetPerson_case1() {
 		username = "luser";
-		assertEquals("Username of Person is equal to " + username, username, ph.getPerson(username).getUsername());
+		Person user = ph.getPerson(username);
+		assertEquals("Username of Person is equal to " + username, username, user.getUsername());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -291,10 +292,10 @@ public class PersonHomeTest {
 		}
 		
 		ph.saveSchool(matt, school);
-		sList = matt.getSavedSchools();
-		for(int i = 0; i < sList.length; i++) {
+		String[] strList = matt.getSavedSchools();
+		for(int i = 0; i < strList.length; i++) {
 			if(sList[i].getName().equals("BARD")) {
-				assertTrue("The added school exists.", sList[i].equals(school));
+				assertTrue("The added school exists.", sList[i].equals(school.getName()));
 			}
 		}
 		UniversityDBLibrary db = new UniversityDBLibrary("straightou", "straightou", "adem4");
@@ -348,9 +349,9 @@ public class PersonHomeTest {
 		
 		ph.saveSchool(matt, school);
 		ph.removeSchool(matt, school);
-		sList = matt.getSavedSchools();
-		for(int i = 0; i < sList.length; i++) {
-			assertTrue("The removed school exists.", !(sList[i].equals(school)));
+		String[] strList = matt.getSavedSchools();
+		for(int i = 0; i < strList.length; i++) {
+			assertTrue("The removed school exists.", !(sList[i].equals(school.getName())));
 		}
 		UniversityDBLibrary db = new UniversityDBLibrary("straightou", "straightou", "adem4");
 		db.user_deleteUser(username);

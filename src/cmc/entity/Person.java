@@ -45,7 +45,7 @@ public class Person {
 	/**
 	 * Attribute savedSchools is an array that holds all the schools the student would want to look at later.
 	 */
-	private School[] savedSchools;
+	private String[] savedSchools;
 	
 	/**
 	 * Default constructor for the Person class. 
@@ -58,7 +58,7 @@ public class Person {
 	 * @param status, used to set the status of the person.
 	 * @param savedSchools, used to set the array for saved schools.
 	 */
-	public Person(String firstName, String lastName, String username, String password, char type, char status, School[] savedSchools) {
+	public Person(String firstName, String lastName, String username, String password, char type, char status, String[] savedSchools) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
@@ -191,7 +191,7 @@ public class Person {
 	 * 
 	 * @return the current array of schools for savedSchools.
 	 */
-	public School[] getSavedSchools() {
+	public String[] getSavedSchools() {
 		return savedSchools;
 	}
 
@@ -200,7 +200,7 @@ public class Person {
 	 * 
 	 * @param savedSchools, is the new array of schools to set savedSchools to.
 	 */
-	public void setSavedSchools(School[] savedSchools) {
+	public void setSavedSchools(String[] savedSchools) {
 		this.savedSchools = savedSchools;
 	}
 		

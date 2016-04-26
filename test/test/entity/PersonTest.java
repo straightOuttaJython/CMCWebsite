@@ -10,18 +10,15 @@ import cmc.entity.School;
 public class PersonTest {
 	
 	private Person person, user, student;
-	School school1 = new School("College University", "Texas", "Urban", "Private", 
-			33, 15.5, 200.0, 200.0, 30000.52, 35.5, 
-			6500, 58.6, 36.8, 
-			5,5,5, new String[2]);
-    private School[] savedSchool = {school1};
+	String school1 = "College University";
+    private String[] savedSchool = {school1};
 	
     
     @Before
 	public void setUp() {
 		// TODO Auto-generated constructor stub
         user = new Person();
-        student = new Person("di", "tham", "bennhau", "trondoi", 'u', 'y',new School[0]);
+        student = new Person("di", "tham", "bennhau", "trondoi", 'u', 'y',new String[0]);
 		person = new Person("soai", "ca", "nanhnungboy", "dicuagai", 'u', 'y', savedSchool);
 	}
 	
@@ -123,18 +120,15 @@ public class PersonTest {
 
     @Test
     public void testGetSavedSchool(){
-        School[] school = person.getSavedSchools();
+        String[] school = person.getSavedSchools();
         assertTrue("School length should be 1", school.length == 1);
-        assertTrue("School name should be 'College University'", school[0].getName().equals("College University"));
-        assertTrue("School state should be 'Texas'", school[0].getState().equals("Texas"));
-        assertTrue("School location should be 'Urban'", school[0].getLocation().equals("Urban"));
-        assertTrue("The Control should be Private", school[0].getControl().equals("Private"));
+        assertTrue("School name should be 'College University'", school[0].equals("College University"));
     }
 
     @Test
     public void testSetSavedSchool(){
-        person.setSavedSchools(new School[0]);
-        School[] school = person.getSavedSchools();
+        person.setSavedSchools(new String[0]);
+        String[] school = person.getSavedSchools();
         assertTrue("School length should be 0", school.length == 0);
     }
 

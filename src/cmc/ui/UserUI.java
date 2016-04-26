@@ -63,7 +63,7 @@ public class UserUI {
 	 * Access method for .jsp pages when managing a user's list of saved schools.
 	 * @return an array of this user's saved Schools
 	 */
-	public School[] manageSchools() {
+	public String[] manageSchools() {
 		return this.user.getSavedSchools();
 	}
 	

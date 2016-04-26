@@ -1,5 +1,7 @@
 package cmc.home;
 
+import java.util.ArrayList;
+
 import cmc.entity.Person;
 import cmc.entity.School;
 import dblibrary.project.csci230.UniversityDBLibrary;
@@ -44,14 +46,14 @@ public class PersonHome {
 	 * 
 	 * @param person, the Person to be updated
 	 */
-	public void updatePerson(String username, String firstName, String lastName, String password, char type,
+	public int updatePerson(String username, String firstName, String lastName, String password, char type,
 			char status)
 	{
 		if(type != 'u' && type != 'a') 
 			throw new IllegalArgumentException("Invalid Type");
 		if(status != 'Y' && status != 'N') 
 			throw new IllegalArgumentException("Invalid Status");
-		db.user_editUser(username, firstName, lastName, password, type, status);
+		return db.user_editUser(username, firstName, lastName, password, type, status);
 	}
 	
 	/**
@@ -72,32 +74,13 @@ public class PersonHome {
 			char type = stringArray[i][4].charAt(0);
 			char status = stringArray[i][5].charAt(0);
 			String[][] savedArray = db.user_getUsernamesWithSavedSchools();
-			School[] savedSchools = new School[1];
-			savedSchools[0] = new School();
-			if(savedArray != null) {
-				int numberOfSavedSchools = 0;
-				for(int p = 0; p < savedArray.length; p++) {
-					if(savedArray[p].equals(username)) {
-						numberOfSavedSchools++;
-					}
-				}
-				savedSchools = new School[numberOfSavedSchools];
-				if(numberOfSavedSchools > 0) {
-					int length = 0;
-					for(int p = 0; p < savedArray.length; p++) {
-						if(savedArray[p].equals(username)) {
-							String schoolName =  savedArray[p][0];
-							SchoolHome sh = new SchoolHome();
-							School[] school = sh.listOfSchools();
-							for(int o = 0; 0 < school.length; o++) {
-								if(school[o].getName().equals(schoolName))
-									savedSchools[length] = school[o];
-							}
-							length++;
-						}
-					}
-				}
+			ArrayList<String> schoolsList = new ArrayList<String>(); 
+			for (String[] pair : savedArray) {
+				if (pair[0].equals(username))
+					schoolsList.add(pair[1]);
 			}
+			String[] savedSchools = new String[0];
+			savedSchools = schoolsList.toArray(savedSchools);
 			personArray[i] = new Person(firstname, lastname, username, password, type, status, savedSchools);
 		}
 		return personArray;
@@ -145,15 +128,15 @@ public class PersonHome {
 			throw new RuntimeException("Database Error");
 		}
 		else {
-			School[] savedSchools = user.getSavedSchools();
-			School[] newSaved = new School[savedSchools.length+1];
+			String[] savedSchools = user.getSavedSchools();
+			String[] newSaved = new String[savedSchools.length+1];
 			int i;
 			for(i = 0; i < savedSchools.length; i++) {
 				if(savedSchools[i] != null) {
 					newSaved[i] = savedSchools[i];
 				}
 			}
-			newSaved[i] = school;
+			newSaved[i] = school.getName();
 			user.setSavedSchools(newSaved);
 		}
 	}
@@ -171,11 +154,11 @@ public class PersonHome {
 			throw new RuntimeException("Database Error");
 		}
 		else {			
-			School[] savedSchools = user.getSavedSchools();
-			School[] newSaved = new School[savedSchools.length-1];
+			String[] savedSchools = user.getSavedSchools();
+			String[] newSaved = new String[savedSchools.length-1];
 			int i;
 			for(i = 0; i < savedSchools.length; i++) {
-				if(!savedSchools[i].equals(school)) {
+				if(!savedSchools[i].equals(school.getName())) {
 					newSaved[i] = savedSchools[i];
 				}
 			}
