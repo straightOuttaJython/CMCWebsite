@@ -2,6 +2,7 @@ package cmc.driver;
 
 import cmc.entity.Person;
 import cmc.home.PersonHome;
+import cmc.home.SchoolHome;
 import cmc.ui.AdminUI;
 import cmc.ui.LoginUI;
 import cmc.ui.UserUI;
@@ -39,8 +40,22 @@ public class Driver {
 			System.out.println("*************************");
 		}
 		
-			
+		SchoolHome sc = new SchoolHome();
+		for(String s : sc.getEmp("ABILENE CHRISTIAN UNIVERSITY"))
+		{
+			System.out.println(s);
+		}
+		
+		sc.removeSchoolEmph("ABILENE CHRISTIAN UNIVERSITY", "Erin");
+		
+		System.out.println("*************************");
+		for(String s : sc.getEmp("ABILENE CHRISTIAN UNIVERSITY"))
+		{
+			System.out.println(s);
+		}
 		System.out.println("***************REMEBER TO SEE ABOVE BEFORE GOING FORWARD***************\n");
+		
+		
 		System.out.println("***************THIS IS AN INTRACTIVE VIEW OF OUR WEBSITE***************\n");
 		LoginUI login = new LoginUI();
 		if(login.getLoggedPerson().getType() == 'a') 

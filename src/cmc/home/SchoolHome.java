@@ -178,7 +178,7 @@ public class SchoolHome
 
 	public String[] getEmp(String school) 
 	{
-		finalL = new String[10];
+		finalL = new String[5];
 		String[][] allEmpList = db.university_getNamesWithEmphases();
 		String[] listOfEmps = new String[allEmpList.length];
 		int j = 0;
