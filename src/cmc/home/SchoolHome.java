@@ -155,7 +155,8 @@ public class SchoolHome
 	
 	public void addSchoolEmph(String schoolName, String emph)
 	{
-		db.university_addUniversityEmphasis(schoolName, emph);
+		if (emph!=null && !emph.equals(""))
+			db.university_addUniversityEmphasis(schoolName, emph);
 	}
 	
 	public int getNumOfEmph(String school)

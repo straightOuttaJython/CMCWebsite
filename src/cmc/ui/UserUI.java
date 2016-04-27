@@ -19,6 +19,16 @@ import cmc.home.SchoolHome;
 public class UserUI {
 	
 	/**
+	 * Creates a schoolHome to access and process the information of the database
+	 */
+	private SchoolHome sh = new SchoolHome();
+	
+	/**
+	 * Creates a personHome to access and process the information of the database
+	 */
+	private PersonHome ph = new PersonHome();
+	
+	/**
 	 * The Person logged into the UI
 	 */
 	private Person user;
@@ -72,7 +82,7 @@ public class UserUI {
 	 * @param school the School to be saved
 	 */
 	public void saveSchool(School school) {
-		new PersonHome().saveSchool(this.user, school);
+		ph.saveSchool(this.user, school);
 	}
 	
 	/**
@@ -80,7 +90,7 @@ public class UserUI {
 	 * @param school the School to be removed
 	 */
 	public void removeSchool(School school) {
-		new PersonHome().removeSchool(this.user, school);
+		ph.removeSchool(this.user, school);
 	}
 	
 	/**
@@ -91,7 +101,7 @@ public class UserUI {
 	 * @param password the password to change to
 	 */
 	public void editUser(String firstName, String lastName, String password) {
-		new PersonHome().updatePerson(this.user.getUsername(), firstName, lastName, password, user.getType(), user.getStatus());
+		ph.updatePerson(this.user.getUsername(), firstName, lastName, password, user.getType(), user.getStatus());
 	}
 	
 	/**
@@ -116,7 +126,6 @@ public class UserUI {
 	 * @return School school, the school object that has the given schoolName.
 	 */
 	public School getSchool(String schoolName) {
-		SchoolHome sh = new SchoolHome();
 		School school = sh.getSchool(schoolName);
 		return school;
 	}

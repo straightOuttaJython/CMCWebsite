@@ -19,7 +19,12 @@ public class AdminUI {
 	/**
 	 * Creates a schoolHome to access and process the information of the database
 	 */
-	private SchoolHome sh;
+	private SchoolHome sh = new SchoolHome();
+	
+	/**
+	 * Creates a personHome to access and process the information of the database
+	 */
+	private PersonHome ph = new PersonHome();
 	
 	/**
 	 * The Person logged into the UI
@@ -32,7 +37,6 @@ public class AdminUI {
 	public AdminUI(Person admin) 
 	{
 		this.admin = admin;
-		sh = new SchoolHome();
 	}
 	
 	/**
@@ -60,8 +64,7 @@ public class AdminUI {
 			double tuition, double percentFinAid, int numApplicants, double admitRate, 
 			double decideRate, int academics, int socialLife, int qualityLife) throws IllegalArgumentException
 	{
-		SchoolHome aSH = new SchoolHome();
-		School[] listOfSchools = aSH.listOfSchools();
+		School[] listOfSchools = sh.listOfSchools();
 		
 		for(int i =0; i < listOfSchools.length; i++)
 		{
@@ -70,7 +73,7 @@ public class AdminUI {
 				throw new IllegalArgumentException("The school " + name + " already exists in the system.");
 			}
 		}
-		aSH.addSchool(name,state,location,control,
+		sh.addSchool(name,state,location,control,
 				numStudentsEnrolled,percentFemEnrolled, satVerbal, satMath, tuition, percentFinAid,
 				numApplicants, admitRate,decideRate,academics,socialLife,qualityLife);
 	}
@@ -100,10 +103,9 @@ public class AdminUI {
 			double tuition, double percentFinAid, int numApplicants, double admitRate, 
 			double decideRate, int academics, int socialLife, int qualityLife) throws IllegalArgumentException
 	{
-		SchoolHome eSH = new SchoolHome();
-		School editSchool = eSH.getSchool(name);
+		School editSchool = sh.getSchool(name);
 		if (editSchool!=null) {
-			eSH.updateSchool(name, state, location, control, numStudentsEnrolled, percentFemEnrolled, satVerbal, 
+			sh.updateSchool(name, state, location, control, numStudentsEnrolled, percentFemEnrolled, satVerbal, 
 							satMath, tuition, percentFinAid, numApplicants, admitRate, decideRate, academics, socialLife, qualityLife);
 		}
 	}
@@ -121,7 +123,6 @@ public class AdminUI {
 	public void editUser(String username, String firstName, String lastName,
 			String password, char type, char status) throws IllegalArgumentException
 	{
-		PersonHome ph = new PersonHome();
 		Person editPerson = ph.getPerson(username);
 		if (editPerson!=null)
 			ph.updatePerson(username, firstName, lastName, password, type, status);
@@ -133,7 +134,6 @@ public class AdminUI {
 	 */
 	public void deactivate(String username) 
 	{
-		PersonHome ph = new PersonHome();
 		Person dPerson = ph.getPerson(username);
 		ph.deactivate(dPerson);
 	}
@@ -149,20 +149,15 @@ public class AdminUI {
 	 */
 	public void addUser(String firstName, String lastName, String username, String password, char type) throws IllegalArgumentException
 	{
-		boolean notFound = true;
-		PersonHome ph = new PersonHome();
 		Person[] list = ph.getAllUsers();
 		for(int i =0; i < list.length; i++)
 		{
 			if(list[i].getUsername().equals(username))
 			{
-				notFound = false;
-				ph.addUser(username, firstName, lastName, password, type);
+				throw new IllegalArgumentException("The account " + username + " already exists.");
 			} 
 		}
-		if(notFound) {
-			throw new IllegalArgumentException("The account " + username + " already exists.");
-		}
+		ph.addUser(firstName, lastName, username, password, type);
 	}
 
 	public School[] getSchoolList()
@@ -171,9 +166,13 @@ public class AdminUI {
 	}
 
 	public School getSchool(String schoolName) {
-		SchoolHome sh = new SchoolHome();
 		School school = sh.getSchool(schoolName);
 		return school;
+	}
+	
+	public Person getPerson(String personName) {
+		Person person = ph.getPerson(personName);
+		return person;
 	}
 	
 	public String[] getEmph(String school)
