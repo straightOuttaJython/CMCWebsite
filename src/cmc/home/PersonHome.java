@@ -93,16 +93,8 @@ public class PersonHome {
 	 */
 	public void deactivate(Person user) 
 	{
-		if(user.getStatus() == ('Y'))
-		{
-			db.user_editUser(user.getUsername(), user.getFirstName(), user.getLastName(), 
-					user.getPassword(), user.getType(), 'N');
-		}
-		else
-		{
-			db.user_editUser(user.getUsername(), user.getFirstName(), user.getLastName(), 
-					user.getPassword(), user.getType(), 'Y');
-		}
+		db.user_editUser(user.getUsername(), user.getFirstName(), user.getLastName(), 
+						 user.getPassword(), user.getType(), 'N');
 	}
 	
 	/**

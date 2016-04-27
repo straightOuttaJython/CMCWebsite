@@ -153,15 +153,8 @@ public class AdminUI {
 	public void deactivate(String username) 
 	{
 		PersonHome ph = new PersonHome();
-		Person[] list = ph.getAllUsers();
-		for(int i =0; i < list.length; i++)
-		{
-			if(list[i].getUsername().equals(username))
-			{
-				ph.deactivate(list[i]);
-			}
-		}
-		
+		Person dPerson = ph.getPerson(username);
+		ph.deactivate(dPerson);
 	}
 	
 	/**
