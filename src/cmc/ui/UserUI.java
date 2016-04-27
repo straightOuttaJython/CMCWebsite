@@ -128,4 +128,19 @@ public class UserUI {
 	public Person getUser() {
 		return this.user;
 	}
+	
+	/**
+	 * Check the user has this school or not
+	 * @param String schoolName
+	 * @return true or false
+	 */
+	public boolean hasSchool(String schoolName){
+		String[] schools = user.getSavedSchools();
+		for(int i = 0; i < schools.length; i++){
+			if(schools[i].equals(schoolName)){
+				return true;
+			}
+		}
+		return false;
+	}
 }

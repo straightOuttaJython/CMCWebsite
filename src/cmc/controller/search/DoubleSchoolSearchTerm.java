@@ -88,12 +88,12 @@ public class DoubleSchoolSearchTerm extends SchoolSearchTerm {
 		double lower;
 		double upper;
 		if (dashIndex==-1) {
-			lower = Integer.parseInt(value);
-			upper = Integer.parseInt(value);
+			lower = Double.parseDouble(value);
+			upper = Double.parseDouble(value);
 		}
 		else {
-			lower = Integer.parseInt(value.substring(0,dashIndex));
-			upper = Integer.parseInt(value.substring(dashIndex+1, value.length()));
+			lower = Double.parseDouble(value.substring(0,dashIndex));
+			upper = Double.parseDouble(value.substring(dashIndex+1, value.length()));
 		}
 		if (lower > upper)
 			throw new IllegalArgumentException("Lower value is greater than upper value");
