@@ -207,4 +207,14 @@ public class AdminUI {
 	public Person getAdmin() {
 		return this.admin;
 	}
+
+	public void addSchoolEmph(String schoolName, String emph)
+	{
+		sh.addSchoolEmph(schoolName, emph);
+	}
+	
+	public void removeSchoolEmph(String schoolNm, String emp)
+	{
+		sh.removeSchoolEmph(schoolNm, emp);
+	}
 }
