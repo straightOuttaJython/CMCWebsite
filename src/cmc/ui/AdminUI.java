@@ -100,20 +100,11 @@ public class AdminUI {
 			double tuition, double percentFinAid, int numApplicants, double admitRate, 
 			double decideRate, int academics, int socialLife, int qualityLife) throws IllegalArgumentException
 	{
-		boolean notFound = true;
 		SchoolHome eSH = new SchoolHome();
-		School[] list = eSH.listOfSchools();
-		for(int i =0; i < list.length; i++)
-		{
-			if(list[i].getName().equals(name))
-			{
-				notFound = false;
-				eSH.updateSchool(name, state, location, control, numStudentsEnrolled, percentFemEnrolled, satVerbal, 
-						satMath, tuition, percentFinAid, numApplicants, admitRate, decideRate, academics, socialLife, qualityLife);
-			}
-		}
-		if(notFound) {
-			throw new IllegalArgumentException("The school " + name + " does not exist in the system.");
+		School editSchool = eSH.getSchool(name);
+		if (editSchool!=null) {
+			eSH.updateSchool(name, state, location, control, numStudentsEnrolled, percentFemEnrolled, satVerbal, 
+							satMath, tuition, percentFinAid, numApplicants, admitRate, decideRate, academics, socialLife, qualityLife);
 		}
 	}
 
@@ -130,20 +121,10 @@ public class AdminUI {
 	public void editUser(String username, String firstName, String lastName,
 			String password, char type, char status) throws IllegalArgumentException
 	{
-		boolean notFound = true;
 		PersonHome ph = new PersonHome();
-		Person[] list = ph.getAllUsers();
-		for(int i =0; i < list.length; i++)
-		{
-			if(list[i].getUsername().equals(username))
-			{
-				notFound = false;
-				ph.updatePerson(username, firstName, lastName, password, type, status);
-			} 
-		}
-		if(notFound) {
-			throw new IllegalArgumentException("The account " + username + " does not exist.");
-		}
+		Person editPerson = ph.getPerson(username);
+		if (editPerson!=null)
+			ph.updatePerson(username, firstName, lastName, password, type, status);
 	}
 
 	/**
