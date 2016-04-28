@@ -139,4 +139,23 @@ public class SearchController
 			return new Double(score).compareTo(new Double(sR.getScore()));
 		}
 	}
+
+	public SchoolSearchClause prepareSearchClause(String[] searchValues, String[] emphases) {
+		SchoolSearchClause searchClause = new SchoolSearchClause();
+		String value;
+		String emphasisString = "";
+		for (int i=0; i<emphases.length; i++) {
+			value = emphases[i];
+			if (!value.equals("") && value!=null)
+				emphasisString+=":"+value;
+		}
+		if (!emphasisString.equals(""))
+			searchClause.setValueAtIndex(emphasisString.substring(1), 16);
+		for (int i=0; i<searchValues.length; i++) {
+			value = searchValues[i];
+			if (!value.equals(""))
+				searchClause.setValueAtIndex(value, i);
+		}
+		return searchClause;
+	}
 }

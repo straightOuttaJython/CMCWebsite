@@ -51,22 +51,9 @@ public class UserUI {
 	 * @return an array of matching Schools
 	 */
 	public School[] searchForSchools(String[] searchValues, String[] emphases) {
-		SchoolSearchClause searchClause = new SchoolSearchClause();
-		String value;
-		String emphasisString = "";
-		for (int i=0; i<emphases.length; i++) {
-			value = emphases[i];
-			if (!value.equals("") && value!=null)
-				emphasisString+=":"+value;
-		}
-		if (!emphasisString.equals(""))
-			searchClause.setValueAtIndex(emphasisString.substring(1), 16);
-		for (int i=0; i<searchValues.length; i++) {
-			value = searchValues[i];
-			if (!value.equals(""))
-				searchClause.setValueAtIndex(value, i);
-		}
-		return new SearchController().search(searchClause);
+		SearchController sc = new SearchController();
+		SchoolSearchClause searchClause = sc.prepareSearchClause(searchValues,emphases);
+		return sc.search(searchClause);
 	}
 	
 	/**

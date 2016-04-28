@@ -118,6 +118,17 @@ public class SchoolHome
 			double percentFemEnrolled, double satVerbal, double satMath, double tuition, double percentFinAid,
 			int numApplicatns, double admitRate, double decideRate, int academics, int socialLife, int qualityLife) 
 	{
+		if (percentFemEnrolled > 0 || percentFemEnrolled < 100 || percentFemEnrolled==-1 ||
+			satVerbal > 0 || satVerbal < 800 || satVerbal==-1 ||
+			satMath > 0 || satMath < 800 || satMath==-1 ||
+			percentFinAid > 0 || percentFinAid < 100 || percentFinAid==-1 ||
+			admitRate > 0 || admitRate < 100 || admitRate==-1 ||
+			decideRate > 0 || decideRate < 100 || decideRate==-1 ||
+			academics > 1 || academics < 5 || academics==-1 ||
+			socialLife > 1 || socialLife < 5 || socialLife==-1 ||
+			qualityLife > 1 || qualityLife < 5 || qualityLife==-1) {
+			throw new IllegalArgumentException("Some number out of range");
+		}
 		db.university_editUniversity(name,state,location,control,
 						numStudentsEnrolled,percentFemEnrolled, satVerbal, satMath, tuition, percentFinAid,
 						numApplicatns, admitRate,decideRate,academics,socialLife,qualityLife);	
@@ -130,9 +141,22 @@ public class SchoolHome
 			double percentFemEnrolled, double satVerbal, double satMath, double tuition, double percentFinAid,
 			int numApplicatns, double admitRate, double decideRate, int academics, int socialLife, int qualityLife) 
 	{
-		db.university_addUniversity(name,state,location,control,
-				numStudentsEnrolled,percentFemEnrolled, satVerbal, satMath, tuition, percentFinAid,
-				numApplicatns, admitRate,decideRate,academics,socialLife,qualityLife);
+		if (percentFemEnrolled > 0 || percentFemEnrolled < 100 || percentFemEnrolled==-1 ||
+			satVerbal > 0 || satVerbal < 800 || satVerbal==-1 ||
+			satMath > 0 || satMath < 800 || satMath==-1 ||
+			percentFinAid > 0 || percentFinAid < 100 || percentFinAid==-1 ||
+			admitRate > 0 || admitRate < 100 || admitRate==-1 ||
+			decideRate > 0 || decideRate < 100 || decideRate==-1 ||
+			academics > 1 || academics < 5 || academics==-1 ||
+			socialLife > 1 || socialLife < 5 || socialLife==-1 ||
+			qualityLife > 1 || qualityLife < 5 || qualityLife==-1) {
+			throw new IllegalArgumentException("Some number out of range");
+		}
+		else {
+			db.university_addUniversity(name,state,location,control,
+					numStudentsEnrolled,percentFemEnrolled, satVerbal, satMath, tuition, percentFinAid,
+					numApplicatns, admitRate,decideRate,academics,socialLife,qualityLife);
+		}
 	}
 
 	public School getSchool(String school) throws IllegalArgumentException
@@ -190,6 +214,8 @@ public class SchoolHome
 				finalL[j] =  allEmpList[i][1];
 				j = j+1;
 			}
+			if (j==5)
+				break;
 		}
 		return finalL;
 	}
